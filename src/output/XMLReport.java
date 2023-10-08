@@ -1,28 +1,23 @@
 package output;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
+import data.Agent;
 
 import java.io.File;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-
-import data.Agent;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 public class XMLReport extends Report{
 
-		
 	public XMLReport(Agent a){
-			agent = a;
+		agent = a;
 	}	
-
 		
 	public void saveFile() {
 		String fullPathName =  "/users/Nick/Desktop/Reports/" + agent.getAfm() + "_SALES.xml";
@@ -86,4 +81,3 @@ public class XMLReport extends Report{
 	}
 
 }
-

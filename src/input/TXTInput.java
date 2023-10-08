@@ -6,14 +6,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-
-
 public class TXTInput extends Input{
 
 	public TXTInput(File recieptFileTXT){
 		this.inputFile = recieptFileTXT;
 		inputFilePath =  inputFile.getAbsolutePath();
-		
 	}
 	
 	@Override

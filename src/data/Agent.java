@@ -1,6 +1,5 @@
 package data;
 
-
 import java.util.Vector;
 
 public class Agent {
@@ -8,7 +7,6 @@ public class Agent {
 	private String afm;
 	private Vector <Receipt> allReceipts;
 	private FileAppender fileAppender;
-	
 	
 	public Agent(){
 		allReceipts = new Vector<Receipt>();
@@ -22,19 +20,23 @@ public class Agent {
 			fileAppender = new FileAppenderXML();
 		}	
 	}
+	
 	public Vector<Receipt> getReceipts(){
 		return allReceipts;
-
 	}
+	
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	public String getAfm() {
 		return afm;
 	}
+	
 	public void setAfm(String afm) {
 		this.afm = afm;
 	}
@@ -47,7 +49,6 @@ public class Agent {
 		return sumSales;
 	}
 	
-
 	public int calculateTotalItems(){
 		int sumItems = 0;
 		for(int i = 0; i< allReceipts.size(); i++){
@@ -110,10 +111,8 @@ public class Agent {
 		return commission;
 	}
 
-
 	public FileAppender getFileAppender() {
 		return fileAppender;
 	}
-
 
 }

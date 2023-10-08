@@ -1,22 +1,18 @@
 package output;
 
+import data.Agent;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import javax.swing.JOptionPane;
-
-import data.Agent;
-
 
 public class TXTReport extends Report{
 
-	
 	public TXTReport(Agent a){
 		agent = a;
 	}
-	
 	
 	public void saveFile() {
         BufferedWriter bufferedWriter = null;
@@ -54,7 +50,7 @@ public class TXTReport extends Report{
 
 
         }catch (IOException ex){
-			JOptionPane.showMessageDialog(null,"Υπήρξε κάποιο πρόβλημα κατά την αποθήκευση του αρχείου");
+			JOptionPane.showMessageDialog(null,"οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½");
 
         }
 		

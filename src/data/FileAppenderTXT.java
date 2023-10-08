@@ -7,9 +7,7 @@ import java.io.IOException;
 public class FileAppenderTXT extends FileAppender{
 
 	public  void setFileToAppend(File fileToAppend) {
-		
 		this.fileToAppend = fileToAppend;
-		
 	}
 
 	public void appendFile(){
@@ -73,43 +71,33 @@ public class FileAppenderTXT extends FileAppender{
 		this.receiptID = receiptID;
 	}
 
-
 	public void setDate(String date) {
 		this.date = date;
 	}
-
 
 	public void setKind(String kind) {
 		this.kind = kind;
 	}
 
-
-
 	public void setSales(String sales) {
 		this.sales = sales;
 	}
-
-
 
 	public void setItems(String items) {
 		this.items = items;
 	}
 
-
 	public void setCompany(String company) {
 		this.company = company;
 	}
-
 
 	public void setCountry(String country) {
 		this.country = country;
 	}
 
-
 	public void setCity(String city) {
 		this.city = city;
 	}
-
 
 	public void setStreet(String street) {
 		this.street = street;

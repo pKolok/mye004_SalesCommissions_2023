@@ -8,14 +8,12 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-
-
 public class XMLInput extends Input {
  
 	public XMLInput(File receiptFileXML ){
-		inputFile = receiptFileXML;
-		
+		inputFile = receiptFileXML;	
 	}
+	
     public void readFile() {
         try {
         	DocumentBuilderFactory docBuilderFactory 
@@ -77,10 +75,8 @@ public class XMLInput extends Input {
             
         } catch (Exception e) {
         	JOptionPane.showMessageDialog
-			(null,"Προέκυψε κάποιο πρόβλημα κατά το διάβασμα του αρχείου");
+			(null,"οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½");
 		} 
     }
     
 }
-
-

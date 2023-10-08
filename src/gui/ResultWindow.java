@@ -1,7 +1,15 @@
 package gui;
 
-import java.awt.BorderLayout;
+import data.Agent;
+import output.TXTReport;
+import output.XMLReport;
 
+import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -9,19 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
-import java.awt.Font;
-
 import javax.swing.UIManager;
-
-import output.TXTReport;
-import output.XMLReport;
-import data.Agent;
-
-import java.awt.Color;
-import java.awt.SystemColor;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class ResultWindow extends JDialog {
 
@@ -44,9 +40,9 @@ public class ResultWindow extends JDialog {
 	private float coatsSales;
 	private double commission;
 
-
-	public ResultWindow(final SelectionWindow sw, Agent agent,double tSales,int tItems,
-			float shirtS,float skirtS,float trousersS,float coatsS,double com) {
+	public ResultWindow(final SelectionWindow sw, Agent agent, double tSales,
+		int tItems, float shirtS,float skirtS,float trousersS,float coatsS,
+		double com) {
 		selectionWindow = sw;
 		selectedAgent = agent;
 		totalSales = tSales;
@@ -59,6 +55,7 @@ public class ResultWindow extends JDialog {
 		
 		initialise();
 	}	
+	
 	private void initialise(){
 		setBounds(100, 100, 686, 456);
 		getContentPane().setLayout(new BorderLayout());
@@ -228,22 +225,21 @@ public class ResultWindow extends JDialog {
 		if(commission>=0)
 			commissionTextField.setText(Double.toString(commission));
 		else 
-			commissionTextField.setEnabled(false);
-	
-				
+			commissionTextField.setEnabled(false);		
 	}
+	
 	private void outputTXTButtonPressed(ActionEvent evt) {
 		TXTReport makeTXTFile = new TXTReport(selectedAgent);
 		makeTXTFile.saveFile();
-		JOptionPane.showMessageDialog(null,"Η αναφορά αποθηκεύτηκε επιτυχώς");
-
-		
+		JOptionPane.showMessageDialog(null,"οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½");
 	}
+	
 	private void outputXMLButtonPressed(ActionEvent evt) {
 		XMLReport makeXMLFile = new XMLReport(selectedAgent);
 		makeXMLFile.saveFile();
-		JOptionPane.showMessageDialog(null,"Η αναφορά αποθηκεύτηκε επιτυχώς");		
+		JOptionPane.showMessageDialog(null,"οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½");		
 	}
+	
 	private void okButtonPressed(ActionEvent evt) {
 		System.exit(0);		
 	}

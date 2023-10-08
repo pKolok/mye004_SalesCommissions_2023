@@ -9,22 +9,20 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 public class FileAppenderXML  extends FileAppender{
 
-public  void setFileToAppend(File fileToAppend) {
-		
+	public  void setFileToAppend(File fileToAppend) {
 		this.fileToAppend = fileToAppend;
-		
 	}
+
 	public void appendFile(){
 
 		try{
-		
+			
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 			Document doc = docBuilder.parse(fileToAppend);
@@ -82,7 +80,7 @@ public  void setFileToAppend(File fileToAppend) {
 			StreamResult result = new StreamResult(fileToAppend);
 			transformer.transform(source, result);
 
-		}catch (Exception e){
+		} catch (Exception e){
 			e.printStackTrace();
 		}
 	}
@@ -91,41 +89,33 @@ public  void setFileToAppend(File fileToAppend) {
 		this.receiptID = receiptID;
 	}
 
-
 	public void setDate(String date) {
 		this.date = date;
 	}
-
 
 	public void setKind(String kind) {
 		this.kind = kind;
 	}
 
-
 	public void setSales(String sales) {
 		this.sales = sales;
 	}
-
 
 	public void setItems(String items) {
 		this.items = items;
 	}
 
-
 	public void setCompany(String company) {
 		this.company = company;
 	}
-
 
 	public void setCountry(String country) {
 		this.country = country;
 	}
 
-
 	public void setCity(String city) {
 		this.city = city;
 	}
-
 
 	public void setStreet(String street) {
 		this.street = street;

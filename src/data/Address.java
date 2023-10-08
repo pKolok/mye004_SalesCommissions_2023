@@ -1,12 +1,12 @@
 package data;
 
 public class Address {
+	
 	private String country;
 	private String city;
 	private String street;
 	private int streetNumber;
 	private int phoneNumber;
-
 
 	public String getCity() {
 		return city;
@@ -49,4 +49,3 @@ public class Address {
 	}
 	
 }
-

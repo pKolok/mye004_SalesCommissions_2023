@@ -1,9 +1,9 @@
 package data;
+
 public class Company {
 
 		private String companyName;
 		private Address companyAddress;
-		
 		
 		public Company(){
 			companyAddress = new Address();
@@ -17,9 +17,8 @@ public class Company {
 			this.companyName = name;
 		}
 		
-		
 		public Address getCompanyAddress(){
-			
 			return companyAddress;
 		}
+		
 }

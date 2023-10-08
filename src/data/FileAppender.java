@@ -2,8 +2,6 @@ package data;
 
 import java.io.File;
 
-
-
 public abstract class FileAppender {
 
 	protected File fileToAppend;
@@ -32,4 +30,3 @@ public abstract class FileAppender {
 	public abstract void setNumber(String number);
 
 }
-

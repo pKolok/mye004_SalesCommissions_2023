@@ -1,6 +1,17 @@
 package gui;
 
+import data.Agent;
+import data.Receipt;
+import data.Coat;
+import data.Shirt;
+import data.Skirt;
+import data.Trouser;
 
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.SystemColor;
+import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -8,29 +19,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
-
-import java.awt.Font;
-
 import javax.swing.JToggleButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.SystemColor;
-import java.awt.Color;
-
-import data.Agent;
-import data.Coat;
-import data.Receipt;
-import data.Shirt;
-import data.Skirt;
-import data.Trouser;
-
-
 public class SelectionWindow extends JDialog {
 
-	
 	private static final long serialVersionUID = 1L;
 	private final JPanel selectionWindowPanel = new JPanel();
 	private JTextField dateTextField;
@@ -70,9 +64,9 @@ public class SelectionWindow extends JDialog {
 		inputDialog = dialog;
 		selectedAgent = agent;
 		fileType = fileTypeFlag;
-		initialise();
-		
+		initialise();	
 	}
+	
 	public void initialise(){
 		getContentPane().setBackground(SystemColor.controlHighlight);
 		setBounds(100, 100, 717, 597);
@@ -386,14 +380,12 @@ public class SelectionWindow extends JDialog {
 			agentNameTextField.setText(selectedAgent.getName());
 		}catch(NullPointerException e){
 			
-			JOptionPane.showMessageDialog(null,"Προέκυψε κάποιο πρόβλημα, προσπαθήστε ξανά");
+			JOptionPane.showMessageDialog(null,"οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½, οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½");
 
 		}
 		
 		
 	}
-	
-	
 	
 	protected void okButtonPressed(ActionEvent evt) {
 		if(totalSalesCheckBox.isSelected())
@@ -435,22 +427,21 @@ public class SelectionWindow extends JDialog {
 		this.setVisible(false);		
 	}
 	
-	
 	private void addReceiptButtonPressed(ActionEvent evt) {
 		if(receiptIDTextField.getText().isEmpty() && dateTextField.getText().isEmpty() 
 				&& kindTextField.getText().isEmpty() && salesTextField.getText().isEmpty()
 				&& itemsTextField.getText().isEmpty() && companyTextField.getText().isEmpty()
 				&& countryTextField.getText().isEmpty() && cityTextField.getText().isEmpty()
 				&& streetTextField.getText().isEmpty() && numberTextField.getText().isEmpty()){
-			JOptionPane.showMessageDialog(null,"Πρέπει να συμπληρώσετε όλα τα πεδία");
+			JOptionPane.showMessageDialog(null,"οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½ οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½");
 			
 		}
 		/*else if(kindTextField.toString().equalsIgnoreCase("Coats") == false && 
 				kindTextField.toString().equalsIgnoreCase("Shirts") == false &&
 				kindTextField.toString().equalsIgnoreCase("Skirts") == false &&
 				kindTextField.toString().equalsIgnoreCase("Trousers") == false){
-			JOptionPane.showMessageDialog(null,"To είδος που πρηκτολογήσατε δεν έιναι έγκυρο. Προσπαθήστε"
-					+ " ξανά συμπληρώνοντας το πεδίο kind Coats ή Shirts ή Skirts ή Trousers");
+			JOptionPane.showMessageDialog(null,"To οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½. οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½"
+					+ " οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½ kind Coats οΏ½ Shirts οΏ½ Skirts οΏ½ Trousers");
 
 		}*/
 			
@@ -512,10 +503,10 @@ public class SelectionWindow extends JDialog {
 			selectedAgent.getReceipts().add(receipt);
 			numOfReceipts++;
 			numOfReceiptsTextField.setText(Integer.toString(numOfReceipts));
-			JOptionPane.showMessageDialog(null,"Η απόδειξη προσθέθηκε επιτυχώς");
+			JOptionPane.showMessageDialog(null,"οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½");
 
 		}catch (NumberFormatException e){
-			JOptionPane.showMessageDialog(null,"Δεν συμπληρώσατε σωστά κάποιο πεδίο, προσπαθήστε ξανά");
+			JOptionPane.showMessageDialog(null,"οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½, οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½");
 
 		}
 	}
@@ -524,6 +515,5 @@ public class SelectionWindow extends JDialog {
 		dispose();
 		inputDialog.setVisible(true);		
 	}
-	
-	
+		
 }
