@@ -1,31 +1,14 @@
 # Java related
-target/**
-*.jar
-*.war
-*.ear
 *.class
 
 # eclipse specific
-*.pydevproject
-.project
-.metadata
-bin/**
-tmp/**
-tmp/**/*
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
-.classpath
+.metadata/
 .settings/
-.loadpath
+bin/**
+.classpath
+.project
 
-# External tool builders
-.externalToolBuilders/
-
-# Locally stored "Eclipse launch configurations"
-*.launch
-
+# Application specific
 test_input_files/*
 test_output_files/*
+*.docx
