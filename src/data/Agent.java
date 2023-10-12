@@ -3,6 +3,7 @@ package data;
 import java.util.Vector;
 
 public class Agent {
+	
 	private String name;
 	private String afm;
 	private Vector <Receipt> allReceipts;
