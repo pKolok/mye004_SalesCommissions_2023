@@ -62,6 +62,7 @@ public class Agent {
 		float skirtSum = 0;
 		for (int i = 0; i< allReceipts.size(); i++){
 			if(allReceipts.get(i).getKind().equals("Skirt")){
+				// TODO: should be .getSales
 				skirtSum += allReceipts.get(i).getItems();
 			}
 		}
@@ -71,9 +72,10 @@ public class Agent {
 	public float calculateCoatsSales(){
 		float coatsSum = 0;
 		for (int i = 0; i< allReceipts.size(); i++){
-				if(allReceipts.get(i).getKind().equals("Coat")){
-					coatsSum += allReceipts.get(i).getItems();
-				}
+			if(allReceipts.get(i).getKind().equals("Coat")){
+				// TODO: should be .getSales
+				coatsSum += allReceipts.get(i).getItems();
+			}
 		}		
 		return coatsSum;
 	}
@@ -82,6 +84,7 @@ public class Agent {
 		float trousersSum = 0;
 		for (int i = 0; i< allReceipts.size(); i++){
 			if(allReceipts.get(i).getKind().equals("Trouser")){
+				// TODO: should be .getSales
 				trousersSum += allReceipts.get(i).getItems();
 			}	
 		}
@@ -91,7 +94,8 @@ public class Agent {
 	public float calculateShirtsSales(){
 		float shirtSum = 0;
 		for (int i = 0; i< allReceipts.size(); i++){
-			if(allReceipts.get(i).getKind().equals("Shirt")){				
+			if(allReceipts.get(i).getKind().equals("Shirt")){	
+				// TODO: should be .getSales
 				shirtSum += allReceipts.get(i).getItems();
 			}
 		}

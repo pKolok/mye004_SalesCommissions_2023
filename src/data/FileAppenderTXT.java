@@ -42,7 +42,6 @@ public class FileAppenderTXT extends FileAppender{
 			fileWriter.write(company);
 			fileWriter.write("\n");
 
-
 			fileWriter.write("Country: ");
 			fileWriter.write(country);
 			fileWriter.write("\n");
