@@ -1,0 +1,48 @@
+Name: Apostolos Zarras
+AFM: 130456093
+
+Receipts:
+
+Receipt ID: 1
+Date: 25/2/2014
+Kind: Coats
+Sales: 2000
+Items: 10
+Company: Hand Made Clothes
+Country: Greece
+City: Ioannina
+Street: Kaloudi 
+Number: 10
+
+Receipt ID: 3
+Date: 25/2/2015
+Kind: Shirts
+Sales: 4000
+Items: 20
+Company: Hand Made Clothes2
+Country: Greece
+City: Trikala
+Street: Pyrsinella 
+Number: 20
+
+Receipt ID: 4
+Date: 25/2/2016
+Kind: Skirts
+Sales: 1000
+Items: 5
+Company: Hand Made Clothes3
+Country: Greece
+City: Preveza
+Street: Dwdwnhs 
+Number: 30
+
+Receipt ID: 6
+Date: 25/2/2017
+Kind: Trousers
+Sales: 5000
+Items: 50
+Company: Hand Made Clothes4
+Country: Greece
+City: Parga
+Street: Ane3arthsias 
+Number: 40

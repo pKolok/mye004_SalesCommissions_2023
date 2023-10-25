@@ -39,6 +39,7 @@ public abstract class Input {
 		agent.setAfm(afm);
 	}
 	
+	// TODO: protected
 	public void addReceipt(){
 		Receipt receipt;			
 		if(kind.equals("Shirts")) {

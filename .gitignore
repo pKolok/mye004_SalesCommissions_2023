@@ -12,3 +12,4 @@ bin/**
 test_input_files/*
 test_output_files/*
 *.docx
+Questions.txt

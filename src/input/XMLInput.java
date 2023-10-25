@@ -26,13 +26,15 @@ public class XMLInput extends Input {
             NodeList nodeLst = doc.getElementsByTagName("Agent");
 			
         	name = ((Element) nodeLst.item(0)).getElementsByTagName("Name").
-			item(0).getChildNodes().item(0).getNodeValue().trim();
+        			item(0).getChildNodes().item(0).getNodeValue().trim();
 			
         	afm = ((Element) nodeLst.item(0)).getElementsByTagName("AFM").
-			item(0).getChildNodes().item(0).getNodeValue().trim();
+        			item(0).getChildNodes().item(0).getNodeValue().trim();
+        	
         	addAgent();
+        	
         	NodeList receiptsNodeList = ((Element) nodeLst.
-			item(0)).getElementsByTagName("Receipt");
+        			item(0)).getElementsByTagName("Receipt");
 			
             int size = receiptsNodeList.getLength();
             for(int i=0; i<size; i++){
@@ -67,12 +69,7 @@ public class XMLInput extends Input {
 				getElementsByTagName("Number").item(0).getChildNodes().item(0).getNodeValue().trim());
             	
 				addReceipt();
-            }
-
-        	
-            
-        
-            
+            }   
         } catch (Exception e) {
         	JOptionPane.showMessageDialog
 			(null,"�������� ������ �������� ���� �� �������� ��� �������");

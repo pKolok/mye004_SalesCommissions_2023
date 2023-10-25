@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Agent>
+
+    <Name> Vassileios Zarras </Name>
+        
+    <Receipts>
+
+        <Receipt>
+            <ReceiptID> 1 </ReceiptID>
+            <Date> 25/2/2014 </Date>
+            <Kind> Coats </Kind>
+            <Sales> 2000 </Sales>
+            <Items> 10 </Items>
+            <Company> Hand Made Clothes </Company>
+            <Country> Greece </Country>
+            <City> Ioannina </City>
+            <Street> Kaloudi </Street>
+            <Number> 10 </Number>
+        </Receipt>
+		
+   	</Receipts>
+</Agent>
