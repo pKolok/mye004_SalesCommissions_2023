@@ -1,6 +1,6 @@
 package gui;
 
-import data.Agent;
+import data.Representative;
 import input.TXTInput;
 import input.XMLInput;
 
@@ -35,9 +35,9 @@ public class InputWindow extends JDialog {
 	private final JPanel inputWindowPanel = new JPanel();
 	private DefaultListModel <String> listModel = new DefaultListModel <String>();
 	private JList <String> agentsList = new JList <String>();
-	private Vector <Agent> allAgents;
-	private Agent agent = new Agent();
-	private Agent selectedAgent = null;
+	private Vector <Representative> allAgents;
+	private Representative agent = new Representative();
+	private Representative selectedAgent = null;
 	@SuppressWarnings("unused")
 	private File inputFile;
 	private String fileTypeFlag;
@@ -64,7 +64,7 @@ public class InputWindow extends JDialog {
 	}
 	
 	public void initialise() {
-		allAgents = new Vector <Agent>();
+		allAgents = new Vector <Representative>();
 		
 		setBackground(new Color(0, 0, 0));
 		setBounds(100, 100, 736, 472);

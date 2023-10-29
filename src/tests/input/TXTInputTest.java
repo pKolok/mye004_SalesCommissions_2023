@@ -2,7 +2,7 @@ package tests.input;
 
 import static org.junit.Assert.*;
 
-import data.Agent;
+import data.Representative;
 import data.SaleItem;
 import data.Receipt;
 import input.TXTInput;
@@ -39,7 +39,7 @@ public class TXTInputTest {
 		TXTInput txtInput = new TXTInput(file);
 		txtInput.readFile();
 		
-		Agent agent = txtInput.getAgent();
+		Representative agent = txtInput.getAgent();
 		
 		assertEquals(agent.getName(), "Apostolos Zarras");
 		assertEquals(agent.getAfm(), "130456093");
@@ -70,7 +70,7 @@ public class TXTInputTest {
 		TXTInput txtInput = new TXTInput(file);
 		txtInput.readFile();
 		
-		Agent agent = txtInput.getAgent();
+		Representative agent = txtInput.getAgent();
 		
 		assertEquals(agent.getName(), "Apostolos Zarras");
 		assertEquals(agent.getAfm(), "130456093");
@@ -148,7 +148,7 @@ public class TXTInputTest {
 		TXTInput txtInput = new TXTInput(file);
 		txtInput.readFile();
 		
-		Agent agent = txtInput.getAgent();
+		Representative agent = txtInput.getAgent();
 		
 		assertEquals(agent.getName(), null);
 	}
@@ -160,7 +160,7 @@ public class TXTInputTest {
 		TXTInput txtInput = new TXTInput(file);
 		txtInput.readFile();
 		
-		Agent agent = txtInput.getAgent();
+		Representative agent = txtInput.getAgent();
 		
 		assertEquals(agent.getAfm(), null);
 	}
@@ -172,7 +172,7 @@ public class TXTInputTest {
 		TXTInput txtInput = new TXTInput(file);
 		txtInput.readFile();
 		
-		Agent agent = txtInput.getAgent();
+		Representative agent = txtInput.getAgent();
 		
 		assertEquals(agent.getName(), "Apostolos Zarras");
 		assertEquals(agent.getAfm(), "130456093");
@@ -203,7 +203,7 @@ public class TXTInputTest {
 		TXTInput txtInput = new TXTInput(file);
 		txtInput.readFile();
 		
-		Agent agent = txtInput.getAgent();
+		Representative agent = txtInput.getAgent();
 		Receipt receipt = agent.getReceipts().get(0);
 		
 		assertEquals(receipt.getReceiptID(), 0);
@@ -216,7 +216,7 @@ public class TXTInputTest {
 		TXTInput txtInput = new TXTInput(file);
 		txtInput.readFile();
 		
-		Agent agent = txtInput.getAgent();
+		Representative agent = txtInput.getAgent();
 		Receipt receipt = agent.getReceipts().get(0);
 		
 		assertEquals(receipt.getDate(), null);
@@ -229,7 +229,7 @@ public class TXTInputTest {
 		TXTInput txtInput = new TXTInput(file);
 		txtInput.readFile();
 		
-		Agent agent = txtInput.getAgent();
+		Representative agent = txtInput.getAgent();
 		Receipt receipt = agent.getReceipts().get(0);
 		
 		assertEquals(receipt.getSales(), 0.0, 0.01);
@@ -242,7 +242,7 @@ public class TXTInputTest {
 		TXTInput txtInput = new TXTInput(file);
 		txtInput.readFile();
 		
-		Agent agent = txtInput.getAgent();
+		Representative agent = txtInput.getAgent();
 		Receipt receipt = agent.getReceipts().get(0);
 		
 		assertEquals(receipt.getKind(), SaleItem.OTHER);
@@ -255,7 +255,7 @@ public class TXTInputTest {
 		TXTInput txtInput = new TXTInput(file);
 		txtInput.readFile();
 		
-		Agent agent = txtInput.getAgent();
+		Representative agent = txtInput.getAgent();
 		Receipt receipt = agent.getReceipts().get(0);
 		
 		assertEquals(receipt.getItems(), 0);
@@ -268,7 +268,7 @@ public class TXTInputTest {
 		TXTInput txtInput = new TXTInput(file);
 		txtInput.readFile();
 		
-		Agent agent = txtInput.getAgent();
+		Representative agent = txtInput.getAgent();
 		Receipt receipt = agent.getReceipts().get(0);
 		
 		assertEquals(receipt.getCompany().getName(), null);
@@ -281,7 +281,7 @@ public class TXTInputTest {
 		TXTInput txtInput = new TXTInput(file);
 		txtInput.readFile();
 		
-		Agent agent = txtInput.getAgent();
+		Representative agent = txtInput.getAgent();
 		Receipt receipt = agent.getReceipts().get(0);
 		
 		assertEquals(
@@ -295,7 +295,7 @@ public class TXTInputTest {
 		TXTInput txtInput = new TXTInput(file);
 		txtInput.readFile();
 		
-		Agent agent = txtInput.getAgent();
+		Representative agent = txtInput.getAgent();
 		Receipt receipt = agent.getReceipts().get(0);
 		
 		assertEquals(
@@ -310,7 +310,7 @@ public class TXTInputTest {
 		TXTInput txtInput = new TXTInput(file);
 		txtInput.readFile();
 		
-		Agent agent = txtInput.getAgent();
+		Representative agent = txtInput.getAgent();
 		Receipt receipt = agent.getReceipts().get(0);
 		
 		assertEquals(
@@ -327,7 +327,7 @@ public class TXTInputTest {
 		TXTInput txtInput = new TXTInput(file);
 		txtInput.readFile();
 		
-		Agent agent = txtInput.getAgent();
+		Representative agent = txtInput.getAgent();
 		Receipt receipt = agent.getReceipts().get(0);
 
 		assertEquals(

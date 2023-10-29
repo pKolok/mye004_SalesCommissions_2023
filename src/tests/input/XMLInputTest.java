@@ -2,7 +2,7 @@ package tests.input;
 
 import static org.junit.Assert.*;
 
-import data.Agent;
+import data.Representative;
 import data.Receipt;
 import data.SaleItem;
 import input.XMLInput;
@@ -19,7 +19,7 @@ public class XMLInputTest {
 		XMLInput xmlInput = new XMLInput(file);
 		xmlInput.readFile();
 			
-		Agent agent = xmlInput.getAgent();
+		Representative agent = xmlInput.getAgent();
 		
 		assertEquals(agent.getName(), "Vassileios Zarras");
 		assertEquals(agent.getAfm(), "130456097");
@@ -50,7 +50,7 @@ public class XMLInputTest {
 		XMLInput xmlInput = new XMLInput(file);
 		xmlInput.readFile();
 		
-		Agent agent = xmlInput.getAgent();
+		Representative agent = xmlInput.getAgent();
 		
 		assertEquals(agent.getName(), "Vassileios Zarras");
 		assertEquals(agent.getAfm(), "130456097");
@@ -129,7 +129,7 @@ public class XMLInputTest {
 		XMLInput xmlInput = new XMLInput(file);
 		xmlInput.readFile();
 		
-		Agent agent = xmlInput.getAgent();
+		Representative agent = xmlInput.getAgent();
 		
 		assertEquals(agent.getName(), null);
 		assertTrue(agent.getReceipts().size() > 0);
@@ -143,7 +143,7 @@ public class XMLInputTest {
 		XMLInput xmlInput = new XMLInput(file);
 		xmlInput.readFile();
 		
-		Agent agent = xmlInput.getAgent();
+		Representative agent = xmlInput.getAgent();
 		
 		assertEquals(agent.getAfm(), null);
 		assertTrue(agent.getReceipts().size() > 0);
@@ -157,7 +157,7 @@ public class XMLInputTest {
 		XMLInput xmlInput = new XMLInput(file);
 		xmlInput.readFile();
 		
-		Agent agent = xmlInput.getAgent();
+		Representative agent = xmlInput.getAgent();
 
 		assertEquals(agent.getReceipts().get(0).getReceiptID(), null);
 	}
@@ -170,7 +170,7 @@ public class XMLInputTest {
 		XMLInput xmlInput = new XMLInput(file);
 		xmlInput.readFile();
 		
-		Agent agent = xmlInput.getAgent();
+		Representative agent = xmlInput.getAgent();
 
 		assertEquals(agent.getReceipts().get(0).getDate(), null);
 	}
@@ -183,7 +183,7 @@ public class XMLInputTest {
 		XMLInput xmlInput = new XMLInput(file);
 		xmlInput.readFile();
 		
-		Agent agent = xmlInput.getAgent();
+		Representative agent = xmlInput.getAgent();
 
 		assertEquals(agent.getReceipts().get(0).getSales(), null);
 	}
@@ -196,7 +196,7 @@ public class XMLInputTest {
 		XMLInput xmlInput = new XMLInput(file);
 		xmlInput.readFile();
 		
-		Agent agent = xmlInput.getAgent();
+		Representative agent = xmlInput.getAgent();
 
 		assertEquals(agent.getReceipts().get(0).getKind(), SaleItem.OTHER);
 	}
@@ -209,7 +209,7 @@ public class XMLInputTest {
 		XMLInput xmlInput = new XMLInput(file);
 		xmlInput.readFile();
 		
-		Agent agent = xmlInput.getAgent();
+		Representative agent = xmlInput.getAgent();
 
 		assertEquals(agent.getReceipts().get(0).getItems(), null);
 	}
@@ -222,7 +222,7 @@ public class XMLInputTest {
 		XMLInput xmlInput = new XMLInput(file);
 		xmlInput.readFile();
 		
-		Agent agent = xmlInput.getAgent();
+		Representative agent = xmlInput.getAgent();
 
 		assertEquals(agent.getReceipts().get(0).getCompany(), null);
 	}
@@ -235,7 +235,7 @@ public class XMLInputTest {
 		XMLInput xmlInput = new XMLInput(file);
 		xmlInput.readFile();
 		
-		Agent agent = xmlInput.getAgent();
+		Representative agent = xmlInput.getAgent();
 
 		assertEquals(agent.getReceipts().get(0).getCompany()
 				.getCompanyAddress().getCountry(), null);
@@ -249,7 +249,7 @@ public class XMLInputTest {
 		XMLInput xmlInput = new XMLInput(file);
 		xmlInput.readFile();
 		
-		Agent agent = xmlInput.getAgent();
+		Representative agent = xmlInput.getAgent();
 
 		assertEquals(agent.getReceipts().get(0).getCompany()
 				.getCompanyAddress().getCity(), null);
@@ -264,7 +264,7 @@ public class XMLInputTest {
 		XMLInput xmlInput = new XMLInput(file);
 		xmlInput.readFile();
 		
-		Agent agent = xmlInput.getAgent();
+		Representative agent = xmlInput.getAgent();
 
 		assertEquals(agent.getReceipts().get(0).getCompany()
 				.getCompanyAddress().getStreet(), null);
@@ -278,7 +278,7 @@ public class XMLInputTest {
 		XMLInput xmlInput = new XMLInput(file);
 		xmlInput.readFile();
 		
-		Agent agent = xmlInput.getAgent();
+		Representative agent = xmlInput.getAgent();
 
 		assertEquals(agent.getReceipts().get(0).getCompany()
 				.getCompanyAddress().getStreetNumber(), null);

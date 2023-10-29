@@ -1,6 +1,7 @@
 package output;
 
-import data.Agent;
+import data.Representative;
+import data.SaleItem;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,7 +11,7 @@ import javax.swing.JOptionPane;
 
 public class TXTReport extends Report{
 
-	public TXTReport(Agent a){
+	public TXTReport(Representative a){
 		agent = a;
 	}
 	
@@ -32,16 +33,20 @@ public class TXTReport extends Report{
             bufferedWriter.write("Total Sales: " + agent.calculateTotalSales());
             bufferedWriter.newLine();
  
-            bufferedWriter.write("Trousers Sales: " + agent.calculateTrouserSales());
+            bufferedWriter.write("Trousers Sales: " + agent.calculateItemSales(
+            		SaleItem.TROUSERS));
             bufferedWriter.newLine();
 
-            bufferedWriter.write("Skirts Sales: " + agent.calculateSkirtsSales());
+            bufferedWriter.write("Skirts Sales: " + agent.calculateItemSales(
+            		SaleItem.SKIRT));
             bufferedWriter.newLine();
 
-            bufferedWriter.write("Shirts Sales: " + agent.calculateShirtsSales());
+            bufferedWriter.write("Shirts Sales: " + agent.calculateItemSales(
+            		SaleItem.SHIRT));
             bufferedWriter.newLine();
             
-            bufferedWriter.write("Coats Sales: " + agent.calculateCoatsSales());
+            bufferedWriter.write("Coats Sales: " + agent.calculateItemSales(
+            		SaleItem.COAT));
             bufferedWriter.newLine();
 
             bufferedWriter.write("Commission: " + agent.calculateCommission());

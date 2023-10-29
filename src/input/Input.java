@@ -1,6 +1,6 @@
 package input;
 
-import data.Agent;
+import data.Representative;
 import data.Receipt;
 import data.SaleItem;
 
@@ -8,7 +8,7 @@ import java.io.File;
 
 public abstract class Input {
 	
-	protected Agent agent;
+	protected Representative agent;
 	protected File inputFile;
 	protected String inputFilePath;
 	protected String name;
@@ -27,7 +27,7 @@ public abstract class Input {
 	public abstract void readFile();
 
 	public Input() {
-		agent = new Agent();
+		agent = new Representative();
 		kind  = SaleItem.OTHER;
 	}
 	
@@ -53,7 +53,7 @@ public abstract class Input {
 		agent.getReceipts().add(receipt);
 	}
 	
-	public Agent getAgent() {
+	public Representative getAgent() {
 		return agent;
 	}
 	

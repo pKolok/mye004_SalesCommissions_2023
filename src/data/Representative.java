@@ -1,16 +1,16 @@
 package data;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
-public class Agent {
+public class Representative {
 	
 	private String name;
 	private String afm;
-	private Vector <Receipt> allReceipts;
+	private ArrayList<Receipt> allReceipts;
 	private FileAppender fileAppender;
 	
-	public Agent(){
-		allReceipts = new Vector<Receipt>();
+	public Representative(){
+		allReceipts = new ArrayList<Receipt>();
 	}
 	
 	public void setFileType(String fileType) {
@@ -22,7 +22,7 @@ public class Agent {
 		}	
 	}
 	
-	public Vector<Receipt> getReceipts(){
+	public ArrayList<Receipt> getReceipts(){
 		return allReceipts;
 	}
 	
@@ -58,48 +58,14 @@ public class Agent {
 		return sumItems;
 	}
 	
-	public float calculateSkirtsSales(){
-		float skirtSum = 0;
+	public float calculateItemSales(SaleItem item){
+		float sum = 0;
 		for (int i = 0; i< allReceipts.size(); i++){
-			if(allReceipts.get(i).getKind() == SaleItem.SKIRT){
-				// TODO: should be .getSales
-				skirtSum += allReceipts.get(i).getItems();
+			if(allReceipts.get(i).getKind() == item){
+				sum += allReceipts.get(i).getSales();
 			}
 		}
-		return skirtSum;
-	}
-
-	public float calculateCoatsSales(){
-		float coatsSum = 0;
-		for (int i = 0; i< allReceipts.size(); i++){
-			if(allReceipts.get(i).getKind() == SaleItem.COAT){
-				// TODO: should be .getSales
-				coatsSum += allReceipts.get(i).getItems();
-			}
-		}		
-		return coatsSum;
-	}
-	
-	public float calculateTrouserSales(){
-		float trousersSum = 0;
-		for (int i = 0; i< allReceipts.size(); i++){
-			if(allReceipts.get(i).getKind() == SaleItem.TROUSERS){
-				// TODO: should be .getSales
-				trousersSum += allReceipts.get(i).getItems();
-			}	
-		}
-		return trousersSum;
-	}
-	
-	public float calculateShirtsSales(){
-		float shirtSum = 0;
-		for (int i = 0; i< allReceipts.size(); i++){
-			if(allReceipts.get(i).getKind() == SaleItem.SHIRT){	
-				// TODO: should be .getSales
-				shirtSum += allReceipts.get(i).getItems();
-			}
-		}
-		return shirtSum;
+		return sum;
 	}
 	
 	public double calculateCommission(){

@@ -2,7 +2,7 @@ package tests.output;
 
 import static org.junit.Assert.*;
 
-import data.Agent;
+import data.Representative;
 import data.Receipt;
 import data.SaleItem;
 import output.TXTReport;
@@ -14,7 +14,7 @@ public class TXTReportTest {
 
 	@Test
 	public void testSaveFileHappyDay() {
-		Agent agent = new Agent();
+		Representative agent = new Representative();
 		agent.setName("Odysseus");
 		agent.setAfm("123456789");
 		

@@ -1,6 +1,6 @@
 package gui;
 
-import data.Agent;
+import data.Representative;
 import data.Receipt;
 import data.SaleItem;
 
@@ -53,11 +53,11 @@ public class SelectionWindow extends JDialog {
 	private float trousersSales;
 	private double commission;
 	private InputWindow inputDialog;
-	private Agent selectedAgent;
+	private Representative selectedAgent;
 	@SuppressWarnings("unused")
 	private String fileType;
 	
-	public SelectionWindow(InputWindow dialog, Agent agent, String fileTypeFlag) {
+	public SelectionWindow(InputWindow dialog, Representative agent, String fileTypeFlag) {
 		inputDialog = dialog;
 		selectedAgent = agent;
 		fileType = fileTypeFlag;
@@ -396,22 +396,22 @@ public class SelectionWindow extends JDialog {
 			totalItems = -1;
 		
 		if(shirtRadio.isSelected())
-			shirtSales = selectedAgent.calculateShirtsSales();
+			shirtSales = selectedAgent.calculateItemSales(SaleItem.SHIRT);
 		else
 			shirtSales = -1;
 		
 		if(skirtRadio.isSelected()  )
-			skirtSales = selectedAgent.calculateSkirtsSales();
+			skirtSales = selectedAgent.calculateItemSales(SaleItem.SKIRT);
 		else 
 			skirtSales = -1;
 		
 		if(coatRadio.isSelected())
-			coatsSales = selectedAgent.calculateCoatsSales();
+			coatsSales = selectedAgent.calculateItemSales(SaleItem.COAT);
 		else 
 			coatsSales = -1;
 		
 		if(trousersRadio.isSelected())
-			trousersSales = selectedAgent.calculateTrouserSales();
+			trousersSales = selectedAgent.calculateItemSales(SaleItem.TROUSERS);
 		else 
 			trousersSales = -1;
 		

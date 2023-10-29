@@ -1,6 +1,7 @@
 package output;
 
-import data.Agent;
+import data.Representative;
+import data.SaleItem;
 
 import java.io.File;
 import javax.xml.parsers.DocumentBuilder;
@@ -15,7 +16,7 @@ import org.w3c.dom.Element;
 
 public class XMLReport extends Report{
 
-	public XMLReport(Agent a){
+	public XMLReport(Representative a){
 		agent = a;
 	}	
 		
@@ -38,27 +39,33 @@ public class XMLReport extends Report{
         	 agentElem.appendChild(afm);
         	 
         	 Element totalSales = document.createElement("TotalSales");
-        	 totalSales.appendChild(document.createTextNode(Double.toString(agent.calculateTotalSales())));
+        	 totalSales.appendChild(document.createTextNode(Double.toString(
+        			 agent.calculateTotalSales())));
         	 agentElem.appendChild(totalSales);
         	 
         	 Element trouserSales = document.createElement("TrouserSales");
-        	 trouserSales.appendChild(document.createTextNode(Float.toString(agent.calculateTrouserSales())));
+        	 trouserSales.appendChild(document.createTextNode(Float.toString(
+        			 agent.calculateItemSales(SaleItem.TROUSERS))));
         	 agentElem.appendChild(trouserSales);
         	 
         	 Element skirtsSales = document.createElement("SkirtsSales");
-        	 skirtsSales.appendChild(document.createTextNode(Float.toString(agent.calculateSkirtsSales())));
+        	 skirtsSales.appendChild(document.createTextNode(Float.toString(
+        			 agent.calculateItemSales(SaleItem.SKIRT))));
         	 agentElem.appendChild(skirtsSales);
         	 
         	 Element shirtsSales = document.createElement("ShirtsSales");
-        	 shirtsSales.appendChild(document.createTextNode(Float.toString(agent.calculateShirtsSales())));
+        	 shirtsSales.appendChild(document.createTextNode(Float.toString(
+        			 agent.calculateItemSales(SaleItem.SHIRT))));
         	 agentElem.appendChild(shirtsSales);
         	 
         	 Element coatsSales = document.createElement("CoatsSales");
-        	 coatsSales.appendChild(document.createTextNode(Float.toString(agent.calculateCoatsSales())));
+        	 coatsSales.appendChild(document.createTextNode(Float.toString(
+        			 agent.calculateItemSales(SaleItem.COAT))));
         	 agentElem.appendChild(coatsSales);
         	 
         	 Element commission = document.createElement("Commission");
-        	 commission.appendChild(document.createTextNode(Double.toString(agent.calculateCommission())));
+        	 commission.appendChild(document.createTextNode(Double.toString(
+        			 agent.calculateCommission())));
         	 agentElem.appendChild(commission);
         
         	 TransformerFactory transformerFactory = TransformerFactory.newInstance();

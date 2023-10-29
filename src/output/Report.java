@@ -1,10 +1,10 @@
 package output;
 
-import data.Agent;
+import data.Representative;
 
 public abstract class Report {
 
-	protected Agent agent;
+	protected Representative agent;
 	
 	public abstract void saveFile();
 	

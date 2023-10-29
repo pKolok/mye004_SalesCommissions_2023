@@ -1,6 +1,6 @@
 package gui;
 
-import data.Agent;
+import data.Representative;
 import output.TXTReport;
 import output.XMLReport;
 
@@ -31,7 +31,7 @@ public class ResultWindow extends JDialog {
 	private JTextField skirtSalesTextField;
 	private JTextField commissionTextField;
 	private SelectionWindow selectionWindow;
-	private Agent selectedAgent;
+	private Representative selectedAgent;
 	private double totalSales;
 	private int totalItems;
 	private float shirtSales;
@@ -40,7 +40,7 @@ public class ResultWindow extends JDialog {
 	private float coatsSales;
 	private double commission;
 
-	public ResultWindow(final SelectionWindow sw, Agent agent, double tSales,
+	public ResultWindow(final SelectionWindow sw, Representative agent, double tSales,
 		int tItems, float shirtS,float skirtS,float trousersS,float coatsS,
 		double com) {
 		selectionWindow = sw;
