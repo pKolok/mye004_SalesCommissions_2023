@@ -131,6 +131,7 @@ public class XMLInputTest {
 		Agent agent = xmlInput.getAgent();
 		
 		assertEquals(agent.getName(), null);
+		assertTrue(agent.getReceipts().size() > 0);
 	}
 	
 	// TODO: triggers dialog message
@@ -144,6 +145,7 @@ public class XMLInputTest {
 		Agent agent = xmlInput.getAgent();
 		
 		assertEquals(agent.getAfm(), null);
+		assertTrue(agent.getReceipts().size() > 0);
 	}
 		
 	// TODO: triggers dialog message
@@ -156,7 +158,7 @@ public class XMLInputTest {
 		
 		Agent agent = xmlInput.getAgent();
 
-		assertEquals(agent.getReceipts().size(), 0);
+		assertEquals(agent.getReceipts().get(0).getReceiptID(), null);
 	}
 	
 	// TODO: triggers dialog message
@@ -169,7 +171,7 @@ public class XMLInputTest {
 		
 		Agent agent = xmlInput.getAgent();
 
-		assertEquals(agent.getReceipts().size(), 0);
+		assertEquals(agent.getReceipts().get(0).getDate(), null);
 	}
 	
 	// TODO: triggers dialog message
@@ -182,7 +184,7 @@ public class XMLInputTest {
 		
 		Agent agent = xmlInput.getAgent();
 
-		assertEquals(agent.getReceipts().size(), 0);
+		assertEquals(agent.getReceipts().get(0).getSales(), null);
 	}
 	
 	// TODO: triggers dialog message 
@@ -195,7 +197,7 @@ public class XMLInputTest {
 		
 		Agent agent = xmlInput.getAgent();
 
-		assertEquals(agent.getReceipts().size(), 0);
+		assertEquals(agent.getReceipts().get(0).getKind(), null);
 	}
 	
 	// TODO: triggers dialog message
@@ -208,7 +210,7 @@ public class XMLInputTest {
 		
 		Agent agent = xmlInput.getAgent();
 
-		assertEquals(agent.getReceipts().size(), 0);
+		assertEquals(agent.getReceipts().get(0).getItems(), null);
 	}
 	
 	// TODO: triggers dialog message
@@ -221,7 +223,7 @@ public class XMLInputTest {
 		
 		Agent agent = xmlInput.getAgent();
 
-		assertEquals(agent.getReceipts().size(), 0);
+		assertEquals(agent.getReceipts().get(0).getCompany(), null);
 	}
 	
 	// TODO: triggers dialog message
@@ -234,7 +236,8 @@ public class XMLInputTest {
 		
 		Agent agent = xmlInput.getAgent();
 
-		assertEquals(agent.getReceipts().size(), 0);
+		assertEquals(agent.getReceipts().get(0).getCompany()
+				.getCompanyAddress().getCountry(), null);
 	}
 	
 	// TODO: triggers dialog message
@@ -247,7 +250,8 @@ public class XMLInputTest {
 		
 		Agent agent = xmlInput.getAgent();
 
-		assertEquals(agent.getReceipts().size(), 0);
+		assertEquals(agent.getReceipts().get(0).getCompany()
+				.getCompanyAddress().getCity(), null);
 
 	}
 	
@@ -261,7 +265,8 @@ public class XMLInputTest {
 		
 		Agent agent = xmlInput.getAgent();
 
-		assertEquals(agent.getReceipts().size(), 0);
+		assertEquals(agent.getReceipts().get(0).getCompany()
+				.getCompanyAddress().getStreet(), null);
 	}
 	
 	// TODO: triggers dialog message
@@ -274,7 +279,8 @@ public class XMLInputTest {
 		
 		Agent agent = xmlInput.getAgent();
 
-		assertEquals(agent.getReceipts().size(), 0);
+		assertEquals(agent.getReceipts().get(0).getCompany()
+				.getCompanyAddress().getStreetNumber(), null);
 	}
 	
 }

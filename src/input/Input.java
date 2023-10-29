@@ -34,6 +34,7 @@ public abstract class Input {
 		kind  = new String("");
 	}
 	
+	// TODO: protected
 	public void addAgent() {
 		agent.setName(name);
 		agent.setAfm(afm);

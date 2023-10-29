@@ -29,8 +29,6 @@ public class XMLReport extends Report{
         	 Element agentElem = document.createElement("Agent");
         	 document.appendChild(agentElem);
         	 
-        	
-        	 
         	 Element name = document.createElement("Name");
         	 name.appendChild(document.createTextNode(agent.getName()));
         	 agentElem.appendChild(name);
@@ -63,8 +61,6 @@ public class XMLReport extends Report{
         	 commission.appendChild(document.createTextNode(Double.toString(agent.calculateCommission())));
         	 agentElem.appendChild(commission);
         
-        	 
-        	 
         	 TransformerFactory transformerFactory = TransformerFactory.newInstance();
         	 Transformer transformer = transformerFactory.newTransformer();
         	 transformer.setOutputProperty(OutputKeys.INDENT, "yes");
@@ -72,8 +68,7 @@ public class XMLReport extends Report{
         	 DOMSource domSource = new DOMSource(document);
         	 StreamResult streamResult = new StreamResult(new File(fullPathName));
         	 transformer.transform(domSource, streamResult);
-      
-    		
+        	 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
