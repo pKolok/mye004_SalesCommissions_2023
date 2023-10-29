@@ -7,10 +7,15 @@ public class Receipt {
 	protected double sales;
 	protected int items;
 	protected Company company;
-	protected String kind;
+	protected SaleItem kind;
 
 	public Receipt(){
-		kind = new String("No specific kind");
+		kind = SaleItem.OTHER;
+		company  = new Company();
+	}
+	
+	public Receipt(SaleItem saleItem) {
+		kind = saleItem;
 		company  = new Company();
 	}
 	
@@ -18,7 +23,7 @@ public class Receipt {
 		return company;
 	}
 
-	public String getKind() {
+	public SaleItem getKind() {
 		return kind;
 	}
 

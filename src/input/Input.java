@@ -2,10 +2,7 @@ package input;
 
 import data.Agent;
 import data.Receipt;
-import data.Coat;
-import data.Shirt;
-import data.Skirt;
-import data.Trouser;
+import data.SaleItem;
 
 import java.io.File;
 
@@ -18,7 +15,7 @@ public abstract class Input {
 	protected String afm;
 	protected int receiptID;
 	protected String date;
-	protected String kind;
+	protected SaleItem kind;
 	protected double sales;
 	protected int items;
 	protected String companyName;
@@ -31,7 +28,7 @@ public abstract class Input {
 
 	public Input() {
 		agent = new Agent();
-		kind  = new String("");
+		kind  = SaleItem.OTHER;
 	}
 	
 	// TODO: protected
@@ -42,19 +39,7 @@ public abstract class Input {
 	
 	// TODO: protected
 	public void addReceipt(){
-		Receipt receipt;			
-		if(kind.equals("Shirts")) {
-			receipt= new Shirt();
-		}
-		else if (kind.equals("Skirts")) {
-			receipt = new Skirt();
-		}
-		else if (kind.equals("Trousers")) {
-			receipt = new Trouser();
-		}
-		else {
-			receipt = new Coat();
-		}
+		Receipt receipt = new Receipt(kind);
 		
 		receipt.setReceiptID(receiptID);			
 		receipt.setDate(date);
@@ -70,6 +55,20 @@ public abstract class Input {
 	
 	public Agent getAgent() {
 		return agent;
+	}
+	
+	protected SaleItem getSaleItem(String item) {
+		if (item.equals("Coats")) {
+			return SaleItem.COAT;
+		} else if (item.equals("Shirts")) {
+			return SaleItem.SHIRT;
+		} else if (item.equals("Skirts")) {
+			return SaleItem.SKIRT;
+		} else if (item.equals("Trousers")) {
+			return SaleItem.TROUSERS;
+		} else {
+			return SaleItem.OTHER;
+		}
 	}
 	
 }

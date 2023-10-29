@@ -6,10 +6,7 @@ import data.Agent;
 import data.FileAppenderTXT;
 import data.FileAppenderXML;
 import data.Receipt;
-import data.Skirt;
-import data.Coat;
-import data.Trouser;
-import data.Shirt;
+import data.SaleItem;
 
 import org.junit.Test;
 
@@ -178,10 +175,10 @@ public class AgentTest {
 	@Test
 	public void testCalculateSkirtSalesHappyDay() {
 		Agent agent = new Agent();
-		Skirt skirt1 = new Skirt();
+		Receipt skirt1 = new Receipt(SaleItem.SKIRT);
 		agent.getReceipts().add(skirt1);
 		skirt1.setSales(20.05);
-		Skirt skirt2 = new Skirt();
+		Receipt skirt2 = new Receipt(SaleItem.SKIRT);
 		skirt2.setSales(10.95);
 		agent.getReceipts().add(skirt2);
 		Receipt receipt = new Receipt();
@@ -193,10 +190,10 @@ public class AgentTest {
 	@Test
 	public void testCalculateSkirtSalesPositiveAndNegativeSales() {
 		Agent agent = new Agent();
-		Skirt skirt1 = new Skirt();
+		Receipt skirt1 = new Receipt(SaleItem.SKIRT);
 		skirt1.setSales(20.95);
 		agent.getReceipts().add(skirt1);
-		Skirt skirt2 = new Skirt();
+		Receipt skirt2 = new Receipt(SaleItem.SKIRT);
 		skirt2.setSales(-10.05);
 		agent.getReceipts().add(skirt2);
 		Receipt receipt = new Receipt();
@@ -208,10 +205,10 @@ public class AgentTest {
 	@Test
 	public void testCalculateSkirtSalesNegativeSales() {
 		Agent agent = new Agent();
-		Skirt skirt1 = new Skirt();
+		Receipt skirt1 = new Receipt(SaleItem.SKIRT);
 		skirt1.setSales(-5.95);
 		agent.getReceipts().add(skirt1);
-		Skirt skirt2 = new Skirt();
+		Receipt skirt2 = new Receipt(SaleItem.SKIRT);
 		skirt2.setSales(-10.05);
 		agent.getReceipts().add(skirt2);
 		Receipt receipt = new Receipt();
@@ -230,10 +227,10 @@ public class AgentTest {
 	@Test
 	public void testCalculateCoatSalesHappyDay() {
 		Agent agent = new Agent();
-		Coat coat1 = new Coat();
+		Receipt coat1 = new Receipt(SaleItem.COAT);
 		agent.getReceipts().add(coat1);
 		coat1.setSales(20.05);
-		Coat coat2 = new Coat();
+		Receipt coat2 = new Receipt(SaleItem.COAT);
 		coat2.setSales(10.95);
 		agent.getReceipts().add(coat2);
 		Receipt receipt = new Receipt();
@@ -245,10 +242,10 @@ public class AgentTest {
 	@Test
 	public void testCalculateCoatSalesPositiveAndNegativeSales() {
 		Agent agent = new Agent();
-		Coat coat1 = new Coat();
+		Receipt coat1 = new Receipt(SaleItem.COAT);
 		coat1.setSales(20.95);
 		agent.getReceipts().add(coat1);
-		Coat coat2 = new Coat();
+		Receipt coat2 = new Receipt(SaleItem.COAT);
 		coat2.setSales(-10.05);
 		agent.getReceipts().add(coat2);
 		Receipt receipt = new Receipt();
@@ -260,10 +257,10 @@ public class AgentTest {
 	@Test
 	public void testCalculateCoatSalesNegativeSales() {
 		Agent agent = new Agent();
-		Coat coat1 = new Coat();
+		Receipt coat1 = new Receipt(SaleItem.COAT);
 		coat1.setSales(-5.95);
 		agent.getReceipts().add(coat1);
-		Coat coat2 = new Coat();
+		Receipt coat2 = new Receipt(SaleItem.COAT);
 		coat2.setSales(-10.05);
 		agent.getReceipts().add(coat2);
 		Receipt receipt = new Receipt();
@@ -282,12 +279,12 @@ public class AgentTest {
 	@Test
 	public void testCalculateTrouserSalesHappyDay() {
 		Agent agent = new Agent();
-		Trouser trouser1 = new Trouser();
-		agent.getReceipts().add(trouser1);
-		trouser1.setSales(20.05);
-		Trouser trouser2 = new Trouser();
-		trouser2.setSales(10.95);
-		agent.getReceipts().add(trouser2);
+		Receipt trousers1 = new Receipt(SaleItem.TROUSERS);
+		agent.getReceipts().add(trousers1);
+		trousers1.setSales(20.05);
+		Receipt trousers2 = new Receipt(SaleItem.TROUSERS);
+		trousers2.setSales(10.95);
+		agent.getReceipts().add(trousers2);
 		Receipt receipt = new Receipt();
 		receipt.setSales(10.95);
 		agent.getReceipts().add(receipt);
@@ -297,12 +294,12 @@ public class AgentTest {
 	@Test
 	public void testCalculateTrouserSalesPositiveAndNegativeSales() {
 		Agent agent = new Agent();
-		Trouser trouser1 = new Trouser();
-		trouser1.setSales(20.95);
-		agent.getReceipts().add(trouser1);
-		Trouser trouser2 = new Trouser();
-		trouser2.setSales(-10.05);
-		agent.getReceipts().add(trouser2);
+		Receipt trousers1 = new Receipt(SaleItem.TROUSERS);
+		trousers1.setSales(20.95);
+		agent.getReceipts().add(trousers1);
+		Receipt trousers2 = new Receipt(SaleItem.TROUSERS);
+		trousers2.setSales(-10.05);
+		agent.getReceipts().add(trousers2);
 		Receipt receipt = new Receipt();
 		receipt.setSales(10.95);
 		agent.getReceipts().add(receipt);
@@ -312,12 +309,12 @@ public class AgentTest {
 	@Test
 	public void testCalculateTrouserSalesNegativeSales() {
 		Agent agent = new Agent();
-		Trouser trouser1 = new Trouser();
-		trouser1.setSales(-5.95);
-		agent.getReceipts().add(trouser1);
-		Trouser trouser2 = new Trouser();
-		trouser2.setSales(-10.05);
-		agent.getReceipts().add(trouser2);
+		Receipt trousers1 = new Receipt(SaleItem.TROUSERS);
+		trousers1.setSales(-5.95);
+		agent.getReceipts().add(trousers1);
+		Receipt trousers2 = new Receipt(SaleItem.TROUSERS);
+		trousers2.setSales(-10.05);
+		agent.getReceipts().add(trousers2);
 		Receipt receipt = new Receipt();
 		receipt.setSales(10.95);
 		agent.getReceipts().add(receipt);
@@ -334,10 +331,10 @@ public class AgentTest {
 	@Test
 	public void testCalculateShirtSalesHappyDay() {
 		Agent agent = new Agent();
-		Shirt shirt1 = new Shirt();
+		Receipt shirt1 = new Receipt(SaleItem.SHIRT);
 		agent.getReceipts().add(shirt1);
 		shirt1.setSales(20.05);
-		Shirt shirt2 = new Shirt();
+		Receipt shirt2 = new Receipt(SaleItem.SHIRT);
 		shirt2.setSales(10.95);
 		agent.getReceipts().add(shirt2);
 		Receipt receipt = new Receipt();
@@ -349,10 +346,10 @@ public class AgentTest {
 	@Test
 	public void testCalculateShirtSalesPositiveAndNegativeSales() {
 		Agent agent = new Agent();
-		Shirt shirt1 = new Shirt();
+		Receipt shirt1 = new Receipt(SaleItem.SHIRT);
 		shirt1.setSales(20.95);
 		agent.getReceipts().add(shirt1);
-		Shirt shirt2 = new Shirt();
+		Receipt shirt2 = new Receipt(SaleItem.SHIRT);
 		shirt2.setSales(-10.05);
 		agent.getReceipts().add(shirt2);
 		Receipt receipt = new Receipt();
@@ -364,10 +361,10 @@ public class AgentTest {
 	@Test
 	public void testCalculateShirtSalesNegativeSales() {
 		Agent agent = new Agent();
-		Shirt shirt1 = new Shirt();
+		Receipt shirt1 = new Receipt(SaleItem.SHIRT);
 		shirt1.setSales(-5.95);
 		agent.getReceipts().add(shirt1);
-		Shirt shirt2 = new Shirt();
+		Receipt shirt2 = new Receipt(SaleItem.SHIRT);
 		shirt2.setSales(-10.05);
 		agent.getReceipts().add(shirt2);
 		Receipt receipt = new Receipt();
@@ -386,16 +383,16 @@ public class AgentTest {
 	@Test
 	public void testCalculateCommissionLessThan6000() {
 		Agent agent = new Agent();
-		Skirt skirt = new Skirt();
+		Receipt skirt = new Receipt(SaleItem.SKIRT);
 		agent.getReceipts().add(skirt);
 		skirt.setSales(1000);
-		Coat coat = new Coat();
+		Receipt coat = new Receipt(SaleItem.COAT);
 		agent.getReceipts().add(coat);
 		coat.setSales(500);
-		Trouser trouser = new Trouser();
+		Receipt trouser = new Receipt(SaleItem.TROUSERS);
 		agent.getReceipts().add(trouser);
 		trouser.setSales(1000);
-		Shirt shirt = new Shirt();
+		Receipt shirt = new Receipt(SaleItem.SHIRT);
 		agent.getReceipts().add(shirt);
 		shirt.setSales(500);
 		Receipt receipt = new Receipt();

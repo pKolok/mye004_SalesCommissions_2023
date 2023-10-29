@@ -2,10 +2,7 @@ package gui;
 
 import data.Agent;
 import data.Receipt;
-import data.Coat;
-import data.Shirt;
-import data.Skirt;
-import data.Trouser;
+import data.SaleItem;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -479,17 +476,21 @@ public class SelectionWindow extends JDialog {
 	}
 	
 	private void addReceipt(){
-		Receipt receipt = new Receipt();
+		SaleItem kind = SaleItem.OTHER;
+		
+		if(kindTextField.equals("Shirts")) {
+			kind = SaleItem.SHIRT;
+		} else if (kindTextField.equals("Skirts")) {
+			kind = SaleItem.SKIRT;
+		} else if (kindTextField.equals("Trousers")) {
+			kind = SaleItem.TROUSERS;
+		} else if(kindTextField.equals("Coats")) {
+			kind = SaleItem.COAT;
+		}
+		
+		Receipt receipt = new Receipt(kind);
 		
 		
-		if(kindTextField.equals("Shirts"))		
-			receipt= new Shirt();
-		else if (kindTextField.equals("Skirts"))
-			receipt = new Skirt();
-		else if (kindTextField.equals("Trousers"))
-			receipt = new Trouser();
-		else if(kindTextField.equals("Coats"))				
-			receipt = new Coat();
 		try{
 			receipt.setReceiptID(Integer.parseInt(receiptIDTextField.getText()));			
 			receipt.setDate(dateTextField.getText());

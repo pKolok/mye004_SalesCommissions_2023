@@ -3,6 +3,7 @@ package tests.input;
 import static org.junit.Assert.*;
 
 import data.Agent;
+import data.SaleItem;
 import data.Receipt;
 import input.TXTInput;
 
@@ -48,7 +49,7 @@ public class TXTInputTest {
 		
 		assertEquals(receipt.getReceiptID(), 1);
 		assertEquals(receipt.getDate(), "25/2/2014");
-		assertEquals(receipt.getKind(), "Coat");
+		assertEquals(receipt.getKind(), SaleItem.COAT);
 		assertEquals(receipt.getSales(), 2000, 0.01);
 		assertEquals(receipt.getItems(), 10);
 		assertEquals(receipt.getCompany().getName(), "Hand Made Clothes");
@@ -78,7 +79,7 @@ public class TXTInputTest {
 		Receipt receipt1 = agent.getReceipts().get(0);
 		assertEquals(receipt1.getReceiptID(), 1);
 		assertEquals(receipt1.getDate(), "25/2/2014");
-		assertEquals(receipt1.getKind(), "Coat");
+		assertEquals(receipt1.getKind(), SaleItem.COAT);
 		assertEquals(receipt1.getSales(), 2000, 0.01);
 		assertEquals(receipt1.getItems(), 10);
 		assertEquals(receipt1.getCompany().getName(), "Hand Made Clothes");
@@ -94,7 +95,7 @@ public class TXTInputTest {
 		Receipt receipt2 = agent.getReceipts().get(1);
 		assertEquals(receipt2.getReceiptID(), 3);
 		assertEquals(receipt2.getDate(), "25/2/2015");
-		assertEquals(receipt2.getKind(), "Shirt");
+		assertEquals(receipt2.getKind(), SaleItem.SHIRT);
 		assertEquals(receipt2.getSales(), 4000, 0.01);
 		assertEquals(receipt2.getItems(), 20);
 		assertEquals(receipt2.getCompany().getName(), "Hand Made Clothes2");
@@ -110,7 +111,7 @@ public class TXTInputTest {
 		Receipt receipt3 = agent.getReceipts().get(2);
 		assertEquals(receipt3.getReceiptID(), 4);
 		assertEquals(receipt3.getDate(), "25/2/2016");
-		assertEquals(receipt3.getKind(), "Skirt");
+		assertEquals(receipt3.getKind(), SaleItem.SKIRT);
 		assertEquals(receipt3.getSales(), 1000, 0.01);
 		assertEquals(receipt3.getItems(), 5);
 		assertEquals(receipt3.getCompany().getName(), "Hand Made Clothes3");
@@ -126,7 +127,7 @@ public class TXTInputTest {
 		Receipt receipt4 = agent.getReceipts().get(3);
 		assertEquals(receipt4.getReceiptID(), 6);
 		assertEquals(receipt4.getDate(), "25/2/2017");
-		assertEquals(receipt4.getKind(), "Trouser");
+		assertEquals(receipt4.getKind(), SaleItem.TROUSERS);
 		assertEquals(receipt4.getSales(), 5000, 0.01);
 		assertEquals(receipt4.getItems(), 50);
 		assertEquals(receipt4.getCompany().getName(), "Hand Made Clothes4");
@@ -181,7 +182,7 @@ public class TXTInputTest {
 		
 		assertEquals(receipt.getReceiptID(), 1);
 		assertEquals(receipt.getDate(), "25/2/2014");
-		assertEquals(receipt.getKind(), "Coat");
+		assertEquals(receipt.getKind(), SaleItem.COAT);
 		assertEquals(receipt.getSales(), 2000, 0.01);
 		assertEquals(receipt.getItems(), 10);
 		assertEquals(receipt.getCompany().getName(), "Hand Made Clothes");
@@ -234,7 +235,6 @@ public class TXTInputTest {
 		assertEquals(receipt.getSales(), 0.0, 0.01);
 	}
 	
-	// TODO: rightfully fails: Input::55 else clause creates a Coat
 	@Test
 	public void testReadFileOneReceipMissingKind() {
 		File file = new File(
@@ -245,7 +245,7 @@ public class TXTInputTest {
 		Agent agent = txtInput.getAgent();
 		Receipt receipt = agent.getReceipts().get(0);
 		
-		assertEquals(receipt.getKind(), "");
+		assertEquals(receipt.getKind(), SaleItem.OTHER);
 	}
 	
 	@Test

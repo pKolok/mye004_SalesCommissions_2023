@@ -4,10 +4,7 @@ import static org.junit.Assert.*;
 
 import data.Agent;
 import data.Receipt;
-import data.Trouser;
-import data.Skirt;
-import data.Coat;
-import data.Shirt;
+import data.SaleItem;
 import output.TXTReport;
 
 import org.junit.Test;
@@ -23,13 +20,13 @@ public class TXTReportTest {
 		
 		Receipt receipt1 = new Receipt();
 		receipt1.setSales(1000);
-		Trouser receipt2 = new Trouser();
+		Receipt receipt2 = new Receipt(SaleItem.COAT);
 		receipt2.setSales(600);
-		Skirt receipt3 = new Skirt();
+		Receipt receipt3 = new Receipt(SaleItem.SHIRT);
 		receipt3.setSales(400);
-		Shirt receipt4 = new Shirt();
+		Receipt receipt4 = new Receipt(SaleItem.SKIRT);
 		receipt4.setSales(700);
-		Coat receipt5 = new Coat();
+		Receipt receipt5 = new Receipt(SaleItem.TROUSERS);
 		receipt5.setSales(300);
 		
 		TXTReport txtReport = new TXTReport(agent);

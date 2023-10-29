@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import data.Company;
 import data.Receipt;
+import data.SaleItem;
 
 public class ReceiptTest {
 
@@ -20,7 +21,7 @@ public class ReceiptTest {
 	@Test
 	public void testGetKindHappyDay() {
 		Receipt receipt = new Receipt();
-		assertEquals(receipt.getKind(), "No specific kind");
+		assertEquals(receipt.getKind(), SaleItem.OTHER);
 	}
 	
 	// ---------------------------- Get and Set Sales --------------------------

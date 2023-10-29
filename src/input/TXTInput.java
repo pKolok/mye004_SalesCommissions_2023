@@ -56,8 +56,9 @@ public class TXTInput extends Input{
 				}
 							
 				if(line.startsWith("Kind")){
-								
-					kind = (line.substring(line.indexOf(":") + 1).trim());
+					
+					kind = getSaleItem(
+							(line.substring(line.indexOf(":") + 1).trim()));
 					continue;
 				}
 						

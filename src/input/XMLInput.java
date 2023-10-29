@@ -44,8 +44,9 @@ public class XMLInput extends Input {
             	date = ((Element) receiptsNodeList.item(i)).
 				getElementsByTagName("Date").item(0).getChildNodes().item(0).getNodeValue().trim();
 				
-            	kind = ((Element) receiptsNodeList.item(i))
-				.getElementsByTagName("Kind").item(0).getChildNodes().item(0).getNodeValue().trim();
+            	kind = getSaleItem(((Element) receiptsNodeList.item(i))
+					.getElementsByTagName("Kind").item(0).getChildNodes()
+					.item(0).getNodeValue().trim());
 				
             	sales = Double.parseDouble(((Element) receiptsNodeList.item(i)).
 				getElementsByTagName("Sales").item(0).getChildNodes().item(0).getNodeValue().trim());
