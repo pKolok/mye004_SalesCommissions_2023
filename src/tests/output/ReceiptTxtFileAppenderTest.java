@@ -11,9 +11,11 @@ import java.io.IOException;
 import org.junit.After;
 import org.junit.Test;
 
+import data.Receipt;
+import data.SaleItem;
 import output.ReceiptTxtFileAppender;
 
-public class FileAppenderTXTTest {
+public class ReceiptTxtFileAppenderTest {
 
 	private File file;
 		
@@ -27,8 +29,8 @@ public class FileAppenderTXTTest {
 	public void testAppendFileHappyDay() {
 		String txtExpected = "\nReceipt ID: 1234\n";
 		txtExpected += "Date: 10/10/2010\n";
-		txtExpected += "Kind: Coat\n";
-		txtExpected += "Sales: 2000\n";
+		txtExpected += "Kind: COAT\n";
+		txtExpected += "Sales: 2000.0\n";
 		txtExpected += "Items: 3\n";
 		txtExpected += "Company: Umbrella\n";
 		txtExpected += "Country: US\n";
@@ -41,16 +43,19 @@ public class FileAppenderTXTTest {
 		ReceiptTxtFileAppender fileAppenderTXT = new ReceiptTxtFileAppender();
 		this.file = new File("src/tests/data/txtFile.txt");
 		fileAppenderTXT.setFileToAppend(file);
-		fileAppenderTXT.setReceiptID("1234");
-		fileAppenderTXT.setDate("10/10/2010");
-		fileAppenderTXT.setSales("2000");
-		fileAppenderTXT.setKind("Coat");
-		fileAppenderTXT.setItems("3");
-		fileAppenderTXT.setCompany("Umbrella");
-		fileAppenderTXT.setCountry("US");
-		fileAppenderTXT.setCity("Racoon");
-		fileAppenderTXT.setStreet("Underground ave");
-		fileAppenderTXT.setNumber("-10");
+		
+		Receipt receipt = new Receipt(SaleItem.COAT);
+		receipt.setReceiptID(1234);
+		receipt.setDate("10/10/2010");
+		receipt.setSales(2000);
+		receipt.setItems(3);
+		receipt.getCompany().setName("Umbrella");
+		receipt.getCompany().getCompanyAddress().setCountry("US");
+		receipt.getCompany().getCompanyAddress().setCity("Racoon");
+		receipt.getCompany().getCompanyAddress().setStreet("Underground ave");
+		receipt.getCompany().getCompanyAddress().setStreetNumber(-10);
+		
+		fileAppenderTXT.setReceipt(receipt);
 		fileAppenderTXT.appendFile();
 		
 		try {

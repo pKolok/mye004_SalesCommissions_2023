@@ -462,34 +462,28 @@ public class SelectionWindow extends JDialog {
 	}
 
 	private void appendFile(){
-		selectedAgent.getFileAppender().setReceiptID(receiptIDTextField.getText());
-		selectedAgent.getFileAppender().setDate(dateTextField.getText());
-		selectedAgent.getFileAppender().setKind(kindTextField.getText());
-		selectedAgent.getFileAppender().setSales(salesTextField.getText());
-		selectedAgent.getFileAppender().setItems(itemsTextField.getText());
-		selectedAgent.getFileAppender().setCompany(companyTextField.getText());
-		selectedAgent.getFileAppender().setCountry(countryTextField.getText());
-		selectedAgent.getFileAppender().setCity(cityTextField.getText());
-		selectedAgent.getFileAppender().setStreet(streetTextField.getText());
-		selectedAgent.getFileAppender().setNumber(numberTextField.getText());
+			
+		Receipt receipt = new Receipt(kindTextField.getText());
+		receipt.setReceiptID(Integer.parseInt(receiptIDTextField.getText()));
+		receipt.setDate(dateTextField.getText());
+		receipt.setSales(Double.parseDouble(salesTextField.getText()));
+		receipt.setItems(Integer.parseInt(itemsTextField.getText()));
+		receipt.getCompany().setName(companyTextField.getText());
+		receipt.getCompany().getCompanyAddress().setCountry(
+				countryTextField.getText());
+		receipt.getCompany().getCompanyAddress().setCity(
+				cityTextField.getText());
+		receipt.getCompany().getCompanyAddress().setStreet(
+				streetTextField.getText());
+		receipt.getCompany().getCompanyAddress().setStreetNumber(
+				Integer.parseInt(numberTextField.getText()));
+		
+		selectedAgent.getFileAppender().setReceipt(receipt);
 		selectedAgent.getFileAppender().appendFile();
 	}
 	
-	private void addReceipt(){
-		SaleItem kind = SaleItem.OTHER;
-		
-		if(kindTextField.equals("Shirts")) {
-			kind = SaleItem.SHIRT;
-		} else if (kindTextField.equals("Skirts")) {
-			kind = SaleItem.SKIRT;
-		} else if (kindTextField.equals("Trousers")) {
-			kind = SaleItem.TROUSERS;
-		} else if(kindTextField.equals("Coats")) {
-			kind = SaleItem.COAT;
-		}
-		
-		Receipt receipt = new Receipt(kind);
-		
+	private void addReceipt(){		
+		Receipt receipt = new Receipt(kindTextField.getText());
 		
 		try{
 			receipt.setReceiptID(Integer.parseInt(receiptIDTextField.getText()));			

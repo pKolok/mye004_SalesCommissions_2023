@@ -22,9 +22,11 @@ import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import data.Receipt;
+import data.SaleItem;
 import output.ReceiptXmlFileAppender;
 
-public class FileAppenderXMLTest {
+public class ReceiptXmlFileAppenderTest {
 
 	private String fileName = "src/tests/data/txtFile.xml";
 		
@@ -62,8 +64,8 @@ public class FileAppenderXMLTest {
 		txtExpected += "    <Receipt>\n";
 		txtExpected += "        <ReceiptID>1234</ReceiptID>\n";
 		txtExpected += "        <Date>10/10/2010</Date>\n";
-		txtExpected += "        <Kind>Coat</Kind>\n";
-		txtExpected += "        <Sales>2000</Sales>\n";
+		txtExpected += "        <Kind>COAT</Kind>\n";
+		txtExpected += "        <Sales>2000.0</Sales>\n";
 		txtExpected += "        <Items>3</Items>\n";
 		txtExpected += "        <Company>Umbrella</Company>\n";
 		txtExpected += "        <Country>US</Country>\n";
@@ -78,16 +80,19 @@ public class FileAppenderXMLTest {
 		ReceiptXmlFileAppender fileAppenderXML = new ReceiptXmlFileAppender();
 		File file = new File(fileName);
 		fileAppenderXML.setFileToAppend(file);
-		fileAppenderXML.setReceiptID("1234");
-		fileAppenderXML.setDate("10/10/2010");
-		fileAppenderXML.setSales("2000");
-		fileAppenderXML.setKind("Coat");
-		fileAppenderXML.setItems("3");
-		fileAppenderXML.setCompany("Umbrella");
-		fileAppenderXML.setCountry("US");
-		fileAppenderXML.setCity("Racoon");
-		fileAppenderXML.setStreet("Underground ave");
-		fileAppenderXML.setNumber("-10");
+		
+		Receipt receipt = new Receipt(SaleItem.COAT);
+		receipt.setReceiptID(1234);
+		receipt.setDate("10/10/2010");
+		receipt.setSales(2000);
+		receipt.setItems(3);
+		receipt.getCompany().setName("Umbrella");
+		receipt.getCompany().getCompanyAddress().setCountry("US");
+		receipt.getCompany().getCompanyAddress().setCity("Racoon");
+		receipt.getCompany().getCompanyAddress().setStreet("Underground ave");
+		receipt.getCompany().getCompanyAddress().setStreetNumber(-10);
+		
+		fileAppenderXML.setReceipt(receipt);
 		fileAppenderXML.appendFile();
 		
 		try {

@@ -1,14 +1,9 @@
 package output;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class ReceiptTxtFileAppender extends ReceiptFileAppender{
-
-	public  void setFileToAppend(File fileToAppend) {
-		this.fileToAppend = fileToAppend;
-	}
 
 	public void appendFile(){
 		System.out.println("Mpike sto TXT");
@@ -19,43 +14,47 @@ public class ReceiptTxtFileAppender extends ReceiptFileAppender{
 			FileWriter fileWriter = new FileWriter(fileToAppend, true);		
 			fileWriter.write("\n");
 			fileWriter.write("Receipt ID: ");
-			fileWriter.write(receiptID);
+			fileWriter.write(Integer.toString(receipt.getReceiptID()));
 			fileWriter.write("\n");
 
 			fileWriter.write("Date: ");
-			fileWriter.write(date);
+			fileWriter.write(receipt.getDate());
 			fileWriter.write("\n");
 
 			fileWriter.write("Kind: ");
-			fileWriter.write(kind);
+			fileWriter.write(receipt.getKind().name());
 			fileWriter.write("\n");
 
 			fileWriter.write("Sales: ");
-			fileWriter.write(sales);
+			fileWriter.write(receipt.getSales() + "");
 			fileWriter.write("\n");
 
 			fileWriter.write("Items: ");
-			fileWriter.write(items);
+			fileWriter.write(receipt.getItems() + "");
 			fileWriter.write("\n");
 
 			fileWriter.write("Company: ");
-			fileWriter.write(company);
+			fileWriter.write(receipt.getCompany().getName());
 			fileWriter.write("\n");
 
 			fileWriter.write("Country: ");
-			fileWriter.write(country);
+			fileWriter.write(receipt.getCompany().getCompanyAddress()
+					.getCountry());
 			fileWriter.write("\n");
 			
 			fileWriter.write("City: ");
-			fileWriter.write(city);
+			fileWriter.write(receipt.getCompany().getCompanyAddress()
+					.getCity());
 			fileWriter.write("\n");
 
 			fileWriter.write("Street: ");
-			fileWriter.write(street);
+			fileWriter.write(receipt.getCompany().getCompanyAddress()
+					.getStreet());
 			fileWriter.write("\n");
 
 			fileWriter.write("Number: ");
-			fileWriter.write(number);
+			fileWriter.write(Integer.toString(receipt.getCompany()
+					.getCompanyAddress().getStreetNumber()));
 			fileWriter.write("\n");
 
 			fileWriter.close();
@@ -64,46 +63,6 @@ public class ReceiptTxtFileAppender extends ReceiptFileAppender{
 			
 			e.printStackTrace();
 		}
-	}
-	
-	public void setReceiptID(String receiptID) {
-		this.receiptID = receiptID;
-	}
-
-	public void setDate(String date) {
-		this.date = date;
-	}
-
-	public void setKind(String kind) {
-		this.kind = kind;
-	}
-
-	public void setSales(String sales) {
-		this.sales = sales;
-	}
-
-	public void setItems(String items) {
-		this.items = items;
-	}
-
-	public void setCompany(String company) {
-		this.company = company;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public void setStreet(String street) {
-		this.street = street;
-	}
-
-	public void setNumber(String number) {
-		this.number = number;
 	}
 
 }
