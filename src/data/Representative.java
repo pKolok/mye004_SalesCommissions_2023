@@ -2,12 +2,16 @@ package data;
 
 import java.util.ArrayList;
 
+import output.ReceiptFileAppender;
+import output.ReceiptTxtFileAppender;
+import output.ReceiptXmlFileAppender;
+
 public class Representative {
 	
 	private String name;
 	private String afm;
 	private ArrayList<Receipt> allReceipts;
-	private FileAppender fileAppender;
+	private ReceiptFileAppender fileAppender;
 	
 	public Representative(){
 		allReceipts = new ArrayList<Receipt>();
@@ -15,10 +19,10 @@ public class Representative {
 	
 	public void setFileType(String fileType) {
 		if(fileType.equals("TXT")){
-			fileAppender = new FileAppenderTXT();
+			fileAppender = new ReceiptTxtFileAppender();
 		}	
 		else{
-			fileAppender = new FileAppenderXML();
+			fileAppender = new ReceiptXmlFileAppender();
 		}	
 	}
 	
@@ -82,7 +86,7 @@ public class Representative {
 		return commission;
 	}
 
-	public FileAppender getFileAppender() {
+	public ReceiptFileAppender getFileAppender() {
 		return fileAppender;
 	}
 

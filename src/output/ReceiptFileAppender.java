@@ -1,8 +1,8 @@
-package data;
+package output;
 
 import java.io.File;
 
-public abstract class FileAppender {
+public abstract class ReceiptFileAppender {
 
 	protected File fileToAppend;
 	protected String receiptID;

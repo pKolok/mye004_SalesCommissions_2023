@@ -1,10 +1,10 @@
-package data;
+package output;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class FileAppenderTXT extends FileAppender{
+public class ReceiptTxtFileAppender extends ReceiptFileAppender{
 
 	public  void setFileToAppend(File fileToAppend) {
 		this.fileToAppend = fileToAppend;
@@ -16,7 +16,7 @@ public class FileAppenderTXT extends FileAppender{
 
 		try {
 			
-			FileWriter fileWriter = new FileWriter(fileToAppend,true);		
+			FileWriter fileWriter = new FileWriter(fileToAppend, true);		
 			fileWriter.write("\n");
 			fileWriter.write("Receipt ID: ");
 			fileWriter.write(receiptID);

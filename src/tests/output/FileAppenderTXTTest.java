@@ -1,8 +1,6 @@
-package tests.data;
+package tests.output;
 
 import static org.junit.Assert.*;
-
-import data.FileAppenderTXT;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,6 +10,8 @@ import java.io.IOException;
 
 import org.junit.After;
 import org.junit.Test;
+
+import output.ReceiptTxtFileAppender;
 
 public class FileAppenderTXTTest {
 
@@ -38,7 +38,7 @@ public class FileAppenderTXTTest {
 
 		String txtFileRead = "";
 
-		FileAppenderTXT fileAppenderTXT = new FileAppenderTXT();
+		ReceiptTxtFileAppender fileAppenderTXT = new ReceiptTxtFileAppender();
 		this.file = new File("src/tests/data/txtFile.txt");
 		fileAppenderTXT.setFileToAppend(file);
 		fileAppenderTXT.setReceiptID("1234");

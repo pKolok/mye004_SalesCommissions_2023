@@ -1,8 +1,6 @@
-package tests.data;
+package tests.output;
 
 import static org.junit.Assert.*;
-
-import data.FileAppenderXML;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,6 +21,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import output.ReceiptXmlFileAppender;
 
 public class FileAppenderXMLTest {
 
@@ -75,7 +75,7 @@ public class FileAppenderXMLTest {
 		
 		String txtFileRead = "";
 
-		FileAppenderXML fileAppenderXML = new FileAppenderXML();
+		ReceiptXmlFileAppender fileAppenderXML = new ReceiptXmlFileAppender();
 		File file = new File(fileName);
 		fileAppenderXML.setFileToAppend(file);
 		fileAppenderXML.setReceiptID("1234");

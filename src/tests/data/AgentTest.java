@@ -3,10 +3,10 @@ package tests.data;
 import static org.junit.Assert.*;
 
 import data.Representative;
-import data.FileAppenderTXT;
-import data.FileAppenderXML;
 import data.Receipt;
 import data.SaleItem;
+import output.ReceiptTxtFileAppender;
+import output.ReceiptXmlFileAppender;
 
 import org.junit.Test;
 
@@ -61,14 +61,14 @@ public class AgentTest {
 	public void testGetAndSetFileTypeTXTHappyDay() {
 		Representative representative = new Representative();
 		representative.setFileType("TXT");
-		assertTrue(representative.getFileAppender() instanceof FileAppenderTXT);
+		assertTrue(representative.getFileAppender() instanceof ReceiptTxtFileAppender);
 	}
 	
 	@Test
 	public void testGetAndSetFileTypeXMLHappyDay() {
 		Representative representative = new Representative();
 		representative.setFileType("XML");
-		assertTrue(representative.getFileAppender() instanceof FileAppenderXML);
+		assertTrue(representative.getFileAppender() instanceof ReceiptXmlFileAppender);
 	}
 	
 	@Test
