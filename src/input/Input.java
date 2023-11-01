@@ -33,6 +33,7 @@ public abstract class Input {
 	
 	// TODO: protected
 	public void addAgent() {
+		// TODO: remove setters
 		agent.setName(name);
 		agent.setAfm(afm);
 	}

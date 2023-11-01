@@ -194,8 +194,7 @@ public class InputWindow extends JDialog {
 			TXTInput inputFileTXT = new TXTInput(recieptFileTXT);	
 			inputFileTXT.readFile();
 			agent = inputFileTXT.getAgent();
-			agent.setFileType("TXT");
-			agent.getFileAppender().setFileToAppend(recieptFileTXT);				
+			agent.setupReceiptFileAppender("TXT", recieptFileTXT);				
 			allAgents.add(agent);
 			for(int i = 0; i< listModel.getSize(); i++){
 				if(agent.getName().equals(listModel.getElementAt(i))){
@@ -230,12 +229,11 @@ public class InputWindow extends JDialog {
 		XMLFileChooser.showOpenDialog(null);
 		boolean agentDuplicate = false;
 		try{
-			File recieptFileXML = XMLFileChooser.getSelectedFile();
-			XMLInput inputFileXML = new XMLInput(recieptFileXML);	
+			File receiptFileXML = XMLFileChooser.getSelectedFile();
+			XMLInput inputFileXML = new XMLInput(receiptFileXML);	
 			inputFileXML.readFile();
 			agent = inputFileXML.getAgent();
-			agent.setFileType("XML");
-			agent.getFileAppender().setFileToAppend(recieptFileXML);				
+			agent.setupReceiptFileAppender("XML", receiptFileXML);				
 			allAgents.add(agent);
 			for(int i = 0; i< listModel.getSize(); i++){
 				if(agent.getName().equals(listModel.getElementAt(i))){

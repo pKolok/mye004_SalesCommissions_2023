@@ -27,7 +27,7 @@ public class ReceiptTxtFileAppenderTest {
 	
 	@Test
 	public void testAppendFileHappyDay() {
-		String txtExpected = "\nReceipt ID: 1234\n";
+		String txtExpected = "\nReceiptID: 1234\n";
 		txtExpected += "Date: 10/10/2010\n";
 		txtExpected += "Kind: COAT\n";
 		txtExpected += "Sales: 2000.0\n";
@@ -40,9 +40,9 @@ public class ReceiptTxtFileAppenderTest {
 
 		String txtFileRead = "";
 
-		ReceiptTxtFileAppender fileAppenderTXT = new ReceiptTxtFileAppender();
 		this.file = new File("src/tests/data/txtFile.txt");
-		fileAppenderTXT.setFileToAppend(file);
+		ReceiptTxtFileAppender fileAppenderTXT = new ReceiptTxtFileAppender(
+				this.file);
 		
 		Receipt receipt = new Receipt(SaleItem.COAT);
 		receipt.setReceiptID(1234);
@@ -55,8 +55,7 @@ public class ReceiptTxtFileAppenderTest {
 		receipt.getCompany().getCompanyAddress().setStreet("Underground ave");
 		receipt.getCompany().getCompanyAddress().setStreetNumber(-10);
 		
-		fileAppenderTXT.setReceipt(receipt);
-		fileAppenderTXT.appendFile();
+		fileAppenderTXT.appendFile(receipt);
 		
 		try {
 			BufferedReader reader = new BufferedReader(

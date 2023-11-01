@@ -77,9 +77,9 @@ public class ReceiptXmlFileAppenderTest {
 		
 		String txtFileRead = "";
 
-		ReceiptXmlFileAppender fileAppenderXML = new ReceiptXmlFileAppender();
 		File file = new File(fileName);
-		fileAppenderXML.setFileToAppend(file);
+		ReceiptXmlFileAppender fileAppenderXML = new ReceiptXmlFileAppender(
+				file);
 		
 		Receipt receipt = new Receipt(SaleItem.COAT);
 		receipt.setReceiptID(1234);
@@ -92,8 +92,7 @@ public class ReceiptXmlFileAppenderTest {
 		receipt.getCompany().getCompanyAddress().setStreet("Underground ave");
 		receipt.getCompany().getCompanyAddress().setStreetNumber(-10);
 		
-		fileAppenderXML.setReceipt(receipt);
-		fileAppenderXML.appendFile();
+		fileAppenderXML.appendFile(receipt);
 		
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(fileName));

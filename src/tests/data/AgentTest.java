@@ -2,6 +2,8 @@ package tests.data;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+
 import data.Representative;
 import data.Receipt;
 import data.SaleItem;
@@ -56,32 +58,32 @@ public class AgentTest {
 		assertEquals(null, representative.getAfm());
 	}
 	
-	// -------------------- Set File type, Get FileAppender --------------------
+	// -------------- setupReceiptFileAppender, Get FileAppender ---------------
 	@Test
 	public void testGetAndSetFileTypeTXTHappyDay() {
 		Representative representative = new Representative();
-		representative.setFileType("TXT");
+		representative.setupReceiptFileAppender("TXT", new File(""));
 		assertTrue(representative.getFileAppender() instanceof ReceiptTxtFileAppender);
 	}
 	
 	@Test
 	public void testGetAndSetFileTypeXMLHappyDay() {
 		Representative representative = new Representative();
-		representative.setFileType("XML");
+		representative.setupReceiptFileAppender("XML", new File(""));
 		assertTrue(representative.getFileAppender() instanceof ReceiptXmlFileAppender);
 	}
 	
 	@Test
 	public void testGetAndSetFileTypeEmptyString() {
 		Representative representative = new Representative();
-		representative.setFileType("");
+		representative.setupReceiptFileAppender("", new File(""));
 		assertEquals(representative.getFileAppender(), null);
 	}
 	
 	@Test
 	public void testGetAndSetFileTypeRandomString() {
 		Representative representative = new Representative();
-		representative.setFileType("mpla");
+		representative.setupReceiptFileAppender("mpla", new File(""));
 		assertEquals(representative.getFileAppender(), null);
 	}
 	

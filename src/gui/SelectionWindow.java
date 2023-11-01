@@ -478,8 +478,7 @@ public class SelectionWindow extends JDialog {
 		receipt.getCompany().getCompanyAddress().setStreetNumber(
 				Integer.parseInt(numberTextField.getText()));
 		
-		selectedAgent.getFileAppender().setReceipt(receipt);
-		selectedAgent.getFileAppender().appendFile();
+		selectedAgent.getFileAppender().appendFile(receipt);
 	}
 	
 	private void addReceipt(){		
