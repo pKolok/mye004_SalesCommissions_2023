@@ -14,9 +14,7 @@ public class TXTReportTest {
 
 	@Test
 	public void testSaveFileHappyDay() {
-		Representative agent = new Representative();
-		agent.setName("Odysseus");
-		agent.setAfm("123456789");
+		Representative agent = new Representative("Odysseus", "123456789");
 		
 		Receipt receipt1 = new Receipt();
 		receipt1.setSales(1000);

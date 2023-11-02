@@ -12,49 +12,44 @@ import output.ReceiptXmlFileAppender;
 
 import org.junit.Test;
 
-public class AgentTest {
+public class RepresentativeTest {
 
-	// ---------------------------- Get and Set Name ---------------------------
+	// -------------------------------- Get Name -------------------------------
 	@Test
 	public void testGetAndSetNameHappyDay() {
-		Representative representative = new Representative();
-		representative.setName("Petros");
+		Representative representative = new Representative("Petros", "");
 		assertEquals("Petros", representative.getName());
 	}
 	
 	@Test
 	public void testGetAndSetNameEmptyString() {
-		Representative representative = new Representative();
-		representative.setName("");
+		Representative representative = new Representative("", "");
 		assertEquals("", representative.getName());
 	}
 
 	@Test
 	public void testGetAndSetNameNull() {
-		Representative representative = new Representative();
-		representative.setName(null);
+		Representative representative = new Representative(null, "");
 		assertEquals(null, representative.getName());
 	}
 
-	// ---------------------------- Get and Set AFM ----------------------------
+	// -------------------------------- Get AFM --------------------------------
 	@Test
 	public void testGetAndSetAFMHappyDay() {
-		Representative representative = new Representative();
-		representative.setAfm("1234567fgdf");
+		Representative representative = new Representative(
+				"Petros", "1234567fgdf");
 		assertEquals("1234567fgdf", representative.getAfm());
 	}
 	
 	@Test
 	public void testGetAndSetAFMEmptyString() {
-		Representative representative = new Representative();
-		representative.setAfm("");
+		Representative representative = new Representative("Petros", "");
 		assertEquals("", representative.getAfm());
 	}
 
 	@Test
 	public void testGetAndSetAFMNull() {
-		Representative representative = new Representative();
-		representative.setAfm(null);
+		Representative representative = new Representative("Petros", null);
 		assertEquals(null, representative.getAfm());
 	}
 	

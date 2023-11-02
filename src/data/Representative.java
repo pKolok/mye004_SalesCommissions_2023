@@ -18,13 +18,10 @@ public class Representative {
 		allReceipts = new ArrayList<Receipt>();
 	}
 	
-	public void setupReceiptFileAppender(String fileType, File file) {
-		if(fileType.equals("TXT")){
-			fileAppender = new ReceiptTxtFileAppender(file);
-		}	
-		else{
-			fileAppender = new ReceiptXmlFileAppender(file);
-		}	
+	public Representative(String name, String afm){
+		this.name = name;
+		this.afm = afm;
+		allReceipts = new ArrayList<Receipt>();
 	}
 	
 	public ArrayList<Receipt> getReceipts(){
@@ -34,17 +31,22 @@ public class Representative {
 	public String getName() {
 		return name;
 	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
+
 	public String getAfm() {
 		return afm;
 	}
+
+	public ReceiptFileAppender getFileAppender() {
+		return fileAppender;
+	}
 	
-	public void setAfm(String afm) {
-		this.afm = afm;
+	public void setupReceiptFileAppender(String fileType, File file) {
+		if(fileType.equals("TXT")){
+			fileAppender = new ReceiptTxtFileAppender(file);
+		}	
+		else{
+			fileAppender = new ReceiptXmlFileAppender(file);
+		}	
 	}
 
 	public double calculateTotalSales(){
@@ -85,10 +87,6 @@ public class Representative {
 			commission = 10000*0.1 + 30000*0.15 + (calculateTotalSales() - 40000)*0.2;			
 		}
 		return commission;
-	}
-
-	public ReceiptFileAppender getFileAppender() {
-		return fileAppender;
 	}
 
 }
