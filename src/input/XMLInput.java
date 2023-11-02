@@ -17,9 +17,9 @@ public class XMLInput extends Input {
     public void readFile() {
         try {
         	DocumentBuilderFactory docBuilderFactory 
-			= DocumentBuilderFactory.newInstance();
+				= DocumentBuilderFactory.newInstance();
         	DocumentBuilder docBuilder
-			= docBuilderFactory.newDocumentBuilder();
+				= docBuilderFactory.newDocumentBuilder();
         	Document doc = docBuilder.parse(inputFile);
         	 
         	doc.getDocumentElement().normalize();

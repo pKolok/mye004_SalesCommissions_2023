@@ -15,105 +15,88 @@ public class TXTInput extends Input{
 	
 	@Override
 	public void readFile()  {
-		 BufferedReader br = null;
+		BufferedReader bufferedReader = null;
 	    try {
-	            	
-			br = new BufferedReader(new FileReader(inputFilePath));
+			bufferedReader = new BufferedReader(new FileReader(inputFilePath));
 		} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
 		}
+	    
 	    String line;
-	    try {
 
-			while ((line = br.readLine()) != null) {
-						
-				if(line.startsWith("Name:")){
-					name = (line.substring(line.indexOf(":") + 1).trim());
-					continue;
-				}	
-						
-				if(line.startsWith("AFM")){
-					afm = (line.substring(line.indexOf(":") + 1).trim());
-					addAgent();
-					continue;
-				}
-						
-				if(line.startsWith("Receipts")){
-	
-					continue;
-				}
-							
-				if(line.startsWith("Receipt ID")){
-					receiptID = (Integer.parseInt(line.substring
-					(line.indexOf(":") + 1).trim()));
-					continue;
-				}
-							
-				if(line.startsWith("Date")){
-								
-					date = (line.substring(line.indexOf(":") + 1).trim());
-					continue;
-				}
-							
-				if(line.startsWith("Kind")){
-					
-					kind = getSaleItem(
-							(line.substring(line.indexOf(":") + 1).trim()));
-					continue;
-				}
-						
-				if(line.startsWith("Sales")){
-								
-					sales = (Double.parseDouble(line.substring
-					(line.indexOf(":") + 1).trim()));
-					continue;
-				}
-							
-				if(line.startsWith("Items")){
-								
-					items = (Integer.parseInt(line.substring
-					(line.indexOf(":") + 1).trim()));
-					continue;
-				}
-							
-													
-				if(line.startsWith("Company")){
-					companyName = (line.substring
-					(line.indexOf(":") + 1).trim());
-					continue;
-				}
-							
-				if(line.startsWith("Country")){
-					companyCountry =  (line.substring
-					(line.indexOf(":") + 1).trim());
-					continue;
-				}
-							
-				if(line.startsWith("City")){
-					companyCity =  (line.substring
-					(line.indexOf(":") + 1).trim());
-					continue;
-				}
-						
-				if(line.startsWith("Street")){
-					companyStreet =  (line.substring
-					(line.indexOf(":") + 1).trim());
-					continue;
-				}
-							
-				if(line.startsWith("Number")){
-					companyStreetNumber =  (Integer.parseInt
-					(line.substring(line.indexOf(":") + 1).trim()));
-					addReceipt();
-					continue;
-				}
-					
-			}
+	    try {
+	    	// Name line
+	    	line = bufferedReader.readLine();
+	    	name = (line.substring(line.indexOf(":") + 1).trim());
+	    	
+	    	// Afm line
+	    	line = bufferedReader.readLine();
+	    	afm = (line.substring(line.indexOf(":") + 1).trim());
+	    	
+	    	addAgent();
+	    	
+	    	// Receipts line and empty lines
+	    	line = bufferedReader.readLine();
+	    	line = bufferedReader.readLine();
+	    	line = bufferedReader.readLine();
+	    	
+	    	while ((line = bufferedReader.readLine()) != null) {
+	    		
+	    		// Receipt ID line
+		    	receiptID = (Integer.parseInt(line.substring(
+		    			line.indexOf(":") + 1).trim()));
+		    	
+	    		// Date line
+		    	line = bufferedReader.readLine();
+		    	date = (line.substring(line.indexOf(":") + 1).trim());
+		    	
+		    	// Kind line
+		    	line = bufferedReader.readLine();
+		    	kind = getSaleItem(
+		    			line.substring(line.indexOf(":") + 1).trim());
+		    		
+		    	// Sales line
+		    	line = bufferedReader.readLine();
+		    	sales = Double.parseDouble(line.substring(
+		    			line.indexOf(":") + 1).trim());
+		    	
+		    	// Items line
+		    	line = bufferedReader.readLine();
+		    	items = Integer.parseInt(line.substring(
+		    			line.indexOf(":") + 1).trim());
+		    	
+		    	// Company line
+		    	line = bufferedReader.readLine();
+		    	companyName = line.substring(line.indexOf(":") + 1).trim();
+		    	
+		    	// Country line
+		    	line = bufferedReader.readLine();
+		    	companyCountry =  line.substring(line.indexOf(":") + 1).trim();
+		    	
+		    	// City line
+		    	line = bufferedReader.readLine();
+		    	companyCity =  line.substring(line.indexOf(":") + 1).trim();
+		    	
+		    	// Street line
+		    	line = bufferedReader.readLine();
+		    	companyStreet = line.substring(line.indexOf(":") + 1).trim();
+		    	
+		    	// Street number line
+		    	line = bufferedReader.readLine();
+		    	companyStreetNumber = Integer.parseInt(line.substring(
+		    			line.indexOf(":") + 1).trim());
+		    	
+		    	// Empty line
+		    	line = bufferedReader.readLine();
+		    	
+		    	addReceipt();
+	    	}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	    
 	    try {
-			br.close();
+			bufferedReader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
