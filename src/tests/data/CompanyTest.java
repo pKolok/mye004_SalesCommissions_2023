@@ -12,29 +12,30 @@ public class CompanyTest {
 	// ---------------------------- Get Company Address ------------------------
 	@Test
 	public void testGetCompanyAddress() {
-		Company company = new Company();
+		Address address = new Address("", "", "", 0);
+		Company company = new Company("", address);
 		assertTrue(company.getCompanyAddress() instanceof Address);
 	}
 	
-	// ---------------------------- Get and Set Name ---------------------------
+	// ---------------------------- Get Name ---------------------------
 	@Test
 	public void testGetAndSetNameHappyDay() {
-		Company company = new Company();
-		company.setName("Umbrella");
+		Address address = new Address("", "", "", 0);
+		Company company = new Company("Umbrella", address);
 		assertEquals(company.getName(), "Umbrella");
 	}
 	
 	@Test
 	public void testGetAndSetNameEmptyString() {
-		Company company = new Company();
-		company.setName("");
+		Address address = new Address("", "", "", 0);
+		Company company = new Company("", address);
 		assertEquals(company.getName(), "");
 	}
 	
 	@Test
 	public void testGetAndSetNameMNull() {
-		Company company = new Company();
-		company.setName(null);
+		Address address = new Address("", "", "", 0);
+		Company company = new Company(null, address);
 		assertEquals(company.getName(), null);
 	}
 

@@ -1,6 +1,8 @@
 package input;
 
 import data.Representative;
+import data.Address;
+import data.Company;
 import data.Receipt;
 import data.SaleItem;
 
@@ -8,7 +10,7 @@ import java.io.File;
 
 public abstract class Input {
 	
-	protected Representative agent;
+	protected Representative agent;	// TODO: rename
 	protected File inputFile;
 	protected String inputFilePath;
 	protected String name;
@@ -27,7 +29,7 @@ public abstract class Input {
 	public abstract void readFile();
 
 	public Input() {
-		agent = new Representative();
+		agent = new Representative("", "");
 		kind  = SaleItem.OTHER;
 	}
 	
@@ -38,18 +40,12 @@ public abstract class Input {
 	
 	// TODO: protected
 	public void addReceipt(){
-		Receipt receipt = new Receipt(kind);
-		
-		receipt.setReceiptID(receiptID);			
-		receipt.setDate(date);
-		receipt.setSales(sales);
-		receipt.setItems(items);
-		receipt.getCompany().setName(companyName);
-		receipt.getCompany().getCompanyAddress().setCountry(companyCountry);
-		receipt.getCompany().getCompanyAddress().setCity(companyCity);
-		receipt.getCompany().getCompanyAddress().setStreet(companyStreet);
-		receipt.getCompany().getCompanyAddress().setStreetNumber(companyStreetNumber);
-		agent.getReceipts().add(receipt);
+		Address address = new Address(companyCountry, companyCity,
+				companyStreet, companyStreetNumber);
+		Company company = new Company(companyName, address);
+		Receipt receipt = new Receipt(receiptID, date, sales, kind, items,
+				company);
+		agent.addRepresentativeReceipt(receipt);
 	}
 	
 	public Representative getAgent() {

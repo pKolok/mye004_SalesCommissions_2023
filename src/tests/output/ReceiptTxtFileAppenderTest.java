@@ -11,6 +11,8 @@ import java.io.IOException;
 import org.junit.After;
 import org.junit.Test;
 
+import data.Address;
+import data.Company;
 import data.Receipt;
 import data.SaleItem;
 import output.ReceiptTxtFileAppender;
@@ -44,16 +46,10 @@ public class ReceiptTxtFileAppenderTest {
 		ReceiptTxtFileAppender fileAppenderTXT = new ReceiptTxtFileAppender(
 				this.file);
 		
-		Receipt receipt = new Receipt(SaleItem.COAT);
-		receipt.setReceiptID(1234);
-		receipt.setDate("10/10/2010");
-		receipt.setSales(2000);
-		receipt.setItems(3);
-		receipt.getCompany().setName("Umbrella");
-		receipt.getCompany().getCompanyAddress().setCountry("US");
-		receipt.getCompany().getCompanyAddress().setCity("Racoon");
-		receipt.getCompany().getCompanyAddress().setStreet("Underground ave");
-		receipt.getCompany().getCompanyAddress().setStreetNumber(-10);
+		Address address = new Address("US", "Racoon", "Underground ave", -10);
+		Company company = new Company("Umbrella", address);
+		Receipt receipt = new Receipt(1234, "10/10/2010", 2000.0, 
+				SaleItem.COAT, 3, company);
 		
 		fileAppenderTXT.appendFile(receipt);
 		
@@ -65,9 +61,6 @@ public class ReceiptTxtFileAppenderTest {
 				txtFileRead += line + "\n";
 			}
 			reader.close();
-			
-//			System.out.println("Expected: " + txtExpected);
-//			System.out.println("Received: " + txtFileRead);
 			
 			assertEquals(txtExpected, txtFileRead);
 			

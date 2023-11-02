@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import data.Address;
 import data.Company;
 import data.Receipt;
 import data.SaleItem;
@@ -13,102 +14,161 @@ public class ReceiptTest {
 	// ---------------------------- Get Company --------------------------------
 	@Test
 	public void testGetCompanyHappyDay() {
-		Receipt receipt = new Receipt();
+		Address address = new Address("", "", "", 0);
+		Company company = new Company("", address);
+		Receipt receipt = new Receipt(0, "", 0.0, SaleItem.OTHER, 0, company);
 		assertTrue(receipt.getCompany() instanceof Company);
 	}
 
 	// ----------------------------- Get Kind ----------------------------------
 	@Test
 	public void testGetKindHappyDay() {
-		Receipt receipt = new Receipt();
+		Address address = new Address("", "", "", 0);
+		Company company = new Company("", address);
+		Receipt receipt = new Receipt(0, "", 0.0, SaleItem.OTHER, 0, company);
 		assertEquals(receipt.getKind(), SaleItem.OTHER);
 	}
 	
-	// ---------------------------- Get and Set Sales --------------------------
+	@Test
+	public void testGetKindStringShirtsHappyDay() {
+		Address address = new Address("", "", "", 0);
+		Company company = new Company("", address);
+		Receipt receipt = new Receipt(0, "", 0.0, "Shirts", 0, company);
+		assertEquals(receipt.getKind(), SaleItem.SHIRT);
+	}
+	
+	@Test
+	public void testGetKindStringSkirtsHappyDay() {
+		Address address = new Address("", "", "", 0);
+		Company company = new Company("", address);
+		Receipt receipt = new Receipt(0, "", 0.0, "Skirts", 0, company);
+		assertEquals(receipt.getKind(), SaleItem.SKIRT);
+	}
+	
+	@Test
+	public void testGetKindStringTrousersHappyDay() {
+		Address address = new Address("", "", "", 0);
+		Company company = new Company("", address);
+		Receipt receipt = new Receipt(0, "", 0.0, "Trousers", 0, company);
+		assertEquals(receipt.getKind(), SaleItem.TROUSERS);
+	}
+	
+	@Test
+	public void testGetKindStringCoatsHappyDay() {
+		Address address = new Address("", "", "", 0);
+		Company company = new Company("", address);
+		Receipt receipt = new Receipt(0, "", 0.0, "Coats", 0, company);
+		assertEquals(receipt.getKind(), SaleItem.COAT);
+	}
+	
+	@Test
+	public void testGetKindStringInvald() {
+		Address address = new Address("", "", "", 0);
+		Company company = new Company("", address);
+		Receipt receipt = new Receipt(0, "", 0.0, "Random", 0, company);
+		assertEquals(receipt.getKind(), SaleItem.OTHER);
+	}
+	
+	// -------------------------------- Get Sales ------------------------------
 	@Test
 	public void testGetAndSetSalesHappyDay() {
-		Receipt receipt = new Receipt();
-		receipt.setSales(500.54);
+		Address address = new Address("", "", "", 0);
+		Company company = new Company("", address);
+		Receipt receipt = new Receipt(0, "", 500.54, SaleItem.OTHER, 0,
+				company);
 		assertEquals(receipt.getSales(), 500.54, 0.01);
 	}
 	
 	@Test
 	public void testGetAndSetSalesZero() {
-		Receipt receipt = new Receipt();
-		receipt.setSales(0);
+		Address address = new Address("", "", "", 0);
+		Company company = new Company("", address);
+		Receipt receipt = new Receipt(0, "", 0.0, SaleItem.OTHER, 0, company);
 		assertEquals(receipt.getSales(), 0.0, 0.01);
 	}
 	
 	@Test
 	public void testGetAndSetSalesNegative() {
-		Receipt receipt = new Receipt();
-		receipt.setSales(-25.980);
+		Address address = new Address("", "", "", 0);
+		Company company = new Company("", address);
+		Receipt receipt = new Receipt(0, "", -25.980, SaleItem.OTHER, 0,
+				company);
 		assertEquals(receipt.getSales(), -25.980, 0.01);
 	}
 	
-	// ---------------------------- Get and Set Items --------------------------
+	// -------------------------------- Get Items ------------------------------
 	@Test
 	public void testGetAndSetItemsHappyDay() {
-		Receipt receipt = new Receipt();
-		receipt.setItems(200);
+		Address address = new Address("", "", "", 0);
+		Company company = new Company("", address);
+		Receipt receipt = new Receipt(0, "", 0.0, SaleItem.OTHER, 200, company);
 		assertEquals(receipt.getItems(), 200);
 	}
 	
 	@Test
 	public void testGetAndSetItemsZero() {
-		Receipt receipt = new Receipt();
-		receipt.setItems(0);
+		Address address = new Address("", "", "", 0);
+		Company company = new Company("", address);
+		Receipt receipt = new Receipt(0, "", 0.0, SaleItem.OTHER, 0, company);
 		assertEquals(receipt.getItems(), 0);
 	}
 	
 	@Test
 	public void testGetAndSetItemsNegative() {
-		Receipt receipt = new Receipt();
-		receipt.setItems(-35);
+		Address address = new Address("", "", "", 0);
+		Company company = new Company("", address);
+		Receipt receipt = new Receipt(0, "", 0.0, SaleItem.OTHER, -35, company);
 		assertEquals(receipt.getItems(), -35);
 	}
 	
-	// ------------------------- Get and Set Receipt ID ------------------------
+	// ----------------------------- Get Receipt ID ----------------------------
 	@Test
 	public void testGetAndSetReceiptIDHappyDay() {
-		Receipt receipt = new Receipt();
-		receipt.setReceiptID(200);
+		Address address = new Address("", "", "", 0);
+		Company company = new Company("", address);
+		Receipt receipt = new Receipt(200, "", 0.0, SaleItem.OTHER, 0, company);
 		assertEquals(receipt.getReceiptID(), 200);
 	}
 	
 	@Test
 	public void testGetAndSetReceiptIDZero() {
-		Receipt receipt = new Receipt();
-		receipt.setReceiptID(0);
+		Address address = new Address("", "", "", 0);
+		Company company = new Company("", address);
+		Receipt receipt = new Receipt(0, "", 0.0, SaleItem.OTHER, 0, company);
 		assertEquals(receipt.getReceiptID(), 0);
 	}
 	
 	@Test
 	public void testGetAndSetReceiptIDNegative() {
-		Receipt receipt = new Receipt();
-		receipt.setReceiptID(-35);
+		Address address = new Address("", "", "", 0);
+		Company company = new Company("", address);
+		Receipt receipt = new Receipt(-35, "", 0.0, SaleItem.OTHER, 0, company);
 		assertEquals(receipt.getReceiptID(), -35);
 	}
 	
-	// ---------------------------- Get and Set Date ---------------------------
+	// -------------------------------- Get Date -------------------------------
 	@Test
 	public void testGetAndSetDateHappyDay() {
-		Receipt receipt = new Receipt();
-		receipt.setDate("10-10-2010");
+		Address address = new Address("", "", "", 0);
+		Company company = new Company("", address);
+		Receipt receipt = new Receipt(0, "10-10-2010", 0.0, SaleItem.OTHER, 0,
+				company);
 		assertEquals(receipt.getDate(), "10-10-2010");
 	}
 	
 	@Test
 	public void testGetAndSetDateEmptyString() {
-		Receipt receipt = new Receipt();
-		receipt.setDate("");
+		Address address = new Address("", "", "", 0);
+		Company company = new Company("", address);
+		Receipt receipt = new Receipt(0, "", 0.0, SaleItem.OTHER, 0, company);
 		assertEquals(receipt.getDate(), "");
 	}
 	
 	@Test
 	public void testGetAndSetDateNull() {
-		Receipt receipt = new Receipt();
-		receipt.setDate(null);
+		Address address = new Address("", "", "", 0);
+		Company company = new Company("", address);
+		Receipt receipt = new Receipt(0, null, 0.0, SaleItem.OTHER, 0, company);
 		assertEquals(receipt.getDate(), null);
 	}
 	

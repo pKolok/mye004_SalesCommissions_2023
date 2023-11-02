@@ -3,6 +3,8 @@ package gui;
 import data.Representative;
 import data.Receipt;
 import data.SaleItem;
+import data.Address;
+import data.Company;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -53,7 +55,7 @@ public class SelectionWindow extends JDialog {
 	private float trousersSales;
 	private double commission;
 	private InputWindow inputDialog;
-	private Representative selectedAgent;
+	private Representative selectedAgent;	// TODO: rename
 	@SuppressWarnings("unused")
 	private String fileType;
 	
@@ -462,46 +464,50 @@ public class SelectionWindow extends JDialog {
 	}
 
 	private void appendFile(){
-			
-		Receipt receipt = new Receipt(kindTextField.getText());
-		receipt.setReceiptID(Integer.parseInt(receiptIDTextField.getText()));
-		receipt.setDate(dateTextField.getText());
-		receipt.setSales(Double.parseDouble(salesTextField.getText()));
-		receipt.setItems(Integer.parseInt(itemsTextField.getText()));
-		receipt.getCompany().setName(companyTextField.getText());
-		receipt.getCompany().getCompanyAddress().setCountry(
-				countryTextField.getText());
-		receipt.getCompany().getCompanyAddress().setCity(
-				cityTextField.getText());
-		receipt.getCompany().getCompanyAddress().setStreet(
-				streetTextField.getText());
-		receipt.getCompany().getCompanyAddress().setStreetNumber(
-				Integer.parseInt(numberTextField.getText()));
+		int id = Integer.parseInt(receiptIDTextField.getText());
+		String date = dateTextField.getText();
+		Double sales = Double.parseDouble(salesTextField.getText());
+		int items = Integer.parseInt(itemsTextField.getText());
+		String kind = kindTextField.getText();
+		String companyName = companyTextField.getText();
+		String country = countryTextField.getText();
+		String city = cityTextField.getText();
+		String street = streetTextField.getText();
+		int streetNumber = Integer.parseInt(numberTextField.getText());
+		Address address = new Address(country, city, street, streetNumber);
+		Company company = new Company(companyName, address);
+		Receipt receipt = new Receipt(id, date, sales, kind, items,
+				company);
+		selectedAgent.addRepresentativeReceipt(receipt);
 		
 		selectedAgent.getFileAppender().appendFile(receipt);
 	}
 	
-	private void addReceipt(){		
-		Receipt receipt = new Receipt(kindTextField.getText());
-		
-		try{
-			receipt.setReceiptID(Integer.parseInt(receiptIDTextField.getText()));			
-			receipt.setDate(dateTextField.getText());
-			receipt.setSales(Double.parseDouble(salesTextField.getText()));
-			receipt.setItems(Integer.parseInt(itemsTextField.getText()));
-			receipt.getCompany().setName(companyTextField.getText());
-			receipt.getCompany().getCompanyAddress().setCountry(countryTextField.getText());
-			receipt.getCompany().getCompanyAddress().setCity(cityTextField.getText());
-			receipt.getCompany().getCompanyAddress().setStreet(streetTextField.getText());
-			receipt.getCompany().getCompanyAddress().setStreetNumber(Integer.parseInt(numberTextField.getText()));
-			selectedAgent.getReceipts().add(receipt);
+	private void addReceipt(){
+		try {
+			int id = Integer.parseInt(receiptIDTextField.getText());
+			String date = dateTextField.getText();
+			Double sales = Double.parseDouble(salesTextField.getText());
+			int items = Integer.parseInt(itemsTextField.getText());
+			String kind = kindTextField.getText();
+			String companyName = companyTextField.getText();
+			String country = countryTextField.getText();
+			String city = cityTextField.getText();
+			String street = streetTextField.getText();
+			int streetNumber = Integer.parseInt(numberTextField.getText());
+			Address address = new Address(country, city, street, streetNumber);
+			Company company = new Company(companyName, address);
+			Receipt receipt = new Receipt(id, date, sales, kind, items,
+					company);
+			selectedAgent.addRepresentativeReceipt(receipt);
+			
 			numOfReceipts++;
 			numOfReceiptsTextField.setText(Integer.toString(numOfReceipts));
+			
 			JOptionPane.showMessageDialog(null,"� �������� ���������� ��������");
-
 		}catch (NumberFormatException e){
-			JOptionPane.showMessageDialog(null,"��� ������������ ����� ������ �����, ����������� ����");
-
+			JOptionPane.showMessageDialog(
+					null,"��� ������������ ����� ������ �����, ����������� ����");
 		}
 	}
 	

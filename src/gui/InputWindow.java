@@ -36,7 +36,7 @@ public class InputWindow extends JDialog {
 	private DefaultListModel <String> listModel = new DefaultListModel <String>();
 	private JList <String> agentsList = new JList <String>();
 	private Vector <Representative> allAgents;
-	private Representative agent = new Representative();
+	private Representative agent = new Representative("", "");
 	private Representative selectedAgent = null;
 	@SuppressWarnings("unused")
 	private File inputFile;

@@ -14,18 +14,10 @@ public class Representative {
 	private ArrayList<Receipt> allReceipts;
 	private ReceiptFileAppender fileAppender;
 	
-	public Representative(){
-		allReceipts = new ArrayList<Receipt>();
-	}
-	
 	public Representative(String name, String afm){
 		this.name = name;
 		this.afm = afm;
 		allReceipts = new ArrayList<Receipt>();
-	}
-	
-	public ArrayList<Receipt> getReceipts(){
-		return allReceipts;
 	}
 	
 	public String getName() {
@@ -49,6 +41,10 @@ public class Representative {
 		}	
 	}
 
+	public void addRepresentativeReceipt(Receipt receipt) {
+		allReceipts.add(receipt);
+	}
+	
 	public double calculateTotalSales(){
 		double sumSales = 0;
 		for(int i = 0; i< allReceipts.size(); i++){

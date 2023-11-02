@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import data.Representative;
+import data.Address;
+import data.Company;
 import data.Receipt;
 import data.SaleItem;
 import output.XMLReport;
@@ -15,21 +17,25 @@ public class XMLReportTest {
 	public void testSaveFileHappyDay() {
 		Representative agent = new Representative("Odysseus", "123456789");
 		
-		Receipt receipt1 = new Receipt();
-		receipt1.setSales(1000);
-		Receipt receipt2 = new Receipt(SaleItem.COAT);
-		receipt2.setSales(600);
-		Receipt receipt3 = new Receipt(SaleItem.SHIRT);
-		receipt3.setSales(400);
-		Receipt receipt4 = new Receipt(SaleItem.SKIRT);
-		receipt4.setSales(700);
-		Receipt receipt5 = new Receipt(SaleItem.TROUSERS);
-		receipt5.setSales(300);
+		Address address = new Address("", "", "", 0);
+		Company company = new Company("", address);
+		
+		Receipt receipt1 = new Receipt(0, "", 1000, SaleItem.OTHER, 0, company);
+		agent.addRepresentativeReceipt(receipt1);
+		Receipt receipt2 = new Receipt(0, "", 600, SaleItem.COAT, 0, company);
+		agent.addRepresentativeReceipt(receipt2);
+		Receipt receipt3 = new Receipt(0, "", 400, SaleItem.SHIRT, 0, company);
+		agent.addRepresentativeReceipt(receipt3);
+		Receipt receipt4 = new Receipt(0, "", 700, SaleItem.SKIRT, 0, company);
+		agent.addRepresentativeReceipt(receipt4);
+		Receipt receipt5 = new Receipt(0, "", 300, SaleItem.TROUSERS, 0,
+				company);
+		agent.addRepresentativeReceipt(receipt5);
 		
 		XMLReport xmlReport = new XMLReport(agent);
 		xmlReport.saveFile();
 		
-		
+		fail();
 	}
 
 }
