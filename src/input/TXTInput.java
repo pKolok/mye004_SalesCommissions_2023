@@ -30,6 +30,10 @@ public class TXTInput extends Input {
 		}
 	}
 	
+	/**
+	 * Parses beginning of file. Finds representative information and returns
+	 * a Representative object.
+	 */
 	protected Representative getRepresentative() {
 		String line;
 
