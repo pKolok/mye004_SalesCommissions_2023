@@ -20,7 +20,7 @@ public class XMLInput extends Input {
 	private Document doc;
 	
 	public XMLInput(File receiptFileXML ){
-		inputFile = receiptFileXML;	
+		this.inputFile = receiptFileXML;	
 	}
 	
 	protected void openFile() {
@@ -39,9 +39,9 @@ public class XMLInput extends Input {
 		try {
             NodeList nodeLst = doc.getElementsByTagName("Agent");
 			
-        	name = ((Element) nodeLst.item(0)).getElementsByTagName("Name").
+        	String name = ((Element) nodeLst.item(0)).getElementsByTagName("Name").
         			item(0).getChildNodes().item(0).getNodeValue().trim();
-        	afm = ((Element) nodeLst.item(0)).getElementsByTagName("AFM").
+        	String afm = ((Element) nodeLst.item(0)).getElementsByTagName("AFM").
         			item(0).getChildNodes().item(0).getNodeValue().trim();
         	
         	return new Representative(name, afm);
@@ -61,45 +61,46 @@ public class XMLInput extends Input {
 	    			item(0)).getElementsByTagName("Receipt");
 			
 	        for (int i = 0; i < receiptsNodeList.getLength(); i++){
-	        	receiptID = Integer.parseInt(((Element) receiptsNodeList.item(i))
-	        			.getElementsByTagName("ReceiptID").item(0).getChildNodes()
-	        			.item(0).getNodeValue().trim());
+	        	int receiptID = Integer.parseInt(((Element) receiptsNodeList
+	        			.item(i)).getElementsByTagName("ReceiptID").item(0)
+	        			.getChildNodes().item(0).getNodeValue().trim());
 	        	
-	        	date = ((Element) receiptsNodeList.item(i))
+	        	String date = ((Element) receiptsNodeList.item(i))
 	        			.getElementsByTagName("Date").item(0).getChildNodes()
 	        			.item(0).getNodeValue().trim();
 				
-	        	kind = getSaleItem(((Element) receiptsNodeList.item(i))
+	        	String kind = ((Element) receiptsNodeList.item(i))
 	        			.getElementsByTagName("Kind").item(0).getChildNodes()
-	        			.item(0).getNodeValue().trim());
+	        			.item(0).getNodeValue().trim();
 				
-	        	sales = Double.parseDouble(((Element) receiptsNodeList.item(i))
-	        			.getElementsByTagName("Sales").item(0).getChildNodes()
-	        			.item(0).getNodeValue().trim());
+	        	double sales = Double.parseDouble(((Element) receiptsNodeList
+	        			.item(i)).getElementsByTagName("Sales").item(0)
+	        			.getChildNodes().item(0).getNodeValue().trim());
 	        	
-				items = Integer.parseInt(((Element) receiptsNodeList.item(i))
-						.getElementsByTagName("Items").item(0).getChildNodes()
-						.item(0).getNodeValue().trim());
+				int items = Integer.parseInt(((Element) receiptsNodeList
+						.item(i)).getElementsByTagName("Items").item(0)
+						.getChildNodes().item(0).getNodeValue().trim());
 	        	
-				companyName = ((Element) receiptsNodeList.item(i))
+				String companyName = ((Element) receiptsNodeList.item(i))
 						.getElementsByTagName("Company").item(0).getChildNodes()
 						.item(0).getNodeValue().trim();
 	        	
-				companyCountry = ((Element) receiptsNodeList.item(i))
+				String companyCountry = ((Element) receiptsNodeList.item(i))
 						.getElementsByTagName("Country").item(0).getChildNodes()
 						.item(0).getNodeValue().trim();
 	        	
-				companyCity = ((Element) receiptsNodeList.item(i))
+				String companyCity = ((Element) receiptsNodeList.item(i))
 						.getElementsByTagName("City").item(0).getChildNodes()
 						.item(0).getNodeValue().trim();
 	        	
-				companyStreet = ((Element) receiptsNodeList.item(i))
+				String companyStreet = ((Element) receiptsNodeList.item(i))
 						.getElementsByTagName("Street").item(0).getChildNodes()
 						.item(0).getNodeValue().trim();
 	        	
-				companyStreetNumber = Integer.parseInt(((Element) receiptsNodeList
-						.item(i)).getElementsByTagName("Number").item(0)
-						.getChildNodes().item(0).getNodeValue().trim());
+				int companyStreetNumber = Integer.parseInt(
+						((Element) receiptsNodeList.item(i))
+						.getElementsByTagName("Number").item(0).getChildNodes()
+						.item(0).getNodeValue().trim());
 	        	
 				Address address = new Address(companyCountry, companyCity,
 		    			companyStreet, companyStreetNumber);

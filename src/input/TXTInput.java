@@ -14,11 +14,12 @@ import data.Representative;
 
 public class TXTInput extends Input {
 	
-	BufferedReader bufferedReader;
+	private String inputFilePath;
+	private BufferedReader bufferedReader;
 
 	public TXTInput(File recieptFileTXT){
 		this.inputFile = recieptFileTXT;
-		inputFilePath =  inputFile.getAbsolutePath();
+		this.inputFilePath =  inputFile.getAbsolutePath();
 	}
 	
 	protected void openFile() {
@@ -35,11 +36,11 @@ public class TXTInput extends Input {
 	    try {
 	    	// Name line
 	    	line = bufferedReader.readLine();
-	    	name = (line.substring(line.indexOf(":") + 1).trim());
+	    	String name = (line.substring(line.indexOf(":") + 1).trim());
 	    	
 	    	// Afm line
 	    	line = bufferedReader.readLine();
-	    	afm = (line.substring(line.indexOf(":") + 1).trim());
+	    	String afm = (line.substring(line.indexOf(":") + 1).trim());
 	    	
 	    	return new Representative(name, afm);
 	    	
@@ -62,47 +63,46 @@ public class TXTInput extends Input {
 	    	while ((line = bufferedReader.readLine()) != null) {
 	    		
 	    		// Receipt ID line
-		    	receiptID = (Integer.parseInt(line.substring(
+		    	int receiptID = (Integer.parseInt(line.substring(
 		    			line.indexOf(":") + 1).trim()));
 		    	
 	    		// Date line
 		    	line = bufferedReader.readLine();
-		    	date = (line.substring(line.indexOf(":") + 1).trim());
+		    	String date = (line.substring(line.indexOf(":") + 1).trim());
 		    	
 		    	// Kind line
 		    	line = bufferedReader.readLine();
-		    	kind = getSaleItem(
-		    			line.substring(line.indexOf(":") + 1).trim());
+		    	String kind = line.substring(line.indexOf(":") + 1).trim();
 		    		
 		    	// Sales line
 		    	line = bufferedReader.readLine();
-		    	sales = Double.parseDouble(line.substring(
+		    	double sales = Double.parseDouble(line.substring(
 		    			line.indexOf(":") + 1).trim());
 		    	
 		    	// Items line
 		    	line = bufferedReader.readLine();
-		    	items = Integer.parseInt(line.substring(
+		    	int items = Integer.parseInt(line.substring(
 		    			line.indexOf(":") + 1).trim());
 		    	
 		    	// Company line
 		    	line = bufferedReader.readLine();
-		    	companyName = line.substring(line.indexOf(":") + 1).trim();
+		    	String companyName = line.substring(line.indexOf(":") + 1).trim();
 		    	
 		    	// Country line
 		    	line = bufferedReader.readLine();
-		    	companyCountry =  line.substring(line.indexOf(":") + 1).trim();
+		    	String companyCountry =  line.substring(line.indexOf(":") + 1).trim();
 		    	
 		    	// City line
 		    	line = bufferedReader.readLine();
-		    	companyCity =  line.substring(line.indexOf(":") + 1).trim();
+		    	String companyCity =  line.substring(line.indexOf(":") + 1).trim();
 		    	
 		    	// Street line
 		    	line = bufferedReader.readLine();
-		    	companyStreet = line.substring(line.indexOf(":") + 1).trim();
+		    	String companyStreet = line.substring(line.indexOf(":") + 1).trim();
 		    	
 		    	// Street number line
 		    	line = bufferedReader.readLine();
-		    	companyStreetNumber = Integer.parseInt(line.substring(
+		    	int companyStreetNumber = Integer.parseInt(line.substring(
 		    			line.indexOf(":") + 1).trim());
 		    	
 		    	// Empty line
