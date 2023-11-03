@@ -15,19 +15,30 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 public class XMLReportWriter extends ReportWriter{
+	
+	private Document document;
+	Element agentElem;
 
 	public XMLReportWriter(Representative a){
 		agent = a;
 	}	
 		
-	public void writeReport() {
-		String fullPathName =  "/users/Nick/Desktop/Reports/" + agent.getAfm() + "_SALES.xml";
+	@Override
+	protected void openFile() {
         try {
         	 DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
         	 DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
-        	 Document document = documentBuilder.newDocument();
+        	 document = documentBuilder.newDocument();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+	}
+	
+	@Override
+	protected void writeRepresentativeDetails() {
+        try {
         	 // root element
-        	 Element agentElem = document.createElement("Agent");
+        	 agentElem = document.createElement("Agent");
         	 document.appendChild(agentElem);
         	 
         	 Element name = document.createElement("Name");
@@ -38,6 +49,14 @@ public class XMLReportWriter extends ReportWriter{
         	 afm.appendChild(document.createTextNode(agent.getAfm()));	
         	 agentElem.appendChild(afm);
         	 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+	}
+
+	@Override
+	protected void writeSalesSummary() {
+        try {
         	 Element totalSales = document.createElement("TotalSales");
         	 totalSales.appendChild(document.createTextNode(Double.toString(
         			 agent.calculateTotalSales())));
@@ -67,19 +86,30 @@ public class XMLReportWriter extends ReportWriter{
         	 commission.appendChild(document.createTextNode(Double.toString(
         			 agent.calculateCommission())));
         	 agentElem.appendChild(commission);
-        
-        	 TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        	 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+	}
+
+	@Override
+	protected void closeFile() {
+		String fullPathName =  "/users/Nick/Desktop/Reports/" + agent.getAfm() 
+			+ "_SALES.xml";
+        try {
+        	 TransformerFactory transformerFactory = TransformerFactory
+        			 .newInstance();
         	 Transformer transformer = transformerFactory.newTransformer();
         	 transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         	 transformer.setOutputProperty(OutputKeys.METHOD, "xml");
         	 DOMSource domSource = new DOMSource(document);
-        	 StreamResult streamResult = new StreamResult(new File(fullPathName));
+        	 StreamResult streamResult = new StreamResult(
+        			 new File(fullPathName));
         	 transformer.transform(domSource, streamResult);
         	 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    		
 	}
 
 }

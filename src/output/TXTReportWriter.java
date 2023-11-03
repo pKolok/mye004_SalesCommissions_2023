@@ -7,29 +7,44 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import javax.swing.JOptionPane;
 
 public class TXTReportWriter extends ReportWriter{
+	
+	private BufferedWriter bufferedWriter;
 
 	public TXTReportWriter(Representative a){
 		agent = a;
 	}
 	
-	public void writeReport() {
-        BufferedWriter bufferedWriter = null;
-        try{
-        	String fullPathName =  "/users/Nick/Desktop/Reports/" + agent.getAfm() + "_SALES.txt";
-        	bufferedWriter = new BufferedWriter(new FileWriter(new File(fullPathName)));
-            
+	@Override
+	protected void openFile() {
+		String fullPathName =  "/users/Nick/Desktop/Reports/" + agent.getAfm() 
+			+ "_SALES.txt";
+		try{
+        	bufferedWriter = new BufferedWriter(new FileWriter(
+        			new File(fullPathName)));  
+        } catch (IOException ex){
+			ex.printStackTrace();
+        }
+	}
+	
+	@Override
+	protected void writeRepresentativeDetails() {
+		try{
         	bufferedWriter.write("Name: " + agent.getName()); 
             bufferedWriter.newLine();
 
             bufferedWriter.write("AFM: " + agent.getAfm());
             bufferedWriter.newLine();
-            bufferedWriter.newLine();
-            bufferedWriter.newLine();
 
-            
+        } catch (IOException ex){
+        	ex.printStackTrace();
+        }
+	}
+
+	@Override
+	protected void writeSalesSummary() {
+		try{          
             bufferedWriter.write("Total Sales: " + agent.calculateTotalSales());
             bufferedWriter.newLine();
  
@@ -50,15 +65,18 @@ public class TXTReportWriter extends ReportWriter{
             bufferedWriter.newLine();
 
             bufferedWriter.write("Commission: " + agent.calculateCommission());
-            
-        	bufferedWriter.close();
-
-
-        }catch (IOException ex){
-			JOptionPane.showMessageDialog(null,"������ ������ �������� ���� ��� ���������� ��� �������");
-
+        } catch (IOException ex){
+        	ex.printStackTrace();
         }
-		
 	}
 
+	@Override
+	protected void closeFile() {
+		try {
+        	bufferedWriter.close();
+        } catch (IOException ex){
+        	ex.printStackTrace();
+        }
+	}
+	
 }
