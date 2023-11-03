@@ -19,12 +19,13 @@ public class XMLReportWriter extends ReportWriter{
 	private Document document;
 	Element agentElem;
 
-	public XMLReportWriter(Representative a){
-		agent = a;
+	public XMLReportWriter(Representative representative, String fileName){
+		this.representative = representative;
+		this.fileName = fileName;
 	}	
 		
 	@Override
-	protected void openFile() {
+	protected void createFile() {
         try {
         	 DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
         	 DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
@@ -42,11 +43,11 @@ public class XMLReportWriter extends ReportWriter{
         	 document.appendChild(agentElem);
         	 
         	 Element name = document.createElement("Name");
-        	 name.appendChild(document.createTextNode(agent.getName()));
+        	 name.appendChild(document.createTextNode(representative.getName()));
         	 agentElem.appendChild(name);
         	 
         	 Element afm = document.createElement("AFM");
-        	 afm.appendChild(document.createTextNode(agent.getAfm()));	
+        	 afm.appendChild(document.createTextNode(representative.getAfm()));	
         	 agentElem.appendChild(afm);
         	 
         } catch (Exception ex) {
@@ -59,32 +60,32 @@ public class XMLReportWriter extends ReportWriter{
         try {
         	 Element totalSales = document.createElement("TotalSales");
         	 totalSales.appendChild(document.createTextNode(Double.toString(
-        			 agent.calculateTotalSales())));
+        			 representative.calculateTotalSales())));
         	 agentElem.appendChild(totalSales);
         	 
         	 Element trouserSales = document.createElement("TrouserSales");
         	 trouserSales.appendChild(document.createTextNode(Float.toString(
-        			 agent.calculateItemSales(SaleItem.TROUSERS))));
+        			 representative.calculateItemSales(SaleItem.TROUSERS))));
         	 agentElem.appendChild(trouserSales);
         	 
         	 Element skirtsSales = document.createElement("SkirtsSales");
         	 skirtsSales.appendChild(document.createTextNode(Float.toString(
-        			 agent.calculateItemSales(SaleItem.SKIRT))));
+        			 representative.calculateItemSales(SaleItem.SKIRT))));
         	 agentElem.appendChild(skirtsSales);
         	 
         	 Element shirtsSales = document.createElement("ShirtsSales");
         	 shirtsSales.appendChild(document.createTextNode(Float.toString(
-        			 agent.calculateItemSales(SaleItem.SHIRT))));
+        			 representative.calculateItemSales(SaleItem.SHIRT))));
         	 agentElem.appendChild(shirtsSales);
         	 
         	 Element coatsSales = document.createElement("CoatsSales");
         	 coatsSales.appendChild(document.createTextNode(Float.toString(
-        			 agent.calculateItemSales(SaleItem.COAT))));
+        			 representative.calculateItemSales(SaleItem.COAT))));
         	 agentElem.appendChild(coatsSales);
         	 
         	 Element commission = document.createElement("Commission");
         	 commission.appendChild(document.createTextNode(Double.toString(
-        			 agent.calculateCommission())));
+        			 representative.calculateCommission())));
         	 agentElem.appendChild(commission);
         	 
         } catch (Exception ex) {
@@ -94,8 +95,6 @@ public class XMLReportWriter extends ReportWriter{
 
 	@Override
 	protected void closeFile() {
-		String fullPathName =  "/users/Nick/Desktop/Reports/" + agent.getAfm() 
-			+ "_SALES.xml";
         try {
         	 TransformerFactory transformerFactory = TransformerFactory
         			 .newInstance();
@@ -104,7 +103,7 @@ public class XMLReportWriter extends ReportWriter{
         	 transformer.setOutputProperty(OutputKeys.METHOD, "xml");
         	 DOMSource domSource = new DOMSource(document);
         	 StreamResult streamResult = new StreamResult(
-        			 new File(fullPathName));
+        			 new File(this.fileName));
         	 transformer.transform(domSource, streamResult);
         	 
         } catch (Exception ex) {

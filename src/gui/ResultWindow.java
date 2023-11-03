@@ -1,6 +1,7 @@
 package gui;
 
 import data.Representative;
+import enums.FileExtension;
 import output.TXTReportWriter;
 import output.XMLReportWriter;
 
@@ -31,7 +32,7 @@ public class ResultWindow extends JDialog {
 	private JTextField skirtSalesTextField;
 	private JTextField commissionTextField;
 	private SelectionWindow selectionWindow;
-	private Representative selectedAgent;
+	private Representative representative;
 	private double totalSales;
 	private int totalItems;
 	private float shirtSales;
@@ -44,7 +45,7 @@ public class ResultWindow extends JDialog {
 		int tItems, float shirtS,float skirtS,float trousersS,float coatsS,
 		double com) {
 		selectionWindow = sw;
-		selectedAgent = agent;
+		representative = agent;
 		totalSales = tSales;
 		totalItems = tItems;
 		shirtSales = shirtS;
@@ -229,15 +230,23 @@ public class ResultWindow extends JDialog {
 	}
 	
 	private void outputTXTButtonPressed(ActionEvent evt) {
-		TXTReportWriter makeTXTFile = new TXTReportWriter(selectedAgent);
-		makeTXTFile.writeReport();
-		JOptionPane.showMessageDialog(null,"� ������� ������������ ��������");
+		FileChooser fileChooser = new FileChooser(FileExtension.TXT);
+		String filename = fileChooser.getSaveFileName();
+
+	    TXTReportWriter txtReportWriter = new TXTReportWriter(
+	    		representative, filename);
+	    txtReportWriter.writeReport(filename);
+	    JOptionPane.showMessageDialog(null, "Report Saved Successfully");
 	}
 	
 	private void outputXMLButtonPressed(ActionEvent evt) {
-		XMLReportWriter makeXMLFile = new XMLReportWriter(selectedAgent);
-		makeXMLFile.writeReport();
-		JOptionPane.showMessageDialog(null,"� ������� ������������ ��������");		
+		FileChooser fileChooser = new FileChooser(FileExtension.XML);
+		String filename = fileChooser.getSaveFileName();
+		
+		XMLReportWriter xmlReportWriter = new XMLReportWriter(
+				representative, filename);
+		xmlReportWriter.writeReport(filename);
+		JOptionPane.showMessageDialog(null, "Report Saved Successfully");		
 	}
 	
 	private void okButtonPressed(ActionEvent evt) {
