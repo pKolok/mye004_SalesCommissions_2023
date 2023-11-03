@@ -2,10 +2,10 @@ package output;
 
 import data.Representative;
 
-public abstract class Report {
+public abstract class ReportWriter {
 
 	protected Representative agent;
 	
-	public abstract void saveFile();
+	public abstract void writeReport();
 	
 }

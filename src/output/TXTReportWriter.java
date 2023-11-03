@@ -9,13 +9,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 
-public class TXTReport extends Report{
+public class TXTReportWriter extends ReportWriter{
 
-	public TXTReport(Representative a){
+	public TXTReportWriter(Representative a){
 		agent = a;
 	}
 	
-	public void saveFile() {
+	public void writeReport() {
         BufferedWriter bufferedWriter = null;
         try{
         	String fullPathName =  "/users/Nick/Desktop/Reports/" + agent.getAfm() + "_SALES.txt";

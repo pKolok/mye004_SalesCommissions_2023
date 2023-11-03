@@ -9,7 +9,7 @@ import data.Address;
 import data.Company;
 import data.Receipt;
 import data.SaleItem;
-import output.XMLReport;
+import output.XMLReportWriter;
 
 public class XMLReportTest {
 
@@ -32,8 +32,8 @@ public class XMLReportTest {
 				company);
 		agent.addRepresentativeReceipt(receipt5);
 		
-		XMLReport xmlReport = new XMLReport(agent);
-		xmlReport.saveFile();
+		XMLReportWriter xmlReport = new XMLReportWriter(agent);
+		xmlReport.writeReport();
 		
 		fail();
 	}

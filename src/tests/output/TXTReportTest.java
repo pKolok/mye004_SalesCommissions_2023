@@ -7,7 +7,7 @@ import data.Address;
 import data.Company;
 import data.Receipt;
 import data.SaleItem;
-import output.TXTReport;
+import output.TXTReportWriter;
 
 import org.junit.Test;
 
@@ -33,8 +33,8 @@ public class TXTReportTest {
 				company);
 		agent.addRepresentativeReceipt(receipt5);
 		
-		TXTReport txtReport = new TXTReport(agent);
-		txtReport.saveFile();
+		TXTReportWriter txtReport = new TXTReportWriter(agent);
+		txtReport.writeReport();
 		
 		fail();
 	}

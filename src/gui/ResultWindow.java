@@ -1,8 +1,8 @@
 package gui;
 
 import data.Representative;
-import output.TXTReport;
-import output.XMLReport;
+import output.TXTReportWriter;
+import output.XMLReportWriter;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
@@ -229,14 +229,14 @@ public class ResultWindow extends JDialog {
 	}
 	
 	private void outputTXTButtonPressed(ActionEvent evt) {
-		TXTReport makeTXTFile = new TXTReport(selectedAgent);
-		makeTXTFile.saveFile();
+		TXTReportWriter makeTXTFile = new TXTReportWriter(selectedAgent);
+		makeTXTFile.writeReport();
 		JOptionPane.showMessageDialog(null,"� ������� ������������ ��������");
 	}
 	
 	private void outputXMLButtonPressed(ActionEvent evt) {
-		XMLReport makeXMLFile = new XMLReport(selectedAgent);
-		makeXMLFile.saveFile();
+		XMLReportWriter makeXMLFile = new XMLReportWriter(selectedAgent);
+		makeXMLFile.writeReport();
 		JOptionPane.showMessageDialog(null,"� ������� ������������ ��������");		
 	}
 	

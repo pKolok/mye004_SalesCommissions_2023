@@ -14,13 +14,13 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-public class XMLReport extends Report{
+public class XMLReportWriter extends ReportWriter{
 
-	public XMLReport(Representative a){
+	public XMLReportWriter(Representative a){
 		agent = a;
 	}	
 		
-	public void saveFile() {
+	public void writeReport() {
 		String fullPathName =  "/users/Nick/Desktop/Reports/" + agent.getAfm() + "_SALES.xml";
         try {
         	 DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
