@@ -7,6 +7,7 @@ import data.Receipt;
 import data.SaleItem;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public abstract class Input {
 	
@@ -26,32 +27,49 @@ public abstract class Input {
 	protected String companyStreet;
 	protected int companyStreetNumber;
 
-	public abstract void readFile();
+	protected abstract void openFile();
+	protected abstract Representative getRepresentative();
+	protected abstract ArrayList<Receipt> getReceipts();
+	protected abstract void closeFile();
 
 	public Input() {
 		agent = new Representative("", "");
 		kind  = SaleItem.OTHER;
 	}
 	
-	// TODO: protected
-	public void addAgent() {
-		agent = new Representative(name, afm);
+	public void readFile() {
+		openFile();
+		
+		agent = getRepresentative();
+		
+		ArrayList<Receipt> receipts = getReceipts();
+		for (Receipt receipt : receipts) {
+			agent.addRepresentativeReceipt(receipt);
+		}
+		
+		closeFile();
 	}
 	
 	// TODO: protected
-	public void addReceipt(){
-		Address address = new Address(companyCountry, companyCity,
-				companyStreet, companyStreetNumber);
-		Company company = new Company(companyName, address);
-		Receipt receipt = new Receipt(receiptID, date, sales, kind, items,
-				company);
-		agent.addRepresentativeReceipt(receipt);
-	}
+//	public void addAgent() {
+//		agent = new Representative(name, afm);
+//	}
+	
+	// TODO: protected
+//	public void addReceipt(){
+//		Address address = new Address(companyCountry, companyCity,
+//				companyStreet, companyStreetNumber);
+//		Company company = new Company(companyName, address);
+//		Receipt receipt = new Receipt(receiptID, date, sales, kind, items,
+//				company);
+//		agent.addRepresentativeReceipt(receipt);
+//	}
 	
 	public Representative getAgent() {
 		return agent;
 	}
 	
+	// TODO: remove
 	protected SaleItem getSaleItem(String item) {
 		if (item.equals("Coats")) {
 			return SaleItem.COAT;

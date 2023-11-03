@@ -7,6 +7,7 @@ import data.Receipt;
 public abstract class ReceiptFileAppender {
 
 	protected File fileToAppend;
+	
 	protected abstract void openFile();
 	protected abstract void append(String label, String value);
 	protected abstract void closeFile();

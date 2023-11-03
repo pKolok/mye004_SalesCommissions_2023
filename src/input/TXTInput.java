@@ -5,24 +5,32 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
-public class TXTInput extends Input{
+import data.Address;
+import data.Company;
+import data.Receipt;
+import data.Representative;
+
+public class TXTInput extends Input {
+	
+	BufferedReader bufferedReader;
 
 	public TXTInput(File recieptFileTXT){
 		this.inputFile = recieptFileTXT;
 		inputFilePath =  inputFile.getAbsolutePath();
 	}
 	
-	@Override
-	public void readFile()  {
-		BufferedReader bufferedReader = null;
+	protected void openFile() {
 	    try {
 			bufferedReader = new BufferedReader(new FileReader(inputFilePath));
 		} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
 		}
-	    
-	    String line;
+	}
+	
+	protected Representative getRepresentative() {
+		String line;
 
 	    try {
 	    	// Name line
@@ -33,8 +41,19 @@ public class TXTInput extends Input{
 	    	line = bufferedReader.readLine();
 	    	afm = (line.substring(line.indexOf(":") + 1).trim());
 	    	
-	    	addAgent();
+	    	return new Representative(name, afm);
 	    	
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	protected ArrayList<Receipt> getReceipts() {
+		ArrayList<Receipt> receipts = new ArrayList<Receipt>();
+		String line;
+
+	    try {
 	    	// Receipts line and empty lines
 	    	line = bufferedReader.readLine();
 	    	line = bufferedReader.readLine();
@@ -89,18 +108,27 @@ public class TXTInput extends Input{
 		    	// Empty line
 		    	line = bufferedReader.readLine();
 		    	
-		    	addReceipt();
+		    	Address address = new Address(companyCountry, companyCity,
+		    			companyStreet, companyStreetNumber);
+		    	Company company = new Company(companyName, address);
+		    	Receipt receipt = new Receipt(receiptID, date, sales, kind,
+		    			items, company);
+		    	
+		    	receipts.add(receipt);
 	    	}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	    
+		
+		return receipts;
+	}	
+	
+	protected void closeFile() {
 	    try {
 			bufferedReader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	
 	}
 	
 }
