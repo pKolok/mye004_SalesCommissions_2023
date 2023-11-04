@@ -28,10 +28,10 @@ import javax.swing.JList;
 import javax.swing.border.LineBorder;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-public class InputWindow extends JDialog {
+public class ReceiptImportWindow extends JDialog {
 
 	private static final long serialVersionUID = 1L;
-	static InputWindow dialog = new InputWindow();
+	static ReceiptImportWindow dialog = new ReceiptImportWindow();
 	private final JPanel inputWindowPanel = new JPanel();
 	private DefaultListModel <String> listModel = new DefaultListModel <String>();
 	private JList <String> agentsList = new JList <String>();
@@ -59,7 +59,7 @@ public class InputWindow extends JDialog {
 		}
 	}
 
-	public InputWindow(){
+	public ReceiptImportWindow(){
 		initialise();
 	}
 	
@@ -106,8 +106,6 @@ public class InputWindow extends JDialog {
 			public void actionPerformed(ActionEvent evt) {
 				okButtonPressed(evt);						
 			}
-
-		
 		});
 		button.setToolTipText("");
 		button.setFont(new Font("Times New Roman", Font.PLAIN, 14));
@@ -280,10 +278,9 @@ public class InputWindow extends JDialog {
 	private void okButtonPressed(ActionEvent evt) {
 		if(agentsList.isSelectionEmpty()){
 			JOptionPane.showMessageDialog(null,"��� ����� �������� �����������");
-
 		}
 		else{
-			SelectionWindow sw = new SelectionWindow(dialog,selectedAgent,fileTypeFlag);
+			ReceiptStatsSelectionWindow sw = new ReceiptStatsSelectionWindow(dialog,selectedAgent,fileTypeFlag);
 			this.setVisible(false);
 			sw.setVisible(true);
 		}	

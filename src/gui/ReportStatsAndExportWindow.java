@@ -20,7 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
-public class ResultWindow extends JDialog {
+public class ReportStatsAndExportWindow extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel resultWindowPanel = new JPanel();
@@ -31,7 +31,7 @@ public class ResultWindow extends JDialog {
 	private JTextField coatSalesTextField;
 	private JTextField skirtSalesTextField;
 	private JTextField commissionTextField;
-	private SelectionWindow selectionWindow;
+	private ReceiptStatsSelectionWindow selectionWindow;
 	private Representative representative;
 	private double totalSales;
 	private int totalItems;
@@ -41,7 +41,7 @@ public class ResultWindow extends JDialog {
 	private float coatsSales;
 	private double commission;
 
-	public ResultWindow(final SelectionWindow sw, Representative agent, double tSales,
+	public ReportStatsAndExportWindow(final ReceiptStatsSelectionWindow sw, Representative agent, double tSales,
 		int tItems, float shirtS,float skirtS,float trousersS,float coatsS,
 		double com) {
 		selectionWindow = sw;

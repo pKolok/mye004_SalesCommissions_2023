@@ -22,7 +22,7 @@ import javax.swing.JToggleButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 
-public class SelectionWindow extends JDialog {
+public class ReceiptStatsSelectionWindow extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel selectionWindowPanel = new JPanel();
@@ -54,12 +54,12 @@ public class SelectionWindow extends JDialog {
 	private float coatsSales;
 	private float trousersSales;
 	private double commission;
-	private InputWindow inputDialog;
+	private ReceiptImportWindow inputDialog;
 	private Representative selectedAgent;	// TODO: rename
 	@SuppressWarnings("unused")
 	private String fileType;
 	
-	public SelectionWindow(InputWindow dialog, Representative agent, String fileTypeFlag) {
+	public ReceiptStatsSelectionWindow(ReceiptImportWindow dialog, Representative agent, String fileTypeFlag) {
 		inputDialog = dialog;
 		selectedAgent = agent;
 		fileType = fileTypeFlag;
@@ -421,7 +421,7 @@ public class SelectionWindow extends JDialog {
 			commission = selectedAgent.calculateCommission();
 		else
 			commission = -1;
-		ResultWindow rs = new ResultWindow(this,selectedAgent, totalSales, totalItems, shirtSales, skirtSales, trousersSales, coatsSales, commission);
+		ReportStatsAndExportWindow rs = new ReportStatsAndExportWindow(this,selectedAgent, totalSales, totalItems, shirtSales, skirtSales, trousersSales, coatsSales, commission);
 		rs.setVisible(true);
 		this.setVisible(false);		
 	}
