@@ -5,6 +5,7 @@ import data.Receipt;
 import data.SaleItem;
 import data.Address;
 import data.Company;
+import data.ReportStatistics;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -39,7 +40,6 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 	private JTextField numOfReceiptsTextField;
 	private JTextField agentNameTextField;
 	private int numOfReceipts = 0;
-	private double totalSales;
 	private JCheckBox totalSalesCheckBox;
 	private JCheckBox totalItemsCheckBox;
 	private JCheckBox commissionCheckBox;
@@ -48,21 +48,17 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 	private JRadioButton shirtRadio;
 	private JRadioButton trousersRadio;
 	private JRadioButton coatRadio;
-	private int totalItems;
-	private float shirtSales;
-	private float skirtSales;
-	private float coatsSales;
-	private float trousersSales;
-	private double commission;
 	private ReceiptImportWindow inputDialog;
 	private Representative selectedAgent;	// TODO: rename
 	@SuppressWarnings("unused")
 	private String fileType;
 	
-	public ReceiptStatsSelectionWindow(ReceiptImportWindow dialog, Representative agent, String fileTypeFlag) {
-		inputDialog = dialog;
-		selectedAgent = agent;
-		fileType = fileTypeFlag;
+	public ReceiptStatsSelectionWindow(ReceiptImportWindow dialog, 
+			Representative agent, String fileTypeFlag) {
+		this.inputDialog = dialog;
+		this.selectedAgent = agent;
+		this.fileType = fileTypeFlag;
+		
 		initialise();	
 	}
 	
@@ -387,13 +383,13 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 	}
 	
 	protected void okButtonPressed(ActionEvent evt) {
-		totalSales = -1;
-		totalItems = -1;
-		shirtSales = -1;
-		skirtSales = -1;
-		coatsSales = -1;
-		trousersSales = -1;
-		commission = -1;
+		double totalSales = -1;
+		int totalItems = -1;
+		float shirtSales = -1;
+		float skirtSales = -1;
+		float coatsSales = -1;
+		float trousersSales = -1;
+		double commission = -1;
 		
 		if(totalSalesCheckBox.isSelected())
 			 totalSales = selectedAgent.calculateTotalSales();
@@ -415,8 +411,13 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		
 		if(commissionCheckBox.isSelected())
 			commission = selectedAgent.calculateCommission();
+		
+		ReportStatistics reportStatistics = new ReportStatistics(totalSales, 
+				totalItems, shirtSales, skirtSales, trousersSales, coatsSales, 
+				commission);
 
-		ReportStatsAndExportWindow rs = new ReportStatsAndExportWindow(this,selectedAgent, totalSales, totalItems, shirtSales, skirtSales, trousersSales, coatsSales, commission);
+		ReportStatsAndExportWindow rs = new ReportStatsAndExportWindow(
+				this,selectedAgent, reportStatistics);
 		rs.setVisible(true);
 		this.setVisible(false);		
 	}

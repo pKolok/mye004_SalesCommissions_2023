@@ -1,6 +1,7 @@
 package gui;
 
 import data.Representative;
+import data.ReportStatistics;
 import enums.FileExtension;
 import output.TXTReportWriter;
 import output.XMLReportWriter;
@@ -33,26 +34,13 @@ public class ReportStatsAndExportWindow extends JDialog {
 	private JTextField commissionTextField;
 	private ReceiptStatsSelectionWindow selectionWindow;
 	private Representative representative;
-	private double totalSales;
-	private int totalItems;
-	private float shirtSales;
-	private float skirtSales;
-	private float trousersSales;
-	private float coatsSales;
-	private double commission;
+	private ReportStatistics reportStatistics;
 
-	public ReportStatsAndExportWindow(final ReceiptStatsSelectionWindow sw, Representative agent, double tSales,
-		int tItems, float shirtS,float skirtS,float trousersS,float coatsS,
-		double com) {
-		selectionWindow = sw;
-		representative = agent;
-		totalSales = tSales;
-		totalItems = tItems;
-		shirtSales = shirtS;
-		skirtSales = skirtS;
-		trousersSales = trousersS;
-		coatsSales = coatsS;
-		commission = com;
+	public ReportStatsAndExportWindow(final ReceiptStatsSelectionWindow sw, 
+			Representative agent, ReportStatistics reportStatistics) {	
+		this.selectionWindow = sw;
+		this.representative = agent;
+		this.reportStatistics = reportStatistics;
 		
 		initialise();
 	}	
@@ -199,32 +187,45 @@ public class ReportStatsAndExportWindow extends JDialog {
 	
 	private void updateResults() {
 
-		if(totalSales>=0)
-			totalSalesTextField.setText(Double.toString(totalSales));
+		if(reportStatistics.getTotalSales() >= 0)
+			totalSalesTextField.setText(Double.toString(
+					reportStatistics.getTotalSales()));
 		else 
 			totalSalesTextField.setEnabled(false);
-		if(totalItems>=0)
-			totalItemsTextField.setText(Integer.toString(totalItems));
+		
+		if(reportStatistics.getTotalItems() >= 0)
+			totalItemsTextField.setText(Integer.toString(
+					reportStatistics.getTotalItems()));
 		else 
 			totalItemsTextField.setEnabled(false);
-		if(shirtSales>=0)
-			shirtSalesTextField.setText(Float.toString(shirtSales));
+		
+		if(reportStatistics.getShirtSales() >= 0)
+			shirtSalesTextField.setText(Float.toString(
+					reportStatistics.getShirtSales()));
 		else 
 			shirtSalesTextField.setEnabled(false);
-		if(skirtSales>=0)
-			skirtSalesTextField.setText(Float.toString(skirtSales));
+		
+		if(reportStatistics.getSkirtSales() >= 0)
+			skirtSalesTextField.setText(Float.toString(
+					reportStatistics.getSkirtSales()));
 		else 
 			skirtSalesTextField.setEnabled(false);
-		if(coatsSales>=0)
-			coatSalesTextField.setText(Float.toString(coatsSales));
+		
+		if(reportStatistics.getCoatsSales() >= 0)
+			coatSalesTextField.setText(Float.toString(
+					reportStatistics.getCoatsSales()));
 		else 
 			coatSalesTextField.setEnabled(false);
-		if(trousersSales>=0)
-			trouserSalesTextField.setText(Float.toString(trousersSales));
+		
+		if(reportStatistics.getTotalItems() >= 0)
+			trouserSalesTextField.setText(Float.toString(
+					reportStatistics.getTotalItems()));
 		else 
 			shirtSalesTextField.setEnabled(false);
-		if(commission>=0)
-			commissionTextField.setText(Double.toString(commission));
+		
+		if(reportStatistics.getCommission() >= 0)
+			commissionTextField.setText(Double.toString(
+					reportStatistics.getCommission()));
 		else 
 			commissionTextField.setEnabled(false);		
 	}
