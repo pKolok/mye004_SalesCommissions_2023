@@ -427,29 +427,14 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 	}
 	
 	private void addReceiptButtonPressed(ActionEvent evt) {
-		if(receiptIDTextField.getText().isEmpty() && dateTextField.getText().isEmpty() 
-				&& kindTextField.getText().isEmpty() && salesTextField.getText().isEmpty()
-				&& itemsTextField.getText().isEmpty() && companyTextField.getText().isEmpty()
-				&& countryTextField.getText().isEmpty() && cityTextField.getText().isEmpty()
-				&& streetTextField.getText().isEmpty() && numberTextField.getText().isEmpty()){
-			JOptionPane.showMessageDialog(null,"������ �� ������������ ��� �� �����");
-			
+		if(areAllReceiptFieldsEmpty()){
+			JOptionPane.showMessageDialog(null,"Please fill in receipt fields");
+			return;
 		}
-		/*else if(kindTextField.toString().equalsIgnoreCase("Coats") == false && 
-				kindTextField.toString().equalsIgnoreCase("Shirts") == false &&
-				kindTextField.toString().equalsIgnoreCase("Skirts") == false &&
-				kindTextField.toString().equalsIgnoreCase("Trousers") == false){
-			JOptionPane.showMessageDialog(null,"To ����� ��� �������������� ��� ����� ������. �����������"
-					+ " ���� �������������� �� ����� kind Coats � Shirts � Skirts � Trousers");
-
-		}*/
 			
-		else{
+		addReceipt();
+		appendFile();
 			
-			addReceipt();
-			appendFile();
-			
-		}
 		receiptIDTextField.setText("");	
 		dateTextField.setText("");			
 		kindTextField.setText("");	
@@ -460,9 +445,21 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		cityTextField.setText("");	
 		streetTextField.setText("");	
 		numberTextField.setText("");	
-
 	}
-
+	
+	private boolean areAllReceiptFieldsEmpty() {
+		return receiptIDTextField.getText().isEmpty() 
+				&& dateTextField.getText().isEmpty() 
+				&& kindTextField.getText().isEmpty() 
+				&& salesTextField.getText().isEmpty()
+				&& itemsTextField.getText().isEmpty()
+				&& companyTextField.getText().isEmpty()
+				&& countryTextField.getText().isEmpty()
+				&& cityTextField.getText().isEmpty()
+				&& streetTextField.getText().isEmpty()
+				&& numberTextField.getText().isEmpty();
+	}
+	
 	private void appendFile(){
 		int id = Integer.parseInt(receiptIDTextField.getText());
 		String date = dateTextField.getText();
@@ -510,7 +507,7 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 					null,"��� ������������ ����� ������ �����, ����������� ����");
 		}
 	}
-	
+
 	private void cancelButtonPressed(ActionEvent evt) {		
 		dispose();
 		inputDialog.setVisible(true);		
