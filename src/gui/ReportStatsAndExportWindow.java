@@ -24,7 +24,6 @@ import javax.swing.UIManager;
 public class ReportStatsAndExportWindow extends JDialog {
 
 	private static final long serialVersionUID = 1L;
-	private final JPanel resultWindowPanel = new JPanel(); //TODO: can turn local?
 	private JTextField totalSalesTextField;
 	private JTextField totalItemsTextField;
 	private JTextField trouserSalesTextField;
@@ -46,6 +45,8 @@ public class ReportStatsAndExportWindow extends JDialog {
 	}	
 	
 	private void initialise(){
+		JPanel resultWindowPanel = new JPanel();
+		
 		setBounds(100, 100, 686, 456);
 		getContentPane().setLayout(new BorderLayout());
 		resultWindowPanel.setBackground(SystemColor.controlHighlight);

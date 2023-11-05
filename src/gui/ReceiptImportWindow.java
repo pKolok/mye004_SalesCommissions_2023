@@ -32,11 +32,9 @@ public class ReceiptImportWindow extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private static ReceiptImportWindow dialog = new ReceiptImportWindow();
-	private final JPanel inputWindowPanel = new JPanel();	// TODO: can turn local?
 	private DefaultListModel <String> listModel = new DefaultListModel <String>();
 	private JList <String> representativeList = new JList <String>();
 	private Vector <Representative> allRepresentatives;	// TODO: vector deprecated
-	private Representative representative = new Representative("", ""); // TODO: can turn to local?
 	private Representative selectedRepresentative = null;
 	
 	/**
@@ -61,6 +59,8 @@ public class ReceiptImportWindow extends JDialog {
 	}
 	
 	public void initialise() {
+		JPanel inputWindowPanel = new JPanel();
+		
 		allRepresentatives = new Vector <Representative>();
 		
 		setBackground(new Color(0, 0, 0));
@@ -188,7 +188,7 @@ public class ReceiptImportWindow extends JDialog {
 			File recieptFileTXT = TXTFileChooser.getSelectedFile();
 			TXTInput inputFileTXT = new TXTInput(recieptFileTXT);	
 			inputFileTXT.readFile();
-			representative = inputFileTXT.getAgent();
+			Representative representative = inputFileTXT.getAgent();
 			representative.setupReceiptFileAppender("TXT", recieptFileTXT);				
 			allRepresentatives.add(representative);
 			for(int i = 0; i< listModel.getSize(); i++){
@@ -226,7 +226,7 @@ public class ReceiptImportWindow extends JDialog {
 			File receiptFileXML = XMLFileChooser.getSelectedFile();
 			XMLInput inputFileXML = new XMLInput(receiptFileXML);	
 			inputFileXML.readFile();
-			representative = inputFileXML.getAgent();
+			Representative representative = inputFileXML.getAgent();
 			representative.setupReceiptFileAppender("XML", receiptFileXML);				
 			allRepresentatives.add(representative);
 			for(int i = 0; i< listModel.getSize(); i++){

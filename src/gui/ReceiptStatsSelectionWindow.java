@@ -26,7 +26,6 @@ import javax.swing.JLabel;
 public class ReceiptStatsSelectionWindow extends JDialog {
 
 	private static final long serialVersionUID = 1L;
-	private final JPanel selectionWindowPanel = new JPanel(); // TODO: can turn local?
 	private JTextField dateTextField;
 	private JTextField kindTextField;
 	private JTextField salesTextField;
@@ -60,6 +59,8 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 	}
 	
 	public void initialise(){
+		JPanel selectionWindowPanel = new JPanel();
+		
 		getContentPane().setBackground(SystemColor.controlHighlight);
 		setBounds(100, 100, 717, 597);
 		getContentPane().setLayout(null);
