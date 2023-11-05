@@ -44,9 +44,11 @@ public class ReceiptImportWindow extends JDialog {
 		try {
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
-			javax.swing.UIManager.LookAndFeelInfo[] installedLookAndFeels = javax.swing.UIManager.getInstalledLookAndFeels();
+			javax.swing.UIManager.LookAndFeelInfo[] installedLookAndFeels = 
+					javax.swing.UIManager.getInstalledLookAndFeels();
 			for (int i = 0; i < installedLookAndFeels.length; i++) {
-				UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+				UIManager.setLookAndFeel(
+						"com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 			}
 		
 		} catch (Exception e) {
@@ -54,7 +56,7 @@ public class ReceiptImportWindow extends JDialog {
 		}
 	}
 
-	public ReceiptImportWindow(){
+	public ReceiptImportWindow() {
 		initialise();
 	}
 	
@@ -177,14 +179,14 @@ public class ReceiptImportWindow extends JDialog {
 		System.exit(0);	
 	}
 
-	private void insertFromTXT(ActionEvent evt){
+	private void insertFromTXT(ActionEvent evt) {
 		
 		JFileChooser TXTFileChooser;
 		TXTFileChooser = new JFileChooser();     
 		TXTFileChooser.setFileSelectionMode(JFileChooser.APPROVE_OPTION);		       
 		TXTFileChooser.showOpenDialog(null);
-		boolean agentDuplicate = false;
-		try{
+		boolean representativeDuplicate = false;
+		try {
 			File recieptFileTXT = TXTFileChooser.getSelectedFile();
 			TXTInput inputFileTXT = new TXTInput(recieptFileTXT);	
 			inputFileTXT.readFile();
@@ -193,35 +195,33 @@ public class ReceiptImportWindow extends JDialog {
 			allRepresentatives.add(representative);
 			for(int i = 0; i< listModel.getSize(); i++){
 				if(representative.getName().equals(listModel.getElementAt(i))){
-					agentDuplicate = true;
-
+					representativeDuplicate = true;
 				}
 			}
-			if(agentDuplicate == true){
+			
+			if (representativeDuplicate == true) {
 				JOptionPane.showMessageDialog(null,"� ������������ ������� ��� ��� �����");
 
-			}
-			else{
+			} else {
 				listModel.addElement(representative.getName());
 				representativeList.setModel(listModel);
 			}
 			
-		}catch (NullPointerException e){
-			
-			JOptionPane.showMessageDialog(null,"��� ���������� ������ ������");
+		} catch (NullPointerException e) {
+			JOptionPane.showMessageDialog(
+					null, "Duplicate Sales Representative");
 
-		}catch (NumberFormatException e){
-			JOptionPane.showMessageDialog(null,"�������� ������ �������� ���� ��� �������� ��� �������");
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "Error Reading TXT File");
 		}
-		
 	}
 	
-	private void insertFromXML(ActionEvent evt2){
+	private void insertFromXML(ActionEvent evt2) {
 		JFileChooser XMLFileChooser;
 		XMLFileChooser = new JFileChooser();     
 		XMLFileChooser.setFileSelectionMode(JFileChooser.APPROVE_OPTION);		       
 		XMLFileChooser.showOpenDialog(null);
-		boolean agentDuplicate = false;
+		boolean representativeDuplicate = false;
 		try{
 			File receiptFileXML = XMLFileChooser.getSelectedFile();
 			XMLInput inputFileXML = new XMLInput(receiptFileXML);	
@@ -231,55 +231,45 @@ public class ReceiptImportWindow extends JDialog {
 			allRepresentatives.add(representative);
 			for(int i = 0; i< listModel.getSize(); i++){
 				if(representative.getName().equals(listModel.getElementAt(i))){
-					agentDuplicate = true;
-
+					representativeDuplicate = true;
 				}
 			}
-			if(agentDuplicate == true){
-				JOptionPane.showMessageDialog(null,"� ������������ ������� ��� ��� �����");
-
-			}
-			else{
+			if (representativeDuplicate == true) {
+				JOptionPane.showMessageDialog(
+						null, "Duplicate Sales Representative");
+			} else {
 				listModel.addElement(representative.getName());
 				representativeList.setModel(listModel);
 			}
-		}catch (IllegalArgumentException e){
-		
-			JOptionPane.showMessageDialog(null,"��� ���������� ������ ������");
-
+		} catch (IllegalArgumentException e) {
+			JOptionPane.showMessageDialog(null,"Error Reading XML File");
 		}
-        
-             
 	}
 	
-	private void selectAgent(MouseEvent e){
-		
-		String agentName;
-        if(representativeList.getSelectedIndex()>=0){
-        	
-            agentName = representativeList.getSelectedValue().toString();
-            for(int i=0; i<allRepresentatives.size(); i++){
-                if(agentName.equals(allRepresentatives.get(i).getName())){
-                	
-                		selectedRepresentative = allRepresentatives.get(i);
-                		break;
-                		
+	private void selectAgent(MouseEvent e) {
+		String representativeName;
+        if(representativeList.getSelectedIndex() >= 0){
+            representativeName = representativeList.getSelectedValue().toString();
+            for(int i = 0; i < allRepresentatives.size(); i++){
+                if(representativeName.equals(allRepresentatives.get(i).getName())){
+            		selectedRepresentative = allRepresentatives.get(i);
+            		break;
                 }
             }
-        	
         }
 	}
 	
 	private void okButtonPressed(ActionEvent evt) {
 		if(representativeList.isSelectionEmpty()){
-			JOptionPane.showMessageDialog(null,"��� ����� �������� �����������");
+			JOptionPane.showMessageDialog(
+					null, "Please select a Sale's Representative");
+			return;
 		}
-		else{
-			ReceiptStatsSelectionWindow sw = new ReceiptStatsSelectionWindow(
-					dialog, selectedRepresentative);
-			this.setVisible(false);
-			sw.setVisible(true);
-		}	
+
+		ReceiptStatsSelectionWindow sw = new ReceiptStatsSelectionWindow(
+				dialog, selectedRepresentative);
+		this.setVisible(false);
+		sw.setVisible(true);
 	}	
 
 }

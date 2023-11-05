@@ -44,7 +44,7 @@ public class ReportStatsAndExportWindow extends JDialog {
 		initialise();
 	}	
 	
-	private void initialise(){
+	private void initialise() {
 		JPanel resultWindowPanel = new JPanel();
 		
 		setBounds(100, 100, 686, 456);

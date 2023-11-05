@@ -37,8 +37,7 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 	private JTextField receiptIDTextField;
 	private JTextField numberTextField;
 	private JTextField numOfReceiptsTextField;
-	private JTextField agentNameTextField;
-	private int numOfReceipts = 0;
+	private JTextField representativeNameTextField;
 	private JCheckBox totalSalesCheckBox;
 	private JCheckBox totalItemsCheckBox;
 	private JCheckBox commissionCheckBox;
@@ -48,17 +47,18 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 	private JRadioButton trousersRadio;
 	private JRadioButton coatRadio;
 	private ReceiptImportWindow inputDialog;
+	private int numOfReceipts = 0;
 	private Representative selectedRepresentative;
 	
 	public ReceiptStatsSelectionWindow(ReceiptImportWindow dialog, 
-			Representative agent) {
+			Representative representative) {
 		this.inputDialog = dialog;
-		this.selectedRepresentative = agent;
+		this.selectedRepresentative = representative;
 		
 		initialise();	
 	}
 	
-	public void initialise(){
+	public void initialise() {
 		JPanel selectionWindowPanel = new JPanel();
 		
 		getContentPane().setBackground(SystemColor.controlHighlight);
@@ -292,18 +292,18 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		lblNewLabel_11.setBounds(0, 75, 271, 29);
 		getContentPane().add(lblNewLabel_11);
 		
-		JLabel agentNameLabel = new JLabel("\u0391\u03BD\u03C4\u03B9\u03C0\u03C1\u03CC\u03C3\u03C9\u03C0\u03BF\u03C2:");
-		agentNameLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-		agentNameLabel.setBounds(0, 8, 129, 25);
-		getContentPane().add(agentNameLabel);
+		JLabel representativeNameLabel = new JLabel("\u0391\u03BD\u03C4\u03B9\u03C0\u03C1\u03CC\u03C3\u03C9\u03C0\u03BF\u03C2:");
+		representativeNameLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+		representativeNameLabel.setBounds(0, 8, 129, 25);
+		getContentPane().add(representativeNameLabel);
 		
-		agentNameTextField = new JTextField();
-		agentNameTextField.setBackground(SystemColor.controlHighlight);
-		agentNameTextField.setEditable(false);
-		agentNameTextField.setFont(new Font("Tahoma", Font.BOLD, 16));
-		agentNameTextField.setBounds(135, 4, 174, 32);
-		getContentPane().add(agentNameTextField);
-		agentNameTextField.setColumns(10);
+		representativeNameTextField = new JTextField();
+		representativeNameTextField.setBackground(SystemColor.controlHighlight);
+		representativeNameTextField.setEditable(false);
+		representativeNameTextField.setFont(new Font("Tahoma", Font.BOLD, 16));
+		representativeNameTextField.setBounds(135, 4, 174, 32);
+		getContentPane().add(representativeNameTextField);
+		representativeNameTextField.setColumns(10);
 		
 		categoryCheckBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -370,7 +370,7 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		});
 		
 		try{
-			agentNameTextField.setText(selectedRepresentative.getName());
+			representativeNameTextField.setText(selectedRepresentative.getName());
 		}catch(NullPointerException e){
 			
 			JOptionPane.showMessageDialog(null,"�������� ������ ��������, ����������� ����");
@@ -396,16 +396,20 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 			totalItems = selectedRepresentative.calculateTotalItems();
 		
 		if(shirtRadio.isSelected())
-			shirtSales = selectedRepresentative.calculateItemSales(SaleItem.SHIRT);
+			shirtSales = selectedRepresentative.calculateItemSales(
+					SaleItem.SHIRT);
 
 		if(skirtRadio.isSelected()  )
-			skirtSales = selectedRepresentative.calculateItemSales(SaleItem.SKIRT);
+			skirtSales = selectedRepresentative.calculateItemSales(
+					SaleItem.SKIRT);
 
 		if(coatRadio.isSelected())
-			coatsSales = selectedRepresentative.calculateItemSales(SaleItem.COAT);
+			coatsSales = selectedRepresentative.calculateItemSales(
+					SaleItem.COAT);
 		
 		if(trousersRadio.isSelected())
-			trousersSales = selectedRepresentative.calculateItemSales(SaleItem.TROUSERS);
+			trousersSales = selectedRepresentative.calculateItemSales(
+					SaleItem.TROUSERS);
 		
 		if(commissionCheckBox.isSelected())
 			commission = selectedRepresentative.calculateCommission();
@@ -421,24 +425,14 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 	}
 	
 	private void addReceiptButtonPressed(ActionEvent evt) {
-		if(areAllReceiptFieldsEmpty()){
+		if (areAllReceiptFieldsEmpty()) {
 			JOptionPane.showMessageDialog(null,"Please fill in receipt fields");
 			return;
 		}
 			
 		addReceipt();
 		appendFile();
-			
-		receiptIDTextField.setText("");	
-		dateTextField.setText("");			
-		kindTextField.setText("");	
-		salesTextField.setText("");
-		itemsTextField.setText("");	
-		companyTextField.setText("");	
-		countryTextField.setText("");	
-		cityTextField.setText("");	
-		streetTextField.setText("");	
-		numberTextField.setText("");	
+		resetReceiptFields();
 	}
 	
 	private boolean areAllReceiptFieldsEmpty() {
@@ -454,27 +448,44 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 				&& numberTextField.getText().isEmpty();
 	}
 	
-	private void appendFile() {
-		int id = Integer.parseInt(receiptIDTextField.getText());
-		String date = dateTextField.getText();
-		Double sales = Double.parseDouble(salesTextField.getText());
-		int items = Integer.parseInt(itemsTextField.getText());
-		String kind = kindTextField.getText();
-		String companyName = companyTextField.getText();
-		String country = countryTextField.getText();
-		String city = cityTextField.getText();
-		String street = streetTextField.getText();
-		int streetNumber = Integer.parseInt(numberTextField.getText());
-		Address address = new Address(country, city, street, streetNumber);
-		Company company = new Company(companyName, address);
-		Receipt receipt = new Receipt(id, date, sales, kind, items,
-				company);
+	private void addReceipt() {
+		Receipt receipt = getReceiptFromUserInput();
+		
+		if (receipt == null) 
+			return;
+		
 		selectedRepresentative.addRepresentativeReceipt(receipt);
+		
+		numOfReceipts++;
+		numOfReceiptsTextField.setText(Integer.toString(numOfReceipts));
+		
+		JOptionPane.showMessageDialog(null,"Receipt added to the list of Sale's"
+				+ " Representative " + selectedRepresentative.getName());
+	}
+	
+	private void appendFile() {
+		Receipt receipt = getReceiptFromUserInput();
+		
+		if (receipt == null) 
+			return;
 		
 		selectedRepresentative.getFileAppender().appendFile(receipt);
 	}
+
+	private void resetReceiptFields() {
+		receiptIDTextField.setText("");	
+		dateTextField.setText("");			
+		kindTextField.setText("");	
+		salesTextField.setText("");
+		itemsTextField.setText("");	
+		companyTextField.setText("");	
+		countryTextField.setText("");	
+		cityTextField.setText("");	
+		streetTextField.setText("");	
+		numberTextField.setText("");	
+	}
 	
-	private void addReceipt(){
+	private Receipt getReceiptFromUserInput() {
 		try {
 			int id = Integer.parseInt(receiptIDTextField.getText());
 			String date = dateTextField.getText();
@@ -488,21 +499,16 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 			int streetNumber = Integer.parseInt(numberTextField.getText());
 			Address address = new Address(country, city, street, streetNumber);
 			Company company = new Company(companyName, address);
-			Receipt receipt = new Receipt(id, date, sales, kind, items,
-					company);
-			selectedRepresentative.addRepresentativeReceipt(receipt);
 			
-			numOfReceipts++;
-			numOfReceiptsTextField.setText(Integer.toString(numOfReceipts));
-			
-			JOptionPane.showMessageDialog(null,"� �������� ���������� ��������");
-		}catch (NumberFormatException e){
+			return new Receipt(id, date, sales, kind, items, company);
+		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(
-					null,"��� ������������ ����� ������ �����, ����������� ����");
+					null,"Can not successfully parse user input");
+			return null;
 		}
 	}
-
-	private void cancelButtonPressed(ActionEvent evt) {		
+	
+	private void cancelButtonPressed(ActionEvent evt) {
 		dispose();
 		inputDialog.setVisible(true);		
 	}
