@@ -38,9 +38,6 @@ public class ReceiptImportWindow extends JDialog {
 	private Vector <Representative> allAgents;
 	private Representative agent = new Representative("", "");
 	private Representative selectedAgent = null;
-	@SuppressWarnings("unused")
-	private File inputFile;
-	private String fileTypeFlag;
 	
 	/**
 	 * Launch the application.
@@ -207,7 +204,6 @@ public class ReceiptImportWindow extends JDialog {
 			else{
 				listModel.addElement(agent.getName());
 				agentsList.setModel(listModel);
-				fileTypeFlag = "TXT";
 			}
 			
 		}catch (NullPointerException e){
@@ -246,7 +242,6 @@ public class ReceiptImportWindow extends JDialog {
 			else{
 				listModel.addElement(agent.getName());
 				agentsList.setModel(listModel);
-				fileTypeFlag = "XML";
 			}
 		}catch (IllegalArgumentException e){
 		
@@ -280,7 +275,8 @@ public class ReceiptImportWindow extends JDialog {
 			JOptionPane.showMessageDialog(null,"��� ����� �������� �����������");
 		}
 		else{
-			ReceiptStatsSelectionWindow sw = new ReceiptStatsSelectionWindow(dialog,selectedAgent,fileTypeFlag);
+			ReceiptStatsSelectionWindow sw = new ReceiptStatsSelectionWindow(
+					dialog, selectedAgent);
 			this.setVisible(false);
 			sw.setVisible(true);
 		}	

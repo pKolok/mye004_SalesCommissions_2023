@@ -37,9 +37,9 @@ public class ReportStatsAndExportWindow extends JDialog {
 	private ReportStatistics reportStatistics;
 
 	public ReportStatsAndExportWindow(final ReceiptStatsSelectionWindow sw, 
-			Representative agent, ReportStatistics reportStatistics) {	
+			Representative representative, ReportStatistics reportStatistics) {	
 		this.selectionWindow = sw;
-		this.representative = agent;
+		this.representative = representative;
 		this.reportStatistics = reportStatistics;
 		
 		initialise();

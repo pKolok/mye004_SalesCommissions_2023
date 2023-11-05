@@ -50,14 +50,11 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 	private JRadioButton coatRadio;
 	private ReceiptImportWindow inputDialog;
 	private Representative selectedAgent;	// TODO: rename
-	@SuppressWarnings("unused")
-	private String fileType;
 	
 	public ReceiptStatsSelectionWindow(ReceiptImportWindow dialog, 
-			Representative agent, String fileTypeFlag) {
+			Representative agent) {
 		this.inputDialog = dialog;
 		this.selectedAgent = agent;
-		this.fileType = fileTypeFlag;
 		
 		initialise();	
 	}
