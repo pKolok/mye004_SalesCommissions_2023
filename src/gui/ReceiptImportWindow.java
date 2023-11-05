@@ -5,7 +5,7 @@ import input.TXTInput;
 import input.XMLInput;
 
 import java.io.File;
-import java.util.Vector;
+import java.util.ArrayList;
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -32,9 +32,9 @@ public class ReceiptImportWindow extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private static ReceiptImportWindow dialog = new ReceiptImportWindow();
-	private DefaultListModel <String> listModel = new DefaultListModel <String>();
-	private JList <String> representativeList = new JList <String>();
-	private Vector <Representative> allRepresentatives;	// TODO: vector deprecated
+	private DefaultListModel<String> listModel = new DefaultListModel<String>();
+	private JList<String> representativeList = new JList<String>();
+	private ArrayList<Representative> allRepresentatives;
 	private Representative selectedRepresentative = null;
 	
 	/**
@@ -61,7 +61,7 @@ public class ReceiptImportWindow extends JDialog {
 	public void initialise() {
 		JPanel inputWindowPanel = new JPanel();
 		
-		allRepresentatives = new Vector <Representative>();
+		allRepresentatives = new ArrayList<Representative>();
 		
 		setBackground(new Color(0, 0, 0));
 		setBounds(100, 100, 736, 472);
