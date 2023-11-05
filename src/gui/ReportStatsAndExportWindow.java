@@ -24,7 +24,7 @@ import javax.swing.UIManager;
 public class ReportStatsAndExportWindow extends JDialog {
 
 	private static final long serialVersionUID = 1L;
-	private final JPanel resultWindowPanel = new JPanel();
+	private final JPanel resultWindowPanel = new JPanel(); //TODO: can turn local?
 	private JTextField totalSalesTextField;
 	private JTextField totalItemsTextField;
 	private JTextField trouserSalesTextField;

@@ -31,13 +31,13 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class ReceiptImportWindow extends JDialog {
 
 	private static final long serialVersionUID = 1L;
-	static ReceiptImportWindow dialog = new ReceiptImportWindow();
-	private final JPanel inputWindowPanel = new JPanel();
+	private static ReceiptImportWindow dialog = new ReceiptImportWindow();
+	private final JPanel inputWindowPanel = new JPanel();	// TODO: can turn local?
 	private DefaultListModel <String> listModel = new DefaultListModel <String>();
-	private JList <String> agentsList = new JList <String>();
-	private Vector <Representative> allAgents;
-	private Representative agent = new Representative("", "");
-	private Representative selectedAgent = null;
+	private JList <String> representativeList = new JList <String>();
+	private Vector <Representative> allRepresentatives;	// TODO: vector deprecated
+	private Representative representative = new Representative("", ""); // TODO: can turn to local?
+	private Representative selectedRepresentative = null;
 	
 	/**
 	 * Launch the application.
@@ -61,7 +61,7 @@ public class ReceiptImportWindow extends JDialog {
 	}
 	
 	public void initialise() {
-		allAgents = new Vector <Representative>();
+		allRepresentatives = new Vector <Representative>();
 		
 		setBackground(new Color(0, 0, 0));
 		setBounds(100, 100, 736, 472);
@@ -83,16 +83,16 @@ public class ReceiptImportWindow extends JDialog {
 		
 		JLabel label = new JLabel("\u0395\u03C0\u03B9\u03BB\u03AD\u03BE\u03C4\u03B5 \u03B5\u03AF\u03B4\u03BF\u03C2 \u03B1\u03C1\u03C7\u03B5\u03AF\u03BF\u03C5 \u03B3\u03B9\u03B1 \u03C6\u03CC\u03C1\u03C4\u03C9\u03C3\u03B7 \u03B1\u03C0\u03BF\u03B4\u03B5\u03AF\u03BE\u03B5\u03C9\u03BD:");
 		label.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		agentsList.addMouseListener(new MouseAdapter() {
+		representativeList.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				selectAgent(e);
 			}
 		});
 		
-		agentsList.setFont(new Font("Times New Roman", Font.PLAIN, 19));
-		agentsList.setBackground(UIManager.getColor("Button.light"));
-		agentsList.setBorder(new LineBorder(new Color(0, 0, 0)));
+		representativeList.setFont(new Font("Times New Roman", Font.PLAIN, 19));
+		representativeList.setBackground(UIManager.getColor("Button.light"));
+		representativeList.setBorder(new LineBorder(new Color(0, 0, 0)));
 		
 		
 		JLabel label_1 = new JLabel("\u039B\u03B9\u03C3\u03C4\u03B1 \u0391\u03BD\u03C4\u03B9\u03C0\u03C1\u03BF\u03C3\u03CE\u03C0\u03C9\u03BD");
@@ -131,7 +131,7 @@ public class ReceiptImportWindow extends JDialog {
 							.addComponent(buttonXMLInput, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
 					.addGap(18)
 					.addGroup(gl_inputWindowPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(agentsList, GroupLayout.PREFERRED_SIZE, 309, GroupLayout.PREFERRED_SIZE)
+						.addComponent(representativeList, GroupLayout.PREFERRED_SIZE, 309, GroupLayout.PREFERRED_SIZE)
 						.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(57, Short.MAX_VALUE))
 				.addGroup(Alignment.TRAILING, gl_inputWindowPanel.createSequentialGroup()
@@ -152,7 +152,7 @@ public class ReceiptImportWindow extends JDialog {
 							.addComponent(buttonTXTInput, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 							.addGap(42)
 							.addComponent(buttonXMLInput, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE))
-						.addComponent(agentsList, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE))
+						.addComponent(representativeList, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE))
 					.addGap(139)
 					.addGroup(gl_inputWindowPanel.createParallelGroup(Alignment.LEADING)
 						.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
@@ -188,11 +188,11 @@ public class ReceiptImportWindow extends JDialog {
 			File recieptFileTXT = TXTFileChooser.getSelectedFile();
 			TXTInput inputFileTXT = new TXTInput(recieptFileTXT);	
 			inputFileTXT.readFile();
-			agent = inputFileTXT.getAgent();
-			agent.setupReceiptFileAppender("TXT", recieptFileTXT);				
-			allAgents.add(agent);
+			representative = inputFileTXT.getAgent();
+			representative.setupReceiptFileAppender("TXT", recieptFileTXT);				
+			allRepresentatives.add(representative);
 			for(int i = 0; i< listModel.getSize(); i++){
-				if(agent.getName().equals(listModel.getElementAt(i))){
+				if(representative.getName().equals(listModel.getElementAt(i))){
 					agentDuplicate = true;
 
 				}
@@ -202,8 +202,8 @@ public class ReceiptImportWindow extends JDialog {
 
 			}
 			else{
-				listModel.addElement(agent.getName());
-				agentsList.setModel(listModel);
+				listModel.addElement(representative.getName());
+				representativeList.setModel(listModel);
 			}
 			
 		}catch (NullPointerException e){
@@ -226,11 +226,11 @@ public class ReceiptImportWindow extends JDialog {
 			File receiptFileXML = XMLFileChooser.getSelectedFile();
 			XMLInput inputFileXML = new XMLInput(receiptFileXML);	
 			inputFileXML.readFile();
-			agent = inputFileXML.getAgent();
-			agent.setupReceiptFileAppender("XML", receiptFileXML);				
-			allAgents.add(agent);
+			representative = inputFileXML.getAgent();
+			representative.setupReceiptFileAppender("XML", receiptFileXML);				
+			allRepresentatives.add(representative);
 			for(int i = 0; i< listModel.getSize(); i++){
-				if(agent.getName().equals(listModel.getElementAt(i))){
+				if(representative.getName().equals(listModel.getElementAt(i))){
 					agentDuplicate = true;
 
 				}
@@ -240,8 +240,8 @@ public class ReceiptImportWindow extends JDialog {
 
 			}
 			else{
-				listModel.addElement(agent.getName());
-				agentsList.setModel(listModel);
+				listModel.addElement(representative.getName());
+				representativeList.setModel(listModel);
 			}
 		}catch (IllegalArgumentException e){
 		
@@ -255,13 +255,13 @@ public class ReceiptImportWindow extends JDialog {
 	private void selectAgent(MouseEvent e){
 		
 		String agentName;
-        if(agentsList.getSelectedIndex()>=0){
+        if(representativeList.getSelectedIndex()>=0){
         	
-            agentName = agentsList.getSelectedValue().toString();
-            for(int i=0; i<allAgents.size(); i++){
-                if(agentName.equals(allAgents.get(i).getName())){
+            agentName = representativeList.getSelectedValue().toString();
+            for(int i=0; i<allRepresentatives.size(); i++){
+                if(agentName.equals(allRepresentatives.get(i).getName())){
                 	
-                		selectedAgent = allAgents.get(i);
+                		selectedRepresentative = allRepresentatives.get(i);
                 		break;
                 		
                 }
@@ -271,12 +271,12 @@ public class ReceiptImportWindow extends JDialog {
 	}
 	
 	private void okButtonPressed(ActionEvent evt) {
-		if(agentsList.isSelectionEmpty()){
+		if(representativeList.isSelectionEmpty()){
 			JOptionPane.showMessageDialog(null,"��� ����� �������� �����������");
 		}
 		else{
 			ReceiptStatsSelectionWindow sw = new ReceiptStatsSelectionWindow(
-					dialog, selectedAgent);
+					dialog, selectedRepresentative);
 			this.setVisible(false);
 			sw.setVisible(true);
 		}	

@@ -26,7 +26,7 @@ import javax.swing.JLabel;
 public class ReceiptStatsSelectionWindow extends JDialog {
 
 	private static final long serialVersionUID = 1L;
-	private final JPanel selectionWindowPanel = new JPanel();
+	private final JPanel selectionWindowPanel = new JPanel(); // TODO: can turn local?
 	private JTextField dateTextField;
 	private JTextField kindTextField;
 	private JTextField salesTextField;
@@ -49,12 +49,12 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 	private JRadioButton trousersRadio;
 	private JRadioButton coatRadio;
 	private ReceiptImportWindow inputDialog;
-	private Representative selectedAgent;	// TODO: rename
+	private Representative selectedRepresentative;
 	
 	public ReceiptStatsSelectionWindow(ReceiptImportWindow dialog, 
 			Representative agent) {
 		this.inputDialog = dialog;
-		this.selectedAgent = agent;
+		this.selectedRepresentative = agent;
 		
 		initialise();	
 	}
@@ -369,7 +369,7 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		});
 		
 		try{
-			agentNameTextField.setText(selectedAgent.getName());
+			agentNameTextField.setText(selectedRepresentative.getName());
 		}catch(NullPointerException e){
 			
 			JOptionPane.showMessageDialog(null,"�������� ������ ��������, ����������� ����");
@@ -389,32 +389,32 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		double commission = -1;
 		
 		if(totalSalesCheckBox.isSelected())
-			 totalSales = selectedAgent.calculateTotalSales();
+			 totalSales = selectedRepresentative.calculateTotalSales();
 		
 		if(totalItemsCheckBox.isSelected())
-			totalItems = selectedAgent.calculateTotalItems();
+			totalItems = selectedRepresentative.calculateTotalItems();
 		
 		if(shirtRadio.isSelected())
-			shirtSales = selectedAgent.calculateItemSales(SaleItem.SHIRT);
+			shirtSales = selectedRepresentative.calculateItemSales(SaleItem.SHIRT);
 
 		if(skirtRadio.isSelected()  )
-			skirtSales = selectedAgent.calculateItemSales(SaleItem.SKIRT);
+			skirtSales = selectedRepresentative.calculateItemSales(SaleItem.SKIRT);
 
 		if(coatRadio.isSelected())
-			coatsSales = selectedAgent.calculateItemSales(SaleItem.COAT);
+			coatsSales = selectedRepresentative.calculateItemSales(SaleItem.COAT);
 		
 		if(trousersRadio.isSelected())
-			trousersSales = selectedAgent.calculateItemSales(SaleItem.TROUSERS);
+			trousersSales = selectedRepresentative.calculateItemSales(SaleItem.TROUSERS);
 		
 		if(commissionCheckBox.isSelected())
-			commission = selectedAgent.calculateCommission();
+			commission = selectedRepresentative.calculateCommission();
 		
 		ReportStatistics reportStatistics = new ReportStatistics(totalSales, 
 				totalItems, shirtSales, skirtSales, trousersSales, coatsSales, 
 				commission);
 
 		ReportStatsAndExportWindow rs = new ReportStatsAndExportWindow(
-				this,selectedAgent, reportStatistics);
+				this,selectedRepresentative, reportStatistics);
 		rs.setVisible(true);
 		this.setVisible(false);		
 	}
@@ -468,9 +468,9 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		Company company = new Company(companyName, address);
 		Receipt receipt = new Receipt(id, date, sales, kind, items,
 				company);
-		selectedAgent.addRepresentativeReceipt(receipt);
+		selectedRepresentative.addRepresentativeReceipt(receipt);
 		
-		selectedAgent.getFileAppender().appendFile(receipt);
+		selectedRepresentative.getFileAppender().appendFile(receipt);
 	}
 	
 	private void addReceipt(){
@@ -489,7 +489,7 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 			Company company = new Company(companyName, address);
 			Receipt receipt = new Receipt(id, date, sales, kind, items,
 					company);
-			selectedAgent.addRepresentativeReceipt(receipt);
+			selectedRepresentative.addRepresentativeReceipt(receipt);
 			
 			numOfReceipts++;
 			numOfReceiptsTextField.setText(Integer.toString(numOfReceipts));
