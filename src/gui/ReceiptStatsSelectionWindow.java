@@ -387,40 +387,35 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 	}
 	
 	protected void okButtonPressed(ActionEvent evt) {
+		totalSales = -1;
+		totalItems = -1;
+		shirtSales = -1;
+		skirtSales = -1;
+		coatsSales = -1;
+		trousersSales = -1;
+		commission = -1;
+		
 		if(totalSalesCheckBox.isSelected())
 			 totalSales = selectedAgent.calculateTotalSales();
-		else
-			totalSales = -1;
 		
 		if(totalItemsCheckBox.isSelected())
 			totalItems = selectedAgent.calculateTotalItems();
-		else
-			totalItems = -1;
 		
 		if(shirtRadio.isSelected())
 			shirtSales = selectedAgent.calculateItemSales(SaleItem.SHIRT);
-		else
-			shirtSales = -1;
-		
+
 		if(skirtRadio.isSelected()  )
 			skirtSales = selectedAgent.calculateItemSales(SaleItem.SKIRT);
-		else 
-			skirtSales = -1;
-		
+
 		if(coatRadio.isSelected())
 			coatsSales = selectedAgent.calculateItemSales(SaleItem.COAT);
-		else 
-			coatsSales = -1;
 		
 		if(trousersRadio.isSelected())
 			trousersSales = selectedAgent.calculateItemSales(SaleItem.TROUSERS);
-		else 
-			trousersSales = -1;
 		
 		if(commissionCheckBox.isSelected())
 			commission = selectedAgent.calculateCommission();
-		else
-			commission = -1;
+
 		ReportStatsAndExportWindow rs = new ReportStatsAndExportWindow(this,selectedAgent, totalSales, totalItems, shirtSales, skirtSales, trousersSales, coatsSales, commission);
 		rs.setVisible(true);
 		this.setVisible(false);		
@@ -460,7 +455,7 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 				&& numberTextField.getText().isEmpty();
 	}
 	
-	private void appendFile(){
+	private void appendFile() {
 		int id = Integer.parseInt(receiptIDTextField.getText());
 		String date = dateTextField.getText();
 		Double sales = Double.parseDouble(salesTextField.getText());
