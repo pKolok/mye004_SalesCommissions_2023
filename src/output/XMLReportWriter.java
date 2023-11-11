@@ -63,15 +63,15 @@ public class XMLReportWriter extends ReportWriter{
         			 representative.calculateTotalSales())));
         	 agentElem.appendChild(totalSales);
         	 
+        	 Element totalItems = document.createElement("TotalItems");
+        	 totalItems.appendChild(document.createTextNode(Double.toString(
+        			 representative.calculateTotalItems())));
+        	 agentElem.appendChild(totalItems);
+        	 
         	 Element trouserSales = document.createElement("TrouserSales");
         	 trouserSales.appendChild(document.createTextNode(Float.toString(
         			 representative.calculateItemSales(SaleItem.TROUSERS))));
         	 agentElem.appendChild(trouserSales);
-        	 
-        	 Element skirtsSales = document.createElement("SkirtsSales");
-        	 skirtsSales.appendChild(document.createTextNode(Float.toString(
-        			 representative.calculateItemSales(SaleItem.SKIRT))));
-        	 agentElem.appendChild(skirtsSales);
         	 
         	 Element shirtsSales = document.createElement("ShirtsSales");
         	 shirtsSales.appendChild(document.createTextNode(Float.toString(
@@ -82,6 +82,11 @@ public class XMLReportWriter extends ReportWriter{
         	 coatsSales.appendChild(document.createTextNode(Float.toString(
         			 representative.calculateItemSales(SaleItem.COAT))));
         	 agentElem.appendChild(coatsSales);
+        	 
+        	 Element skirtsSales = document.createElement("SkirtsSales");
+        	 skirtsSales.appendChild(document.createTextNode(Float.toString(
+        			 representative.calculateItemSales(SaleItem.SKIRT))));
+        	 agentElem.appendChild(skirtsSales);
         	 
         	 Element commission = document.createElement("Commission");
         	 commission.appendChild(document.createTextNode(Double.toString(

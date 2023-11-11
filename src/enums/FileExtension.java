@@ -3,7 +3,8 @@ package enums;
 public enum FileExtension {
 
 	TXT,
-	XML;
+	XML,
+	HTML;
 	
 	public String toString() {
         return name().toLowerCase();

@@ -44,26 +44,32 @@ public class TXTReportWriter extends ReportWriter{
 	@Override
 	protected void writeSalesSummary() {
 		try{          
-            bufferedWriter.write("Total Sales: " + representative.calculateTotalSales());
-            bufferedWriter.newLine();
- 
-            bufferedWriter.write("Trousers Sales: " + representative.calculateItemSales(
-            		SaleItem.TROUSERS));
-            bufferedWriter.newLine();
-
-            bufferedWriter.write("Skirts Sales: " + representative.calculateItemSales(
-            		SaleItem.SKIRT));
-            bufferedWriter.newLine();
-
-            bufferedWriter.write("Shirts Sales: " + representative.calculateItemSales(
-            		SaleItem.SHIRT));
+            bufferedWriter.write("Total Sales: " 
+            		+ representative.calculateTotalSales());
             bufferedWriter.newLine();
             
-            bufferedWriter.write("Coats Sales: " + representative.calculateItemSales(
-            		SaleItem.COAT));
+            bufferedWriter.write("Total Items Sold: " 
+            		+ representative.calculateTotalItems());
+            bufferedWriter.newLine();
+ 
+            bufferedWriter.write("Trousers Sales: " 
+            		+ representative.calculateItemSales(SaleItem.TROUSERS));
+            bufferedWriter.newLine();
+            
+            bufferedWriter.write("Shirts Sales: " 
+            		+ representative.calculateItemSales(SaleItem.SHIRT));
+            bufferedWriter.newLine();
+            
+            bufferedWriter.write("Coats Sales: " 
+            		+ representative.calculateItemSales(SaleItem.COAT));
             bufferedWriter.newLine();
 
-            bufferedWriter.write("Commission: " + representative.calculateCommission());
+            bufferedWriter.write("Skirts Sales: " 
+            		+ representative.calculateItemSales(SaleItem.SKIRT));
+            bufferedWriter.newLine();
+
+            bufferedWriter.write("Commission: " 
+            		+ representative.calculateCommission());
         } catch (IOException ex){
         	ex.printStackTrace();
         }

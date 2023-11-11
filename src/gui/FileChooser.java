@@ -17,11 +17,11 @@ public class FileChooser {
 		
 		fileChooser = new JFileChooser();
 		
-		FileNameExtensionFilter txtFilter = new FileNameExtensionFilter(
+		FileNameExtensionFilter filter = new FileNameExtensionFilter(
 				fileExtension + " files (*." + fileExtension+ ")", 
 				fileExtension);
-		fileChooser.addChoosableFileFilter(txtFilter);
-		fileChooser.setFileFilter(txtFilter);
+		fileChooser.addChoosableFileFilter(filter);
+		fileChooser.setFileFilter(filter);
 	}
 	
 	public String getSaveFileName() {
