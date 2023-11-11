@@ -32,6 +32,7 @@ public class Representative {
 		return fileAppender;
 	}
 	
+	// TODO extend
 	public void setupReceiptFileAppender(String fileType, File file) {
 		if(fileType.equals("TXT")){
 			fileAppender = new ReceiptTxtFileAppender(file);

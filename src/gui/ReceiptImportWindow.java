@@ -3,6 +3,7 @@ package gui;
 import data.Representative;
 import input.TXTInput;
 import input.XMLInput;
+import input.HTMLInput;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -20,13 +21,14 @@ import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.LayoutStyle;
 import javax.swing.UIManager;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class ReceiptImportWindow extends JDialog {
 
@@ -36,6 +38,7 @@ public class ReceiptImportWindow extends JDialog {
 	private JList<String> representativeList = new JList<String>();
 	private ArrayList<Representative> allRepresentatives;
 	private Representative selectedRepresentative = null;
+	private JButton nextButton;
 	
 	/**
 	 * Launch the application.
@@ -69,22 +72,51 @@ public class ReceiptImportWindow extends JDialog {
 		setBounds(100, 100, 736, 472);
 		getContentPane().setLayout(new BorderLayout());
 		inputWindowPanel.setBackground(SystemColor.controlHighlight);
-		inputWindowPanel.setBorder(null);
+		inputWindowPanel.setBorder(new EmptyBorder(10, 25, 10, 25));
 		getContentPane().add(inputWindowPanel, BorderLayout.CENTER);
 			
-		JButton buttonTXTInput = new JButton("\u0395\u03B9\u03C3\u03B1\u03B3\u03C9\u03B3\u03AE \u03B1\u03C0\u03CC TXT");
+		JButton buttonTXTInput = new JButton("Import from txt file");
 		buttonTXTInput.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		buttonTXTInput.setBackground(UIManager.getColor("InternalFrame.borderLight"));
+		buttonTXTInput.setBackground(UIManager.getColor(
+				"InternalFrame.borderLight"));
 		buttonTXTInput.setFocusPainted(false);
+		buttonTXTInput.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				insertFromTXT(evt);
+			}
+		});
 		
-		JButton buttonXMLInput = new JButton("\u0395\u03B9\u03C3\u03B1\u03B3\u03C9\u03B3\u03AE \u03B1\u03C0\u03CC XML");
+		JButton buttonXMLInput = new JButton("Import from xml file");
 		buttonXMLInput.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		buttonXMLInput.setBackground(UIManager.getColor("InternalFrame.borderLight"));
+		buttonXMLInput.setBackground(UIManager.getColor(
+				"InternalFrame.borderLight"));
 		buttonXMLInput.setFocusPainted(false);
+		buttonXMLInput.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				insertFromXML(e);
+			}
+		});
+	
+		JButton buttonHTMLInput = new JButton("Import from html file");
+		buttonHTMLInput.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		buttonHTMLInput.setBackground(UIManager.getColor(
+				"InternalFrame.borderLight"));
+		buttonHTMLInput.setFocusPainted(false);
+		buttonHTMLInput.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				insertFromHTML(e);
+			}
+		});
 		
+		JLabel chooseFilelabel = new JLabel("Chooce receipt file type for loading:");
+		chooseFilelabel.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		
-		JLabel label = new JLabel("\u0395\u03C0\u03B9\u03BB\u03AD\u03BE\u03C4\u03B5 \u03B5\u03AF\u03B4\u03BF\u03C2 \u03B1\u03C1\u03C7\u03B5\u03AF\u03BF\u03C5 \u03B3\u03B9\u03B1 \u03C6\u03CC\u03C1\u03C4\u03C9\u03C3\u03B7 \u03B1\u03C0\u03BF\u03B4\u03B5\u03AF\u03BE\u03B5\u03C9\u03BD:");
-		label.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		JLabel salesListLabel = new JLabel("Choose sales sepresentative:");
+		salesListLabel.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		
+		representativeList.setFont(new Font("Times New Roman", Font.PLAIN, 19));
+		representativeList.setBackground(UIManager.getColor("Button.light"));
+		representativeList.setBorder(new LineBorder(new Color(0, 0, 0)));
 		representativeList.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -92,157 +124,179 @@ public class ReceiptImportWindow extends JDialog {
 			}
 		});
 		
-		representativeList.setFont(new Font("Times New Roman", Font.PLAIN, 19));
-		representativeList.setBackground(UIManager.getColor("Button.light"));
-		representativeList.setBorder(new LineBorder(new Color(0, 0, 0)));
-		
-		
-		JLabel label_1 = new JLabel("\u039B\u03B9\u03C3\u03C4\u03B1 \u0391\u03BD\u03C4\u03B9\u03C0\u03C1\u03BF\u03C3\u03CE\u03C0\u03C9\u03BD");
-		label_1.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-		
-		JButton button = new JButton("OK");
-		button.addActionListener(new ActionListener() {
+		nextButton = new JButton("Next");
+		nextButton.setToolTipText("");
+		nextButton.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		nextButton.setBackground(UIManager.getColor("Button.shadow"));
+		nextButton.setVisible(false);
+		nextButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				okButtonPressed(evt);						
 			}
 		});
-		button.setToolTipText("");
-		button.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		button.setBackground(UIManager.getColor("Button.shadow"));
 		
-		JButton button_1 = new JButton("Cancel");
-		button_1.addActionListener(new ActionListener() {
+		JButton exitButton = new JButton("Exit");
+		exitButton.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		exitButton.setBackground(UIManager.getColor("Button.shadow"));
+		exitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cancelButtonPressed(e);
-			}
-		});
-		button_1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		button_1.setBackground(UIManager.getColor("Button.shadow"));
-		
-		GroupLayout gl_inputWindowPanel = new GroupLayout(inputWindowPanel);
-		gl_inputWindowPanel.setHorizontalGroup(
-			gl_inputWindowPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_inputWindowPanel.createSequentialGroup()
-					.addGroup(gl_inputWindowPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_inputWindowPanel.createSequentialGroup()
-							.addGap(258)
-							.addComponent(button, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_inputWindowPanel.createParallelGroup(Alignment.LEADING, false)
-							.addComponent(label)
-							.addComponent(buttonTXTInput, GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
-							.addComponent(buttonXMLInput, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-					.addGap(18)
-					.addGroup(gl_inputWindowPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(representativeList, GroupLayout.PREFERRED_SIZE, 309, GroupLayout.PREFERRED_SIZE)
-						.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(57, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, gl_inputWindowPanel.createSequentialGroup()
-					.addContainerGap(453, Short.MAX_VALUE)
-					.addComponent(label_1)
-					.addGap(143))
-		);
-		gl_inputWindowPanel.setVerticalGroup(
-			gl_inputWindowPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_inputWindowPanel.createSequentialGroup()
-					.addGap(23)
-					.addComponent(label)
-					.addGap(11)
-					.addComponent(label_1)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_inputWindowPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_inputWindowPanel.createSequentialGroup()
-							.addComponent(buttonTXTInput, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-							.addGap(42)
-							.addComponent(buttonXMLInput, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE))
-						.addComponent(representativeList, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE))
-					.addGap(139)
-					.addGroup(gl_inputWindowPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-						.addComponent(button, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(25, Short.MAX_VALUE))
-		);
-		inputWindowPanel.setLayout(gl_inputWindowPanel);
-		buttonTXTInput.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				insertFromTXT(evt);
+				exitButtonPressed(e);
 			}
 		});
 		
-		buttonXMLInput.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						insertFromXML(e);
-					}
-				});
-	}
-	
-	private void cancelButtonPressed(ActionEvent e) {
-		System.exit(0);	
+		GroupLayout layout = new GroupLayout(inputWindowPanel);
+		layout.setAutoCreateGaps(true);
+		layout.setAutoCreateContainerGaps(true);
+		
+		// Set up horizontal layout
+		layout.setHorizontalGroup(
+			layout.createSequentialGroup()
+				.addGroup(layout.createParallelGroup(Alignment.LEADING)
+					.addComponent(chooseFilelabel)
+					.addComponent(buttonTXTInput, 0, 
+							GroupLayout.DEFAULT_SIZE, 300)
+					.addComponent(buttonXMLInput, GroupLayout.DEFAULT_SIZE, 
+							GroupLayout.DEFAULT_SIZE, 300)
+					.addComponent(buttonHTMLInput, GroupLayout.DEFAULT_SIZE, 
+							GroupLayout.DEFAULT_SIZE, 300)					
+					.addGroup(layout.createSequentialGroup()
+						.addComponent(exitButton)
+						.addComponent(nextButton))
+					)
+				.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED,
+	                     GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE)
+				.addGroup(layout.createParallelGroup(Alignment.LEADING)
+					.addComponent(salesListLabel)
+					.addComponent(representativeList, GroupLayout.DEFAULT_SIZE,
+							300, Short.MAX_VALUE))
+		);
+		
+		// Set up vertical layout
+		layout.setVerticalGroup(
+			layout.createSequentialGroup()
+				.addGroup(layout.createParallelGroup(Alignment.LEADING)
+					.addComponent(chooseFilelabel)
+					.addComponent(salesListLabel))
+				.addGroup(layout.createParallelGroup(Alignment.LEADING)
+					.addGroup(layout.createSequentialGroup()
+						.addComponent(buttonTXTInput)
+						.addComponent(buttonXMLInput)
+						.addComponent(buttonHTMLInput))
+					.addComponent(representativeList, GroupLayout.DEFAULT_SIZE,
+							300, Short.MAX_VALUE))
+				.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED,
+	                     GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE)
+				.addGroup(layout.createParallelGroup(Alignment.LEADING)
+					.addComponent(nextButton)
+					.addComponent(exitButton))
+		);
+		
+		inputWindowPanel.setLayout(layout);
 	}
 
 	private void insertFromTXT(ActionEvent evt) {
-		
-		JFileChooser TXTFileChooser;
-		TXTFileChooser = new JFileChooser();     
-		TXTFileChooser.setFileSelectionMode(JFileChooser.APPROVE_OPTION);		       
-		TXTFileChooser.showOpenDialog(null);
+		JFileChooser fileChooser;
+		fileChooser = new JFileChooser();     
+		fileChooser.setFileSelectionMode(JFileChooser.APPROVE_OPTION);		       
+		fileChooser.showOpenDialog(null);
 		boolean representativeDuplicate = false;
-		try {
-			File recieptFileTXT = TXTFileChooser.getSelectedFile();
-			TXTInput inputFileTXT = new TXTInput(recieptFileTXT);	
-			inputFileTXT.readFile();
-			Representative representative = inputFileTXT.getAgent();
-			representative.setupReceiptFileAppender("TXT", recieptFileTXT);				
-			allRepresentatives.add(representative);
-			for(int i = 0; i< listModel.getSize(); i++){
-				if(representative.getName().equals(listModel.getElementAt(i))){
-					representativeDuplicate = true;
-				}
+		
+		File receiptFile = fileChooser.getSelectedFile();
+		
+		// No file was chosen (User pressed Cancel)
+		if (receiptFile == null) {
+			return;
+		}
+		
+		TXTInput inputFileTXT = new TXTInput(receiptFile);	
+		inputFileTXT.readFile();
+		Representative representative = inputFileTXT.getAgent();
+		representative.setupReceiptFileAppender("TXT", receiptFile);				
+		allRepresentatives.add(representative);
+		for(int i = 0; i< listModel.getSize(); i++){
+			if(representative.getName().equals(listModel.getElementAt(i))){
+				representativeDuplicate = true;
+				break;
 			}
-			
-			if (representativeDuplicate == true) {
-				JOptionPane.showMessageDialog(null,"� ������������ ������� ��� ��� �����");
-
-			} else {
-				listModel.addElement(representative.getName());
-				representativeList.setModel(listModel);
-			}
-			
-		} catch (NullPointerException e) {
+		}
+		
+		if (representativeDuplicate == true) {
 			JOptionPane.showMessageDialog(
 					null, "Duplicate Sales Representative");
 
-		} catch (NumberFormatException e) {
-			JOptionPane.showMessageDialog(null, "Error Reading TXT File");
+		} else {
+			listModel.addElement(representative.getName());
+			representativeList.setModel(listModel);
 		}
 	}
 	
 	private void insertFromXML(ActionEvent evt2) {
-		JFileChooser XMLFileChooser;
-		XMLFileChooser = new JFileChooser();     
-		XMLFileChooser.setFileSelectionMode(JFileChooser.APPROVE_OPTION);		       
-		XMLFileChooser.showOpenDialog(null);
+		JFileChooser fileChooser;
+		fileChooser = new JFileChooser();     
+		fileChooser.setFileSelectionMode(JFileChooser.APPROVE_OPTION);		       
+		fileChooser.showOpenDialog(null);
 		boolean representativeDuplicate = false;
-		try{
-			File receiptFileXML = XMLFileChooser.getSelectedFile();
-			XMLInput inputFileXML = new XMLInput(receiptFileXML);	
-			inputFileXML.readFile();
-			Representative representative = inputFileXML.getAgent();
-			representative.setupReceiptFileAppender("XML", receiptFileXML);				
-			allRepresentatives.add(representative);
-			for(int i = 0; i< listModel.getSize(); i++){
-				if(representative.getName().equals(listModel.getElementAt(i))){
-					representativeDuplicate = true;
-				}
+
+		File receiptFile = fileChooser.getSelectedFile();
+		
+		// No file was chosen (User pressed Cancel)
+		if (receiptFile == null) {
+			return;
+		}
+		
+		XMLInput inputFileXML = new XMLInput(receiptFile);	
+		inputFileXML.readFile();
+		Representative representative = inputFileXML.getAgent();
+		representative.setupReceiptFileAppender("XML", receiptFile);				
+		allRepresentatives.add(representative);
+		for(int i = 0; i< listModel.getSize(); i++){
+			if(representative.getName().equals(listModel.getElementAt(i))){
+				representativeDuplicate = true;
+				break;
 			}
-			if (representativeDuplicate == true) {
-				JOptionPane.showMessageDialog(
-						null, "Duplicate Sales Representative");
-			} else {
-				listModel.addElement(representative.getName());
-				representativeList.setModel(listModel);
+		}
+		if (representativeDuplicate == true) {
+			JOptionPane.showMessageDialog(
+					null, "Duplicate Sales Representative");
+		} else {
+			listModel.addElement(representative.getName());
+			representativeList.setModel(listModel);
+		}
+
+	}
+	
+	private void insertFromHTML(ActionEvent evt2) {
+		JFileChooser fileChooser;
+		fileChooser = new JFileChooser();     
+		fileChooser.setFileSelectionMode(JFileChooser.APPROVE_OPTION);		       
+		fileChooser.showOpenDialog(null);
+		boolean representativeDuplicate = false;
+
+		File receiptFile = fileChooser.getSelectedFile();
+		
+		// No file was chosen (User pressed Cancel)
+		if (receiptFile == null) {
+			return;
+		}
+		
+		HTMLInput inputFileXML = new HTMLInput(receiptFile);	
+		inputFileXML.readFile();
+		
+		Representative representative = inputFileXML.getAgent();
+		representative.setupReceiptFileAppender("HTML", receiptFile);
+		allRepresentatives.add(representative);
+		
+		for(int i = 0; i < listModel.getSize(); i++){
+			if(representative.getName().equals(listModel.getElementAt(i))){
+				representativeDuplicate = true;
 			}
-		} catch (IllegalArgumentException e) {
-			JOptionPane.showMessageDialog(null,"Error Reading XML File");
+		}
+		if (representativeDuplicate == true) {
+			JOptionPane.showMessageDialog(
+					null, "Duplicate Sales Representative");
+		} else {
+			listModel.addElement(representative.getName());
+			representativeList.setModel(listModel);
 		}
 	}
 	
@@ -253,6 +307,7 @@ public class ReceiptImportWindow extends JDialog {
             for(int i = 0; i < allRepresentatives.size(); i++){
                 if(representativeName.equals(allRepresentatives.get(i).getName())){
             		selectedRepresentative = allRepresentatives.get(i);
+            		nextButton.setVisible(true);
             		break;
                 }
             }
@@ -270,6 +325,11 @@ public class ReceiptImportWindow extends JDialog {
 				dialog, selectedRepresentative);
 		this.setVisible(false);
 		sw.setVisible(true);
-	}	
+	}
+	
+	
+	private void exitButtonPressed(ActionEvent e) {
+		System.exit(0);	
+	}
 
 }
