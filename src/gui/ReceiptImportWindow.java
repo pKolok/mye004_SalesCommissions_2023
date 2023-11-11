@@ -1,6 +1,7 @@
 package gui;
 
 import data.Representative;
+import enums.FileExtension;
 import input.TXTInput;
 import input.XMLInput;
 import input.HTMLInput;
@@ -195,24 +196,23 @@ public class ReceiptImportWindow extends JDialog {
 	}
 
 	private void insertFromTXT(ActionEvent evt) {
-		JFileChooser fileChooser;
-		fileChooser = new JFileChooser();     
-		fileChooser.setFileSelectionMode(JFileChooser.APPROVE_OPTION);		       
-		fileChooser.showOpenDialog(null);
-		boolean representativeDuplicate = false;
+		FileChooser fileChooser = new FileChooser(FileExtension.TXT);
+		File receiptFile = fileChooser.openReceiptsFile();
 		
-		File receiptFile = fileChooser.getSelectedFile();
-		
-		// No file was chosen (User pressed Cancel)
+		// Invalid file choice
 		if (receiptFile == null) {
 			return;
 		}
 		
+		boolean representativeDuplicate = false;
+
 		TXTInput inputFileTXT = new TXTInput(receiptFile);	
 		inputFileTXT.readFile();
+		
 		Representative representative = inputFileTXT.getAgent();
 		representative.setupReceiptFileAppender("TXT", receiptFile);				
 		allRepresentatives.add(representative);
+		
 		for(int i = 0; i< listModel.getSize(); i++){
 			if(representative.getName().equals(listModel.getElementAt(i))){
 				representativeDuplicate = true;
@@ -231,24 +231,23 @@ public class ReceiptImportWindow extends JDialog {
 	}
 	
 	private void insertFromXML(ActionEvent evt2) {
-		JFileChooser fileChooser;
-		fileChooser = new JFileChooser();     
-		fileChooser.setFileSelectionMode(JFileChooser.APPROVE_OPTION);		       
-		fileChooser.showOpenDialog(null);
-		boolean representativeDuplicate = false;
-
-		File receiptFile = fileChooser.getSelectedFile();
+		FileChooser fileChooser = new FileChooser(FileExtension.XML);
+		File receiptFile = fileChooser.openReceiptsFile();
 		
-		// No file was chosen (User pressed Cancel)
+		// Invalid file choice
 		if (receiptFile == null) {
 			return;
 		}
 		
+		boolean representativeDuplicate = false;
+		
 		XMLInput inputFileXML = new XMLInput(receiptFile);	
 		inputFileXML.readFile();
+		
 		Representative representative = inputFileXML.getAgent();
 		representative.setupReceiptFileAppender("XML", receiptFile);				
 		allRepresentatives.add(representative);
+		
 		for(int i = 0; i< listModel.getSize(); i++){
 			if(representative.getName().equals(listModel.getElementAt(i))){
 				representativeDuplicate = true;
@@ -266,18 +265,15 @@ public class ReceiptImportWindow extends JDialog {
 	}
 	
 	private void insertFromHTML(ActionEvent evt2) {
-		JFileChooser fileChooser;
-		fileChooser = new JFileChooser();     
-		fileChooser.setFileSelectionMode(JFileChooser.APPROVE_OPTION);		       
-		fileChooser.showOpenDialog(null);
-		boolean representativeDuplicate = false;
-
-		File receiptFile = fileChooser.getSelectedFile();
+		FileChooser fileChooser = new FileChooser(FileExtension.HTML);
+		File receiptFile = fileChooser.openReceiptsFile();
 		
-		// No file was chosen (User pressed Cancel)
+		// Invalid file choice
 		if (receiptFile == null) {
 			return;
 		}
+		
+		boolean representativeDuplicate = false;
 		
 		HTMLInput inputFileXML = new HTMLInput(receiptFile);	
 		inputFileXML.readFile();

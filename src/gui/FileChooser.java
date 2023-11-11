@@ -40,4 +40,28 @@ public class FileChooser {
 		}
 		return null;
 	}
+	
+	// TODO: return some kind of warning when invalid file is selected
+	public File openReceiptsFile() {
+		fileChooser.setDialogTitle("Open Receipts File");
+		fileChooser.setDialogType(JFileChooser.OPEN_DIALOG);
+		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		
+		fileChooser.showOpenDialog(null);
+		
+		File receiptFile = fileChooser.getSelectedFile();
+		
+		// User cancelled the dialog
+		if (receiptFile == null) {
+			return null;
+		}
+		
+		// User entered invalid information and pressed OK
+		String filename = receiptFile.toString();
+		if (!filename.endsWith("." + fileExtension)) {
+	    	return null;		    	
+	    }
+		
+		return receiptFile;
+	}
 }
