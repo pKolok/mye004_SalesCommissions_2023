@@ -11,6 +11,7 @@ import data.Address;
 import data.Company;
 import data.Receipt;
 import data.Representative;
+import output.ReceiptTxtFileAppender;
 
 public class TXTInput extends Input {
 	
@@ -46,7 +47,8 @@ public class TXTInput extends Input {
 	    	line = bufferedReader.readLine();
 	    	String afm = (line.substring(line.indexOf(":") + 1).trim());
 	    	
-	    	return new Representative(name, afm);
+	    	return new Representative(name, afm, 
+	    			new ReceiptTxtFileAppender(inputFile));
 	    	
 		} catch (IOException e) {
 			e.printStackTrace();

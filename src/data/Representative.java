@@ -11,9 +11,11 @@ public class Representative {
 	private ArrayList<Receipt> allReceipts;
 	private ReceiptFileAppender fileAppender;
 	
-	public Representative(String name, String afm){
+	public Representative(String name, String afm, 
+			ReceiptFileAppender fileAppender){
 		this.name = name;
 		this.afm = afm;
+		this.fileAppender = fileAppender;
 		allReceipts = new ArrayList<Receipt>();
 	}
 	
@@ -25,16 +27,12 @@ public class Representative {
 		return afm;
 	}
 
-	public ReceiptFileAppender getFileAppender() {
-		return fileAppender;
-	}
-	
-	public void setupReceiptFileAppender(ReceiptFileAppender fileAppender) {
-		this.fileAppender = fileAppender;
-	}
-
 	public void addRepresentativeReceipt(Receipt receipt) {
 		allReceipts.add(receipt);
+	}
+	
+	public void appendReceiptToReceiptsFile(Receipt receipt) {
+		fileAppender.appendFile(receipt);
 	}
 	
 	public double calculateTotalSales(){

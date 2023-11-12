@@ -14,6 +14,7 @@ import data.Address;
 import data.Company;
 import data.Receipt;
 import data.Representative;
+import output.ReceiptXmlFileAppender;
 
 public class XMLInput extends Input {
  
@@ -44,7 +45,8 @@ public class XMLInput extends Input {
         	String afm = ((Element) nodeLst.item(0)).getElementsByTagName("AFM").
         			item(0).getChildNodes().item(0).getNodeValue().trim();
         	
-        	return new Representative(name, afm);
+        	return new Representative(name, afm,
+        			new ReceiptXmlFileAppender(inputFile));
         	  
         } catch (Exception e) {
 			e.printStackTrace();

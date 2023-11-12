@@ -11,6 +11,7 @@ import data.Address;
 import data.Company;
 import data.Receipt;
 import data.Representative;
+import output.ReceiptHtmlFileAppender;
 
 public class HTMLInput extends Input {
 	
@@ -48,7 +49,8 @@ public class HTMLInput extends Input {
 	    	line = line.replace("<h2>", "").replace("</h2>", "");
 	    	String afm = (line.substring(line.indexOf(":") + 1).trim());
 	    	
-	    	return new Representative(name, afm);
+	    	return new Representative(name, afm, 
+	    			new ReceiptHtmlFileAppender(inputFile));
 	    	
 		} catch (IOException e) {
 			e.printStackTrace();

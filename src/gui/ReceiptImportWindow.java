@@ -5,10 +5,6 @@ import enums.FileExtension;
 import input.TXTInput;
 import input.XMLInput;
 import input.HTMLInput;
-import output.ReceiptFileAppender;
-import output.ReceiptHtmlFileAppender;
-import output.ReceiptTxtFileAppender;
-import output.ReceiptXmlFileAppender;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -211,13 +207,7 @@ public class ReceiptImportWindow extends JDialog {
 
 		TXTInput inputFileTXT = new TXTInput(receiptFile);	
 		inputFileTXT.readFile();
-		
 		Representative representative = inputFileTXT.getSalesRepresentative();
-
-		ReceiptFileAppender txtFileAppender = new ReceiptTxtFileAppender(
-				receiptFile);
-		representative.setupReceiptFileAppender(txtFileAppender);
-		
 		allRepresentatives.add(representative);
 		
 		for(int i = 0; i< listModel.getSize(); i++){
@@ -252,11 +242,6 @@ public class ReceiptImportWindow extends JDialog {
 		inputFileXML.readFile();
 		
 		Representative representative = inputFileXML.getSalesRepresentative();
-		
-		ReceiptFileAppender xmlFileAppender = new ReceiptXmlFileAppender(
-				receiptFile);
-		representative.setupReceiptFileAppender(xmlFileAppender);
-		
 		allRepresentatives.add(representative);
 		
 		for(int i = 0; i< listModel.getSize(); i++){
@@ -290,11 +275,6 @@ public class ReceiptImportWindow extends JDialog {
 		inputFileXML.readFile();
 		
 		Representative representative = inputFileXML.getSalesRepresentative();
-		
-		ReceiptFileAppender htmlFileAppender = new ReceiptHtmlFileAppender(
-				receiptFile);
-		representative.setupReceiptFileAppender(htmlFileAppender);
-		
 		allRepresentatives.add(representative);
 		
 		for(int i = 0; i < listModel.getSize(); i++){

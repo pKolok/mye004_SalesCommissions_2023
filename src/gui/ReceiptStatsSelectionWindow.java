@@ -477,7 +477,6 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 	private void onAddNewReceiptButtonPressed(ActionEvent evt) {
 		if (areAllReceiptFieldsFilledIn()) {
 			addReceipt();
-			appendFile();
 			resetReceiptFields();
 		} else {
 			JOptionPane.showMessageDialog(
@@ -553,21 +552,13 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 			return;
 		
 		selectedRepresentative.addRepresentativeReceipt(receipt);
+		selectedRepresentative.appendReceiptToReceiptsFile(receipt);
 		
 		numOfReceipts++;
 		addedReceiptsTextField.setText(Integer.toString(numOfReceipts));
 		
 		JOptionPane.showMessageDialog(null,"Receipt added to the list of Sale's"
 				+ " Representative " + selectedRepresentative.getName());
-	}
-	
-	private void appendFile() {
-		Receipt receipt = getReceiptFromUserInput();
-		
-		if (receipt == null) 
-			return;
-		
-		selectedRepresentative.getFileAppender().appendFile(receipt);
 	}
 
 	private void resetReceiptFields() {
