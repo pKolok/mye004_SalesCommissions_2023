@@ -20,7 +20,7 @@ public abstract class ReceiptFileAppender {
 		openFile();
 		append("ReceiptID", Integer.toString(receipt.getReceiptID()));
 		append("Date", receipt.getDate());
-		append("Kind", receipt.getKind().name());
+		append("Kind", receipt.getKind().toString());
 		append("Sales", Double.toString(receipt.getSales()));
 		append("Items", Integer.toString(receipt.getItems()));
 		append("Company", receipt.getCompany().getName());

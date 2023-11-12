@@ -7,25 +7,43 @@ import data.Address;
 import data.Company;
 import data.ReportStatistics;
 
+import java.util.Arrays;
+import java.util.List;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
+import java.awt.BorderLayout;
 import java.awt.Color;
+
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JCheckBox;
-import javax.swing.JRadioButton;
 import javax.swing.JToggleButton;
+import javax.swing.LayoutStyle;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 
 public class ReceiptStatsSelectionWindow extends JDialog {
 
 	private static final long serialVersionUID = 1L;
+	private ReceiptImportWindow inputDialog;
+	private Representative selectedRepresentative;
+	private JTextField representativeTextField;
+	private JCheckBox totalSalesCheckBox;
+	private JCheckBox totalItemsCheckBox;
+	private JCheckBox categoryCheckBox;
+	private JCheckBox skirtCheckBox;
+	private JCheckBox shirtCheckBox;
+	private JCheckBox trousersCheckBox;
+	private JCheckBox coatCheckBox;
+	private JCheckBox commissionCheckBox;
+	private JTextField receiptIDTextField;
 	private JTextField dateTextField;
 	private JTextField kindTextField;
 	private JTextField salesTextField;
@@ -34,353 +52,425 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 	private JTextField countryTextField;
 	private JTextField cityTextField;
 	private JTextField streetTextField;
-	private JTextField receiptIDTextField;
 	private JTextField numberTextField;
-	private JTextField numOfReceiptsTextField;
-	private JTextField representativeNameTextField;
-	private JCheckBox totalSalesCheckBox;
-	private JCheckBox totalItemsCheckBox;
-	private JCheckBox commissionCheckBox;
-	private JCheckBox categoryCheckBox;
-	private JRadioButton skirtRadio;
-	private JRadioButton shirtRadio;
-	private JRadioButton trousersRadio;
-	private JRadioButton coatRadio;
-	private ReceiptImportWindow inputDialog;
+	private JTextField addedReceiptsTextField;
 	private int numOfReceipts = 0;
-	private Representative selectedRepresentative;
 	
 	public ReceiptStatsSelectionWindow(ReceiptImportWindow dialog, 
 			Representative representative) {
 		this.inputDialog = dialog;
 		this.selectedRepresentative = representative;
 		
-		initialise();	
+		initialiseUI();
+		fillInSalesRepresentative();
 	}
 	
-	public void initialise() {
+	public void initialiseUI() {
 		JPanel selectionWindowPanel = new JPanel();
 		
-		getContentPane().setBackground(SystemColor.controlHighlight);
-		setBounds(100, 100, 717, 597);
-		getContentPane().setLayout(null);
-		selectionWindowPanel.setBounds(0, 0, 701, 1);
-		selectionWindowPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(selectionWindowPanel);
-		selectionWindowPanel.setLayout(null);
-		totalSalesCheckBox = new JCheckBox("\u03A3\u03C5\u03BD\u03BF\u03BB\u03B9\u03BA\u03AE \u03B1\u03BE\u03AF\u03B1 \u03C0\u03C9\u03BB\u03AE\u03C3\u03B5\u03C9\u03BD");
-		totalSalesCheckBox.setBackground(SystemColor.controlHighlight);
-		totalSalesCheckBox.setBounds(52, 129, 169, 25);
-		totalSalesCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		getContentPane().add(totalSalesCheckBox);
+		setBackground(new Color(0, 0, 0));
+		setBounds(100, 100, 800, 510);
+		getContentPane().setLayout(new BorderLayout());
+		selectionWindowPanel.setBackground(SystemColor.controlHighlight);
+		selectionWindowPanel.setBorder(new EmptyBorder(10, 25, 10, 25));
+		getContentPane().add(selectionWindowPanel, BorderLayout.CENTER);
 		
-		totalItemsCheckBox = new JCheckBox("\u03A3\u03C5\u03BD\u03BF\u03BB\u03B9\u03BA\u03CC\u03C2 \u03B1\u03C1\u03B9\u03B8\u03BC\u03CC\u03C2 \u03C0\u03C9\u03BB\u03AE\u03C3\u03B5\u03C9\u03BD");
-		totalItemsCheckBox.setBackground(SystemColor.controlHighlight);
-		totalItemsCheckBox.setBounds(52, 170, 204, 25);
-		totalItemsCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		getContentPane().add(totalItemsCheckBox);
+		JLabel representativeLabel = new JLabel("Sales Representative:");
+		representativeLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
-		categoryCheckBox = new JCheckBox("\u03A0\u03C9\u03BB\u03AE\u03C3\u03B5\u03B9\u03C2 \u03C3\u03C5\u03B3\u03BA\u03B5\u03BA\u03C1\u03B9\u03BC\u03AD\u03BD\u03B7\u03C2 \u03BA\u03B1\u03C4\u03B7\u03B3\u03BF\u03C1\u03AF\u03B1\u03C2");
-		categoryCheckBox.setBackground(SystemColor.controlHighlight);
-		
-		categoryCheckBox.setBounds(52, 214, 257, 25);
-		categoryCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		getContentPane().add(categoryCheckBox);
-		
-		shirtRadio = new JRadioButton("\u039C\u03C0\u03BB\u03BF\u03CD\u03B6\u03B5\u03C2");
-		shirtRadio.setBackground(SystemColor.controlHighlight);
-		shirtRadio.setEnabled(false);
-		shirtRadio.setBounds(119, 242, 125, 25);
-		shirtRadio.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		getContentPane().add(shirtRadio);
-		
-		trousersRadio = new JRadioButton("\u03A0\u03B1\u03BD\u03C4\u03B5\u03BB\u03CC\u03BD\u03B9\u03B1");
-		trousersRadio.setBackground(SystemColor.controlHighlight);
-		trousersRadio.setEnabled(false);
-		trousersRadio.setBounds(119, 270, 125, 25);
-		trousersRadio.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		getContentPane().add(trousersRadio);
-		
-		coatRadio = new JRadioButton("\u03A0\u03B1\u03BB\u03C4\u03AC");
-		coatRadio.setBackground(SystemColor.controlHighlight);
-		coatRadio.setEnabled(false);
-		coatRadio.setBounds(119, 298, 125, 25);
-		coatRadio.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		getContentPane().add(coatRadio);
-		
-		skirtRadio = new JRadioButton("\u03A6\u03BF\u03CD\u03C3\u03C4\u03B5\u03C2");
-		skirtRadio.setBackground(SystemColor.controlHighlight);
-		skirtRadio.setEnabled(false);
-		skirtRadio.setBounds(119, 326, 125, 25);
-		skirtRadio.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		getContentPane().add(skirtRadio);
-		
-		commissionCheckBox = new JCheckBox("\u0395\u03BC\u03C6\u03AC\u03BD\u03B9\u03C3\u03B7 \u03A0\u03C1\u03BF\u03BC\u03AE\u03B8\u03B5\u03B9\u03B1\u03C2");
-		commissionCheckBox.setBackground(SystemColor.controlHighlight);
-		commissionCheckBox.setBounds(52, 375, 204, 25);
-		commissionCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		getContentPane().add(commissionCheckBox);
-		
-		final JToggleButton addReceiptToggleButton = new JToggleButton("\u03A0\u03C1\u03BF\u03C3\u03B8\u03AE\u03BA\u03B7 \u03BD\u03AD\u03B1\u03C2 \u03B1\u03C0\u03CC\u03B4\u03B5\u03B9\u03BE\u03B7\u03C2");
-		addReceiptToggleButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		addReceiptToggleButton.setBackground(new Color(135, 206, 235));
-		
-		addReceiptToggleButton.setBounds(411, 12, 265, 47);
-		getContentPane().add(addReceiptToggleButton);
+		representativeTextField = new JTextField();
+		representativeTextField.setBackground(SystemColor.controlHighlight);
+		representativeTextField.setEditable(false);
+		representativeTextField.setFont(new Font("Tahoma", Font.BOLD, 16));
+		representativeTextField.setColumns(10);
 
-		dateTextField = new JTextField();
-		dateTextField.setVisible(false);
-		dateTextField.setBounds(543, 120, 133, 20);
-		getContentPane().add(dateTextField);
-		dateTextField.setColumns(10);
+		JLabel selectStatsLabel = new JLabel("Select Summary Statistics");
+		selectStatsLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
+
+		totalSalesCheckBox = new JCheckBox("Total Sales Value");
+		totalSalesCheckBox.setBackground(SystemColor.controlHighlight);
+		totalSalesCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+
+		totalItemsCheckBox = new JCheckBox("Total Items Sold");
+		totalItemsCheckBox.setBackground(SystemColor.controlHighlight);
+		totalItemsCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+
+		shirtCheckBox = new JCheckBox("Shirts");
+		shirtCheckBox.setBackground(SystemColor.controlHighlight);
+		shirtCheckBox.setEnabled(false);
+		shirtCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+
+		trousersCheckBox = new JCheckBox("Trousers");
+		trousersCheckBox.setBackground(SystemColor.controlHighlight);
+		trousersCheckBox.setEnabled(false);
+		trousersCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+
+		coatCheckBox = new JCheckBox("Coats");
+		coatCheckBox.setBackground(SystemColor.controlHighlight);
+		coatCheckBox.setEnabled(false);
+		coatCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+
+		skirtCheckBox = new JCheckBox("Skirts");
+		skirtCheckBox.setBackground(SystemColor.controlHighlight);
+		skirtCheckBox.setEnabled(false);
+		skirtCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+
+		categoryCheckBox = new JCheckBox("Sales of certain category");
+		categoryCheckBox.setBackground(SystemColor.controlHighlight);
+		categoryCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		categoryCheckBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				boolean isEnabled = false;
+				if (categoryCheckBox.isSelected() == true) {
+					isEnabled = true;
+				} else {
+					isEnabled = false;
+				}
+				
+				skirtCheckBox.setEnabled(isEnabled);
+				shirtCheckBox.setEnabled(isEnabled);
+				coatCheckBox.setEnabled(isEnabled);
+				trousersCheckBox.setEnabled(isEnabled);
+			}
+		});
 		
-		kindTextField = new JTextField();
-		kindTextField.setVisible(false);
-		kindTextField.setBounds(543, 163, 133, 20);
-		getContentPane().add(kindTextField);
-		kindTextField.setColumns(10);
+		commissionCheckBox = new JCheckBox("Sales Representative's Commission");
+		commissionCheckBox.setBackground(SystemColor.controlHighlight);
+		commissionCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		
-		salesTextField = new JTextField();
-		salesTextField.setVisible(false);
-		salesTextField.setBounds(543, 208, 133, 20);
-		getContentPane().add(salesTextField);
-		salesTextField.setColumns(10);
-		
-		itemsTextField = new JTextField();
-		itemsTextField.setVisible(false);
-		itemsTextField.setBounds(543, 250, 133, 20);
-		getContentPane().add(itemsTextField);
-		itemsTextField.setColumns(10);
-		
-		companyTextField = new JTextField();
-		companyTextField.setVisible(false);
-		companyTextField.setBounds(543, 287, 133, 20);
-		getContentPane().add(companyTextField);
-		companyTextField.setColumns(10);
-		
-		countryTextField = new JTextField();
-		countryTextField.setVisible(false);
-		countryTextField.setBounds(543, 329, 133, 20);
-		getContentPane().add(countryTextField);
-		countryTextField.setColumns(10);
-		
-		cityTextField = new JTextField();
-		cityTextField.setVisible(false);
-		cityTextField.setBounds(543, 367, 133, 20);
-		getContentPane().add(cityTextField);
-		cityTextField.setColumns(10);
-		
-		streetTextField = new JTextField();
-		streetTextField.setVisible(false);
-		streetTextField.setBounds(543, 406, 133, 20);
-		getContentPane().add(streetTextField);
-		streetTextField.setColumns(10);
-		
-		receiptIDTextField = new JTextField();
-		receiptIDTextField.setVisible(false);
-		receiptIDTextField.setBounds(543, 81, 133, 20);
-		getContentPane().add(receiptIDTextField);
-		receiptIDTextField.setColumns(10);
-		
-		numberTextField = new JTextField();
-		numberTextField.setVisible(false);
-		numberTextField.setBounds(543, 445, 133, 20);
-		getContentPane().add(numberTextField);
-		numberTextField.setColumns(10);
-		
-		final JLabel receiptIDLabel = new JLabel("ReceiptID:");
+		// -------------------------- Add new Receipt --------------------------
+		final JLabel receiptIDLabel = new JLabel("Receipt ID:");
 		receiptIDLabel.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 13));
 		receiptIDLabel.setVisible(false);
-		receiptIDLabel.setBounds(470, 84, 71, 14);
-		getContentPane().add(receiptIDLabel);
-		
+
+		receiptIDTextField = new JTextField();
+		receiptIDTextField.setVisible(false);
+		receiptIDTextField.setColumns(10);
+
 		final JLabel dateLabel = new JLabel("Date:");
 		dateLabel.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 13));
 		dateLabel.setVisible(false);
-		dateLabel.setBounds(470, 123, 46, 14);
-		getContentPane().add(dateLabel);
-		
+
+		dateTextField = new JTextField();
+		dateTextField.setVisible(false);
+		dateTextField.setColumns(10);
+
 		final JLabel kindLabel = new JLabel("Kind:");
 		kindLabel.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 13));
 		kindLabel.setVisible(false);
-		kindLabel.setBounds(470, 166, 46, 14);
-		getContentPane().add(kindLabel);
-		
+
+		kindTextField = new JTextField();
+		kindTextField.setVisible(false);
+		kindTextField.setColumns(10);
+
 		final JLabel salesLabel = new JLabel("Sales:");
 		salesLabel.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 13));
 		salesLabel.setVisible(false);
-		salesLabel.setBounds(470, 214, 46, 14);
-		getContentPane().add(salesLabel);
-		
+
+		salesTextField = new JTextField();
+		salesTextField.setVisible(false);
+		salesTextField.setColumns(10);
+
 		final JLabel itemsLabel = new JLabel("Items:");
 		itemsLabel.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 13));
 		itemsLabel.setVisible(false);
-		itemsLabel.setBounds(470, 253, 46, 14);
-		getContentPane().add(itemsLabel);
-		
+
+		itemsTextField = new JTextField();
+		itemsTextField.setVisible(false);
+		itemsTextField.setColumns(10);
+
 		final JLabel companyLabel = new JLabel("Company:");
 		companyLabel.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 13));
 		companyLabel.setVisible(false);
-		companyLabel.setBounds(470, 284, 63, 25);
-		getContentPane().add(companyLabel);
-		
+
+		companyTextField = new JTextField();
+		companyTextField.setVisible(false);
+		companyTextField.setColumns(10);
+
 		final JLabel countryLabel = new JLabel("Country:");
 		countryLabel.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 13));
 		countryLabel.setVisible(false);
-		countryLabel.setBounds(470, 329, 63, 19);
-		getContentPane().add(countryLabel);
-		
+
+		countryTextField = new JTextField();
+		countryTextField.setVisible(false);
+		countryTextField.setColumns(10);
+
 		final JLabel cityLabel = new JLabel("City:");
 		cityLabel.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 13));
 		cityLabel.setVisible(false);
-		cityLabel.setBounds(470, 364, 46, 25);
-		getContentPane().add(cityLabel);
-		
+
+		cityTextField = new JTextField();
+		cityTextField.setVisible(false);
+		cityTextField.setColumns(10);
+
 		final JLabel streetLabel = new JLabel("Street:");
 		streetLabel.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 13));
 		streetLabel.setVisible(false);
-		streetLabel.setBounds(470, 409, 46, 14);
-		getContentPane().add(streetLabel);
-		
+
+		streetTextField = new JTextField();
+		streetTextField.setVisible(false);
+		streetTextField.setColumns(10);
+
 		final JLabel numberLabel = new JLabel("Number:");
 		numberLabel.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 13));
 		numberLabel.setVisible(false);
-		numberLabel.setBounds(470, 448, 63, 14);
-		getContentPane().add(numberLabel);
-		
-		final JButton addReceiptButton = new JButton("\u03A0\u03C1\u03BF\u03C3\u03B8\u03AE\u03BA\u03B7");
+
+		numberTextField = new JTextField();
+		numberTextField.setVisible(false);
+		numberTextField.setColumns(10);
+
+		final JButton addReceiptButton = new JButton("Add");
 		addReceiptButton.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		
 		addReceiptButton.setVisible(false);
-		addReceiptButton.setBounds(519, 482, 105, 39);
-		getContentPane().add(addReceiptButton);
-		
-		JLabel lblNewLabel_10 = new JLabel("\u0391\u03C0\u03BF\u03B4\u03B5\u03AF\u03BE\u03B5\u03B9\u03C2 \u03C0\u03BF\u03C5 \u03C0\u03C1\u03BF\u03C3\u03B8\u03AD\u03B8\u03B7\u03BA\u03B1\u03BD:");
-		lblNewLabel_10.setBounds(469, 532, 157, 14);
-		getContentPane().add(lblNewLabel_10);
-		
-		numOfReceiptsTextField = new JTextField();
-		numOfReceiptsTextField.setText("0");
-		numOfReceiptsTextField.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		numOfReceiptsTextField.setBounds(636, 528, 40, 20);
-		getContentPane().add(numOfReceiptsTextField);
-		numOfReceiptsTextField.setColumns(10);
-		
-		JButton okbutton = new JButton("OK");
-		okbutton.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		okbutton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				okButtonPressed(evt);
-				
-			}
-		});
-		okbutton.setBounds(40, 483, 89, 32);
-		getContentPane().add(okbutton);
-		
-		JButton cancelButton = new JButton("Cancel");
-		cancelButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				cancelButtonPressed(evt);
-			}
-		});
-		cancelButton.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		cancelButton.setBounds(147, 483, 94, 32);
-		getContentPane().add(cancelButton);
-		
-		JLabel lblNewLabel_11 = new JLabel("\u0395\u03C0\u03B9\u03BB\u03AD\u03BE\u03C4\u03B5 \u03C0\u03BB\u03B7\u03C1\u03BF\u03C6\u03BF\u03C1\u03AF\u03B5\u03C2 \u03C0\u03C1\u03BF\u03C2 \u03B5\u03BC\u03C6\u03AC\u03BD\u03B9\u03C3\u03B7");
-		lblNewLabel_11.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel_11.setBounds(0, 75, 271, 29);
-		getContentPane().add(lblNewLabel_11);
-		
-		JLabel representativeNameLabel = new JLabel("\u0391\u03BD\u03C4\u03B9\u03C0\u03C1\u03CC\u03C3\u03C9\u03C0\u03BF\u03C2:");
-		representativeNameLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-		representativeNameLabel.setBounds(0, 8, 129, 25);
-		getContentPane().add(representativeNameLabel);
-		
-		representativeNameTextField = new JTextField();
-		representativeNameTextField.setBackground(SystemColor.controlHighlight);
-		representativeNameTextField.setEditable(false);
-		representativeNameTextField.setFont(new Font("Tahoma", Font.BOLD, 16));
-		representativeNameTextField.setBounds(135, 4, 174, 32);
-		getContentPane().add(representativeNameTextField);
-		representativeNameTextField.setColumns(10);
-		
-		categoryCheckBox.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				skirtRadio.setEnabled(true);
-				shirtRadio.setEnabled(true);
-				coatRadio.setEnabled(true);
-				trousersRadio.setEnabled(true);
-				if(categoryCheckBox.isSelected()==false){
-					if(skirtRadio.isSelected())
-						skirtRadio.setSelected(false);
-					
-					if(shirtRadio.isSelected())
-						shirtRadio.setSelected(false);
-					
-					if(coatRadio.isSelected())
-						coatRadio.setSelected(false);
-					
-					if(trousersRadio.isSelected())
-						trousersRadio.setSelected(false);
-					
-					skirtRadio.setEnabled(false);
-					shirtRadio.setEnabled(false);
-					coatRadio.setEnabled(false);
-					trousersRadio.setEnabled(false);
-				}
-			}
-		});
-		
-		addReceiptToggleButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				receiptIDLabel.setVisible(true);receiptIDTextField.setVisible(true);
-				dateLabel.setVisible(true);dateTextField.setVisible(true);
-				kindLabel.setVisible(true);kindTextField.setVisible(true);
-				salesLabel.setVisible(true);salesTextField.setVisible(true);
-				itemsLabel.setVisible(true);itemsTextField.setVisible(true);
-				companyLabel.setVisible(true);companyTextField.setVisible(true);
-				countryLabel.setVisible(true);countryTextField.setVisible(true);
-				streetLabel.setVisible(true);streetTextField.setVisible(true);
-				cityLabel.setVisible(true);cityTextField.setVisible(true);
-				numberLabel.setVisible(true);numberTextField.setVisible(true);
-				addReceiptButton.setVisible(true);
-				if(addReceiptToggleButton.isSelected()==false){
-					receiptIDLabel.setVisible(false);receiptIDTextField.setVisible(false);
-					dateLabel.setVisible(false);dateTextField.setVisible(false);
-					kindLabel.setVisible(false);kindTextField.setVisible(false);
-					salesLabel.setVisible(false);salesTextField.setVisible(false);
-					itemsLabel.setVisible(false);itemsTextField.setVisible(false);
-					companyLabel.setVisible(false);companyTextField.setVisible(false);
-					countryLabel.setVisible(false);countryTextField.setVisible(false);
-					streetLabel.setVisible(false);streetTextField.setVisible(false);
-					cityLabel.setVisible(false);cityTextField.setVisible(false);
-					numberLabel.setVisible(false);numberTextField.setVisible(false);
-					addReceiptButton.setVisible(false);
-				}
-			}
-		});
-		
 		addReceiptButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-			
-				addReceiptButtonPressed(evt);
-				
+				onAddNewReceiptButtonPressed(evt);
 			}
 		});
 		
-		try{
-			representativeNameTextField.setText(selectedRepresentative.getName());
-		}catch(NullPointerException e){
-			
-			JOptionPane.showMessageDialog(null,"�������� ������ ��������, ����������� ����");
+		final List<JLabel> newReceiptLabels = Arrays.asList(receiptIDLabel, 
+				dateLabel, kindLabel, salesLabel, itemsLabel, companyLabel, 
+				countryLabel, cityLabel, streetLabel, numberLabel);
+		final List<JTextField> newReceiptFields = Arrays.asList(
+				receiptIDTextField, dateTextField, kindTextField, 
+				salesTextField, itemsTextField, companyTextField, 
+				countryTextField, cityTextField, streetTextField,
+				numberTextField);
+		
+		final JToggleButton addReceiptToggleButton = new JToggleButton(
+				"Add New Receipt");
+		addReceiptToggleButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		addReceiptToggleButton.setBackground(new Color(135, 206, 235));
+		addReceiptToggleButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				boolean isSelected = false;
+				if(addReceiptToggleButton.isSelected() == true) {
+					isSelected = true;
+					addReceiptToggleButton.setText("Cancel New Receipt");
+				} else {
+					isSelected = false;
+					addReceiptToggleButton.setText("Add New Receipt");
+				}
+				
+				for (int i = 0; i < newReceiptLabels.size(); ++i) {
+					newReceiptLabels.get(i).setVisible(isSelected);
+					newReceiptFields.get(i).setVisible(isSelected);
+				}
+				addReceiptButton.setVisible(isSelected);
+			}
+		});
 
-		}
+		// ---------------------------------------------------------------------
 		
+		JLabel addedReceiptsLabel = new JLabel("Added Receipts:");
+
+		addedReceiptsTextField = new JTextField();
+		addedReceiptsTextField.setText("0");
+		addedReceiptsTextField.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		addedReceiptsTextField.setColumns(10);
+
+		JButton backButton = new JButton("Back");
+		backButton.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		backButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				onBackButtonPressed(evt);
+			}
+		});
+
+		JButton nextButton = new JButton("Next");
+		nextButton.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		nextButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				onNextButtonPressed(evt);
+			}
+		});
+
+		GroupLayout layout = new GroupLayout(selectionWindowPanel);
+		layout.setAutoCreateGaps(true);
+		layout.setAutoCreateContainerGaps(true);
 		
+		// TODO: finalise design - remove dead code
+		// Set up horizontal layout
+		layout.setHorizontalGroup(
+			layout.createSequentialGroup()
+				// 1st column
+				.addGroup(layout.createParallelGroup(Alignment.LEADING)
+					.addComponent(representativeLabel)
+					.addComponent(selectStatsLabel)
+					.addComponent(totalSalesCheckBox)
+					.addComponent(totalItemsCheckBox)
+					.addComponent(categoryCheckBox)
+					.addGroup(layout.createSequentialGroup()
+						.addGap(25)
+						.addComponent(shirtCheckBox))
+					.addGroup(layout.createSequentialGroup()
+						.addGap(25)
+						.addComponent(trousersCheckBox))
+					.addGroup(layout.createSequentialGroup()
+						.addGap(25)
+						.addComponent(coatCheckBox))
+					.addGroup(layout.createSequentialGroup()
+						.addGap(25)
+						.addComponent(skirtCheckBox))
+					.addComponent(commissionCheckBox)
+					.addGroup(layout.createSequentialGroup()
+						.addComponent(backButton)
+						.addComponent(nextButton))
+				)
+				.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED,
+	                     30, 50)
+				// 2nd column
+				.addGroup(layout.createParallelGroup(Alignment.LEADING)
+					.addComponent(representativeTextField, 
+							GroupLayout.DEFAULT_SIZE, 200, 200)
+					.addComponent(addReceiptToggleButton, 
+							GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+							200)
+//					.addGroup(layout.createSequentialGroup()
+						.addComponent(receiptIDLabel)
+//						.addComponent(receiptIDTextField))
+//					.addGroup(layout.createSequentialGroup()
+						.addComponent(dateLabel)
+//						.addComponent(dateTextField))
+//					.addGroup(layout.createSequentialGroup()
+						.addComponent(kindLabel)
+//						.addComponent(kindTextField))
+//					.addGroup(layout.createSequentialGroup()
+						.addComponent(salesLabel)
+//						.addComponent(salesTextField))
+//					.addGroup(layout.createSequentialGroup()
+						.addComponent(itemsLabel)
+//						.addComponent(itemsTextField))
+//					.addGroup(layout.createSequentialGroup()
+						.addComponent(companyLabel)
+//						.addComponent(companyTextField))
+//					.addGroup(layout.createSequentialGroup()
+						.addComponent(countryLabel)
+//						.addComponent(countryTextField))
+//					.addGroup(layout.createSequentialGroup()
+						.addComponent(cityLabel)
+//						.addComponent(cityTextField))
+//					.addGroup(layout.createSequentialGroup()
+						.addComponent(streetLabel)
+//						.addComponent(streetTextField))
+//					.addGroup(layout.createSequentialGroup()
+						.addComponent(numberLabel)
+//						.addComponent(numberTextField))
+					.addComponent(addReceiptButton)
+//					.addGroup(layout.createSequentialGroup()
+//						.addComponent(addedReceiptsLabel)
+//						.addComponent(addedReceiptsTextField, 
+//								GroupLayout.DEFAULT_SIZE, 10, 25))
+				)
+				// 3rd column
+				.addGroup(layout.createParallelGroup(Alignment.LEADING)
+					.addComponent(receiptIDTextField)
+					.addComponent(dateTextField)
+					.addComponent(kindTextField)
+					.addComponent(salesTextField)
+					.addComponent(itemsTextField)
+					.addComponent(companyTextField)
+					.addComponent(countryTextField)
+					.addComponent(cityTextField)
+					.addComponent(streetTextField)
+					.addComponent(numberTextField)
+					.addGroup(layout.createSequentialGroup()
+						.addComponent(addedReceiptsLabel)
+						.addComponent(addedReceiptsTextField, 
+								GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
+				)
+		);
+		
+		// Set up vertical layout
+		layout.setVerticalGroup(
+			layout.createSequentialGroup()
+				.addGroup(layout.createParallelGroup(Alignment.LEADING)
+					.addComponent(representativeLabel)
+					.addComponent(representativeTextField, 
+							GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+							50))
+				.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED,
+	                     50, 100)
+				.addGroup(layout.createParallelGroup(Alignment.LEADING)
+					.addComponent(selectStatsLabel)
+					.addComponent(addReceiptToggleButton))
+				.addGroup(layout.createParallelGroup(Alignment.LEADING)
+					.addComponent(totalSalesCheckBox)
+					.addComponent(receiptIDLabel)
+					.addComponent(receiptIDTextField))
+				.addGroup(layout.createParallelGroup(Alignment.LEADING)
+					.addComponent(totalItemsCheckBox)
+					.addComponent(dateLabel)
+					.addComponent(dateTextField))
+				.addGroup(layout.createParallelGroup(Alignment.LEADING)
+					.addComponent(categoryCheckBox)
+					.addComponent(kindLabel)
+					.addComponent(kindTextField))
+				.addGroup(layout.createParallelGroup(Alignment.LEADING)
+					.addComponent(shirtCheckBox)
+					.addComponent(salesLabel)
+					.addComponent(salesTextField))
+				.addGroup(layout.createParallelGroup(Alignment.LEADING)
+					.addComponent(trousersCheckBox)
+					.addComponent(itemsLabel)
+					.addComponent(itemsTextField))
+				.addGroup(layout.createParallelGroup(Alignment.LEADING)
+					.addComponent(coatCheckBox)
+					.addComponent(companyLabel)
+					.addComponent(companyTextField))
+				.addGroup(layout.createParallelGroup(Alignment.LEADING)
+					.addComponent(skirtCheckBox)
+					.addComponent(countryLabel)
+					.addComponent(countryTextField))
+				.addGroup(layout.createParallelGroup(Alignment.LEADING)
+					.addComponent(commissionCheckBox)
+					.addComponent(cityLabel)
+					.addComponent(cityTextField))
+				.addGroup(layout.createParallelGroup(Alignment.LEADING)
+					.addComponent(streetLabel)
+					.addComponent(streetTextField))
+				.addGroup(layout.createParallelGroup(Alignment.LEADING)
+					.addComponent(numberLabel)
+					.addComponent(numberTextField))
+				.addComponent(addReceiptButton)
+				.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED,
+	                     100, 100)
+				.addGroup(layout.createParallelGroup(Alignment.LEADING)
+					.addComponent(backButton)
+					.addComponent(nextButton)
+					.addComponent(addedReceiptsLabel)
+					.addComponent(addedReceiptsTextField, 
+							GroupLayout.DEFAULT_SIZE, 25, 25))
+		);
+		
+		selectionWindowPanel.setLayout(layout);
 	}
 	
-	protected void okButtonPressed(ActionEvent evt) {
+	private void fillInSalesRepresentative() {
+		try {
+			representativeTextField.setText(selectedRepresentative.getName());
+		} catch (NullPointerException e) {
+			JOptionPane.showMessageDialog(null,"Invalid Sales Representative");
+		}
+	}
+	
+	private void onAddNewReceiptButtonPressed(ActionEvent evt) {
+		if (areAllReceiptFieldsEmpty()) {
+			JOptionPane.showMessageDialog(null,"Please fill in receipt fields");
+			return;
+		}
+			
+		addReceipt();
+		appendFile();
+		resetReceiptFields();
+	}
+	
+	private void onBackButtonPressed(ActionEvent evt) {
+		dispose();
+		inputDialog.setVisible(true);		
+	}
+	
+	private void onNextButtonPressed(ActionEvent evt) {
 		double totalSales = -1;
 		int totalItems = -1;
 		float shirtSales = -1;
@@ -395,19 +485,19 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		if(totalItemsCheckBox.isSelected())
 			totalItems = selectedRepresentative.calculateTotalItems();
 		
-		if(shirtRadio.isSelected())
+		if(shirtCheckBox.isSelected())
 			shirtSales = selectedRepresentative.calculateItemSales(
 					SaleItem.SHIRT);
 
-		if(skirtRadio.isSelected()  )
+		if(skirtCheckBox.isSelected()  )
 			skirtSales = selectedRepresentative.calculateItemSales(
 					SaleItem.SKIRT);
 
-		if(coatRadio.isSelected())
+		if(coatCheckBox.isSelected())
 			coatsSales = selectedRepresentative.calculateItemSales(
 					SaleItem.COAT);
 		
-		if(trousersRadio.isSelected())
+		if(trousersCheckBox.isSelected())
 			trousersSales = selectedRepresentative.calculateItemSales(
 					SaleItem.TROUSERS);
 		
@@ -422,17 +512,6 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 				this,selectedRepresentative, reportStatistics);
 		rs.setVisible(true);
 		this.setVisible(false);		
-	}
-	
-	private void addReceiptButtonPressed(ActionEvent evt) {
-		if (areAllReceiptFieldsEmpty()) {
-			JOptionPane.showMessageDialog(null,"Please fill in receipt fields");
-			return;
-		}
-			
-		addReceipt();
-		appendFile();
-		resetReceiptFields();
 	}
 	
 	private boolean areAllReceiptFieldsEmpty() {
@@ -457,7 +536,7 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		selectedRepresentative.addRepresentativeReceipt(receipt);
 		
 		numOfReceipts++;
-		numOfReceiptsTextField.setText(Integer.toString(numOfReceipts));
+		addedReceiptsTextField.setText(Integer.toString(numOfReceipts));
 		
 		JOptionPane.showMessageDialog(null,"Receipt added to the list of Sale's"
 				+ " Representative " + selectedRepresentative.getName());
@@ -508,9 +587,6 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		}
 	}
 	
-	private void cancelButtonPressed(ActionEvent evt) {
-		dispose();
-		inputDialog.setVisible(true);		
-	}
+
 		
 }

@@ -19,7 +19,6 @@ import java.awt.event.MouseEvent;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle;
@@ -210,7 +209,7 @@ public class ReceiptImportWindow extends JDialog {
 		inputFileTXT.readFile();
 		
 		Representative representative = inputFileTXT.getAgent();
-		representative.setupReceiptFileAppender("TXT", receiptFile);				
+		representative.setupReceiptFileAppender(FileExtension.TXT, receiptFile);				
 		allRepresentatives.add(representative);
 		
 		for(int i = 0; i< listModel.getSize(); i++){
@@ -245,7 +244,7 @@ public class ReceiptImportWindow extends JDialog {
 		inputFileXML.readFile();
 		
 		Representative representative = inputFileXML.getAgent();
-		representative.setupReceiptFileAppender("XML", receiptFile);				
+		representative.setupReceiptFileAppender(FileExtension.XML, receiptFile);				
 		allRepresentatives.add(representative);
 		
 		for(int i = 0; i< listModel.getSize(); i++){
@@ -279,7 +278,7 @@ public class ReceiptImportWindow extends JDialog {
 		inputFileXML.readFile();
 		
 		Representative representative = inputFileXML.getAgent();
-		representative.setupReceiptFileAppender("HTML", receiptFile);
+		representative.setupReceiptFileAppender(FileExtension.HTML, receiptFile);
 		allRepresentatives.add(representative);
 		
 		for(int i = 0; i < listModel.getSize(); i++){

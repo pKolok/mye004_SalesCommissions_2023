@@ -147,7 +147,7 @@ public class ReportStatsAndExportWindow extends JDialog {
 		backButton.setBackground(Color.LIGHT_GRAY);
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				obBackButtonPressed(evt);	
+				onBackButtonPressed(evt);	
 			}
 		});
 		
@@ -159,6 +159,7 @@ public class ReportStatsAndExportWindow extends JDialog {
 		// Set up horizontal layout
 		layout.setHorizontalGroup(
 			layout.createSequentialGroup()
+				// 1st column
 				.addGroup(layout.createParallelGroup(Alignment.LEADING)
 					.addComponent(totalValueLabel)
 					.addComponent(totalItemsLabel)
@@ -171,6 +172,7 @@ public class ReportStatsAndExportWindow extends JDialog {
 						.addComponent(backButton)
 						.addComponent(exitButton))
 				)
+				// 2nd column
 				.addGroup(layout.createParallelGroup(Alignment.LEADING)
 					.addComponent(totalValueTextField)
 					.addComponent(totalItemsTextField)
@@ -181,6 +183,7 @@ public class ReportStatsAndExportWindow extends JDialog {
 					.addComponent(commissionTextField))
 				.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED,
 	                     15, GroupLayout.DEFAULT_SIZE)
+				// 3rd column
 				.addGroup(layout.createParallelGroup(Alignment.LEADING)
 					.addComponent(txtReportButton, 0, GroupLayout.DEFAULT_SIZE,
 							300)
@@ -309,7 +312,7 @@ public class ReportStatsAndExportWindow extends JDialog {
 		System.exit(0);		
 	}
 	
-	private void obBackButtonPressed(ActionEvent evt) {
+	private void onBackButtonPressed(ActionEvent evt) {
 		selectionWindow.setVisible(true);
 		this.dispose();	
 	}
