@@ -85,48 +85,48 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		getContentPane().add(selectionWindowPanel, BorderLayout.CENTER);
 		
 		JLabel representativeLabel = new JLabel("Sales Representative:");
-		representativeLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+		representativeLabel.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		
 		representativeTextField = new JTextField();
 		representativeTextField.setBackground(SystemColor.controlHighlight);
 		representativeTextField.setEditable(false);
-		representativeTextField.setFont(new Font("Tahoma", Font.BOLD, 16));
+		representativeTextField.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		representativeTextField.setColumns(10);
 
 		JLabel selectStatsLabel = new JLabel("Select Summary Statistics");
-		selectStatsLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
+		selectStatsLabel.setFont(new Font("Times New Roman", Font.BOLD, 12));
 
 		totalSalesCheckBox = new JCheckBox("Total Sales Value");
 		totalSalesCheckBox.setBackground(SystemColor.controlHighlight);
-		totalSalesCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		totalSalesCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 
 		totalItemsCheckBox = new JCheckBox("Total Items Sold");
 		totalItemsCheckBox.setBackground(SystemColor.controlHighlight);
-		totalItemsCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		totalItemsCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 
 		shirtCheckBox = new JCheckBox("Shirts");
 		shirtCheckBox.setBackground(SystemColor.controlHighlight);
 		shirtCheckBox.setEnabled(false);
-		shirtCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		shirtCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 
 		trousersCheckBox = new JCheckBox("Trousers");
 		trousersCheckBox.setBackground(SystemColor.controlHighlight);
 		trousersCheckBox.setEnabled(false);
-		trousersCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		trousersCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 
 		coatCheckBox = new JCheckBox("Coats");
 		coatCheckBox.setBackground(SystemColor.controlHighlight);
 		coatCheckBox.setEnabled(false);
-		coatCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		coatCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 
 		skirtCheckBox = new JCheckBox("Skirts");
 		skirtCheckBox.setBackground(SystemColor.controlHighlight);
 		skirtCheckBox.setEnabled(false);
-		skirtCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		skirtCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 
 		categoryCheckBox = new JCheckBox("Sales of certain category");
 		categoryCheckBox.setBackground(SystemColor.controlHighlight);
-		categoryCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		categoryCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		categoryCheckBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				boolean isEnabled = false;
@@ -145,11 +145,11 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		
 		commissionCheckBox = new JCheckBox("Sales Representative's Commission");
 		commissionCheckBox.setBackground(SystemColor.controlHighlight);
-		commissionCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		commissionCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		
 		// -------------------------- Add new Receipt --------------------------
 		final JLabel receiptIDLabel = new JLabel("Receipt ID:");
-		receiptIDLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		receiptIDLabel.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 		receiptIDLabel.setVisible(false);
 
 		SpinnerNumberModel idModel = new SpinnerNumberModel(0, -1,
@@ -159,7 +159,7 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		receiptIDField.setValue(-1);
 
 		final JLabel dateLabel = new JLabel("Date:");
-		dateLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		dateLabel.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 		dateLabel.setVisible(false);
 
 		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
@@ -169,7 +169,7 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		dateField.setValue(new Date());
 
 		final JLabel kindLabel = new JLabel("Kind:");
-		kindLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		kindLabel.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 		kindLabel.setVisible(false);
 
 		String[] kinds = { SaleItem.SHIRT.toString(), SaleItem.SKIRT.toString(),
@@ -178,7 +178,7 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		kindField.setVisible(false);
 
 		final JLabel salesLabel = new JLabel("Sales Value:");
-		salesLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		salesLabel.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 		salesLabel.setVisible(false);
 
 		SpinnerNumberModel salesModel = new SpinnerNumberModel(0.0, -1.0,
@@ -188,7 +188,7 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		salesField.setValue(-1);
 
 		final JLabel itemsLabel = new JLabel("Items Sold:");
-		itemsLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		itemsLabel.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 		itemsLabel.setVisible(false);
 
 		SpinnerNumberModel itemsModel = new SpinnerNumberModel(0, -1,
@@ -198,7 +198,7 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		itemsField.setValue(-1);
 
 		final JLabel companyLabel = new JLabel("Company Name:");
-		companyLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		companyLabel.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 		companyLabel.setVisible(false);
 
 		companyTextField = new JTextField();
@@ -206,7 +206,7 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		companyTextField.setColumns(10);
 
 		final JLabel countryLabel = new JLabel("Country:");
-		countryLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		countryLabel.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 		countryLabel.setVisible(false);
 
 		countryTextField = new JTextField();
@@ -214,7 +214,7 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		countryTextField.setColumns(10);
 
 		final JLabel cityLabel = new JLabel("City:");
-		cityLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		cityLabel.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 		cityLabel.setVisible(false);
 
 		cityTextField = new JTextField();
@@ -222,7 +222,7 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		cityTextField.setColumns(10);
 
 		final JLabel streetLabel = new JLabel("Street Name:");
-		streetLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		streetLabel.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 		streetLabel.setVisible(false);
 
 		streetTextField = new JTextField();
@@ -230,7 +230,7 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		streetTextField.setColumns(10);
 
 		final JLabel numberLabel = new JLabel("Street Number:");
-		numberLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		numberLabel.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 		numberLabel.setVisible(false);
 
 		SpinnerNumberModel numberModel = new SpinnerNumberModel(0, -1,
@@ -240,7 +240,7 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		numberField.setValue(-1);
 
 		final JButton addReceiptButton = new JButton("Add");
-		addReceiptButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		addReceiptButton.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		addReceiptButton.setVisible(false);
 		addReceiptButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -259,7 +259,7 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		
 		final JToggleButton addReceiptToggleButton = new JToggleButton(
 				"Add New Receipt");
-		addReceiptToggleButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		addReceiptToggleButton.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		addReceiptToggleButton.setBackground(new Color(135, 206, 235));
 		addReceiptToggleButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -286,11 +286,11 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 
 		addedReceiptsTextField = new JTextField();
 		addedReceiptsTextField.setText("0");
-		addedReceiptsTextField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		addedReceiptsTextField.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		addedReceiptsTextField.setColumns(10);
 
 		JButton backButton = new JButton("Back");
-		backButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		backButton.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				onBackButtonPressed(evt);
@@ -298,7 +298,7 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		});
 
 		JButton nextButton = new JButton("Next");
-		nextButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		nextButton.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		nextButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				onNextButtonPressed(evt);
