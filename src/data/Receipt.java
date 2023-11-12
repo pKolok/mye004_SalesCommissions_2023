@@ -19,6 +19,7 @@ public class Receipt {
 		this.company  = company;
 	}
 	
+	// TODO: violates open-closed principle
 	/**
 	 * Constructs a Receipt object.
 	 * Accepts a String _kind of "Shirts", "Skirts", "Trousers" or "Coats". If 

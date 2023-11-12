@@ -38,7 +38,7 @@ public class TXTInputTest {
 		TXTInput txtInput = new TXTInput(file);
 		txtInput.readFile();
 		
-		Representative agent = txtInput.getAgent();
+		Representative agent = txtInput.getSalesRepresentative();
 		
 		assertEquals(agent.getName(), "Apostolos Zarras");
 		assertEquals(agent.getAfm(), "130456093");
@@ -55,7 +55,7 @@ public class TXTInputTest {
 		TXTInput txtInput = new TXTInput(file);
 		txtInput.readFile();
 		
-		Representative agent = txtInput.getAgent();
+		Representative agent = txtInput.getSalesRepresentative();
 		
 		assertEquals(agent.getName(), "Apostolos Zarras");
 		assertEquals(agent.getAfm(), "130456093");

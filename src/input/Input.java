@@ -29,7 +29,7 @@ public abstract class Input {
 		closeFile();
 	}
 	
-	public Representative getAgent() {
+	public Representative getSalesRepresentative() {
 		return representative;
 	}
 	

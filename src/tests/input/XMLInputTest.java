@@ -18,7 +18,7 @@ public class XMLInputTest {
 		XMLInput xmlInput = new XMLInput(file);
 		xmlInput.readFile();
 			
-		Representative agent = xmlInput.getAgent();
+		Representative agent = xmlInput.getSalesRepresentative();
 		
 		assertEquals(agent.getName(), "Vassileios Zarras");
 		assertEquals(agent.getAfm(), "130456097");
@@ -35,7 +35,7 @@ public class XMLInputTest {
 		XMLInput xmlInput = new XMLInput(file);
 		xmlInput.readFile();
 		
-		Representative agent = xmlInput.getAgent();
+		Representative agent = xmlInput.getSalesRepresentative();
 		
 		assertEquals(agent.getName(), "Vassileios Zarras");
 		assertEquals(agent.getAfm(), "130456097");

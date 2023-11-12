@@ -1,13 +1,8 @@
 package data;
 
-import java.io.File;
 import java.util.ArrayList;
 
-import enums.FileExtension;
 import output.ReceiptFileAppender;
-import output.ReceiptHtmlFileAppender;
-import output.ReceiptTxtFileAppender;
-import output.ReceiptXmlFileAppender;
 
 public class Representative {
 	
@@ -34,21 +29,8 @@ public class Representative {
 		return fileAppender;
 	}
 	
-	// TODO violates closed to modification principle
-	public void setupReceiptFileAppender(FileExtension fileType, File file) {
-		switch (fileType) {
-		case TXT:
-			fileAppender = new ReceiptTxtFileAppender(file);
-			break;
-		case XML:
-			fileAppender = new ReceiptXmlFileAppender(file);
-			break;
-		case HTML:
-			fileAppender = new ReceiptHtmlFileAppender(file);
-			break;
-		default:
-			break;
-		}
+	public void setupReceiptFileAppender(ReceiptFileAppender fileAppender) {
+		this.fileAppender = fileAppender;
 	}
 
 	public void addRepresentativeReceipt(Receipt receipt) {
