@@ -8,7 +8,10 @@ import data.Company;
 import data.ReportStatistics;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -19,15 +22,21 @@ import java.awt.Color;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.JSpinner;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JToggleButton;
 import javax.swing.LayoutStyle;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.text.DateFormatter;
 
 public class ReceiptStatsSelectionWindow extends JDialog {
 
@@ -43,16 +52,16 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 	private JCheckBox trousersCheckBox;
 	private JCheckBox coatCheckBox;
 	private JCheckBox commissionCheckBox;
-	private JTextField receiptIDTextField;
-	private JTextField dateTextField;
-	private JTextField kindTextField;
-	private JTextField salesTextField;
-	private JTextField itemsTextField;
+	private JSpinner receiptIDField;
+	private JFormattedTextField dateField;
+	private JComboBox<String> kindField;
+	private JSpinner salesField;
+	private JSpinner itemsField;
 	private JTextField companyTextField;
 	private JTextField countryTextField;
 	private JTextField cityTextField;
 	private JTextField streetTextField;
-	private JTextField numberTextField;
+	private JSpinner numberField;
 	private JTextField addedReceiptsTextField;
 	private int numOfReceipts = 0;
 	
@@ -89,35 +98,35 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 
 		totalSalesCheckBox = new JCheckBox("Total Sales Value");
 		totalSalesCheckBox.setBackground(SystemColor.controlHighlight);
-		totalSalesCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		totalSalesCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		totalItemsCheckBox = new JCheckBox("Total Items Sold");
 		totalItemsCheckBox.setBackground(SystemColor.controlHighlight);
-		totalItemsCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		totalItemsCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		shirtCheckBox = new JCheckBox("Shirts");
 		shirtCheckBox.setBackground(SystemColor.controlHighlight);
 		shirtCheckBox.setEnabled(false);
-		shirtCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		shirtCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		trousersCheckBox = new JCheckBox("Trousers");
 		trousersCheckBox.setBackground(SystemColor.controlHighlight);
 		trousersCheckBox.setEnabled(false);
-		trousersCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		trousersCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		coatCheckBox = new JCheckBox("Coats");
 		coatCheckBox.setBackground(SystemColor.controlHighlight);
 		coatCheckBox.setEnabled(false);
-		coatCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		coatCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		skirtCheckBox = new JCheckBox("Skirts");
 		skirtCheckBox.setBackground(SystemColor.controlHighlight);
 		skirtCheckBox.setEnabled(false);
-		skirtCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		skirtCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		categoryCheckBox = new JCheckBox("Sales of certain category");
 		categoryCheckBox.setBackground(SystemColor.controlHighlight);
-		categoryCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		categoryCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		categoryCheckBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				boolean isEnabled = false;
@@ -136,51 +145,60 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		
 		commissionCheckBox = new JCheckBox("Sales Representative's Commission");
 		commissionCheckBox.setBackground(SystemColor.controlHighlight);
-		commissionCheckBox.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		commissionCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
 		// -------------------------- Add new Receipt --------------------------
 		final JLabel receiptIDLabel = new JLabel("Receipt ID:");
-		receiptIDLabel.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 13));
+		receiptIDLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		receiptIDLabel.setVisible(false);
 
-		receiptIDTextField = new JTextField();
-		receiptIDTextField.setVisible(false);
-		receiptIDTextField.setColumns(10);
+		SpinnerNumberModel idModel = new SpinnerNumberModel(0, -1,
+				Short.MAX_VALUE, 1);
+		receiptIDField = new JSpinner(idModel);
+		receiptIDField.setVisible(false);
+		receiptIDField.setValue(-1);
 
 		final JLabel dateLabel = new JLabel("Date:");
-		dateLabel.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 13));
+		dateLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		dateLabel.setVisible(false);
 
-		dateTextField = new JTextField();
-		dateTextField.setVisible(false);
-		dateTextField.setColumns(10);
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormatter df = new DateFormatter(format);
+		dateField = new JFormattedTextField(df);
+		dateField.setVisible(false);
+		dateField.setValue(new Date());
 
 		final JLabel kindLabel = new JLabel("Kind:");
-		kindLabel.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 13));
+		kindLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		kindLabel.setVisible(false);
 
-		kindTextField = new JTextField();
-		kindTextField.setVisible(false);
-		kindTextField.setColumns(10);
+		String[] kinds = { SaleItem.SHIRT.toString(), SaleItem.SKIRT.toString(),
+				SaleItem.COAT.toString(), SaleItem.TROUSERS.toString() };
+		kindField = new JComboBox<String>(kinds);
+		kindField.setVisible(false);
 
-		final JLabel salesLabel = new JLabel("Sales:");
-		salesLabel.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 13));
+		final JLabel salesLabel = new JLabel("Sales Value:");
+		salesLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		salesLabel.setVisible(false);
 
-		salesTextField = new JTextField();
-		salesTextField.setVisible(false);
-		salesTextField.setColumns(10);
+		SpinnerNumberModel salesModel = new SpinnerNumberModel(0.0, -1.0,
+				Short.MAX_VALUE, 0.1);
+		salesField = new JSpinner(salesModel);
+		salesField.setVisible(false);
+		salesField.setValue(-1);
 
-		final JLabel itemsLabel = new JLabel("Items:");
-		itemsLabel.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 13));
+		final JLabel itemsLabel = new JLabel("Items Sold:");
+		itemsLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		itemsLabel.setVisible(false);
 
-		itemsTextField = new JTextField();
-		itemsTextField.setVisible(false);
-		itemsTextField.setColumns(10);
+		SpinnerNumberModel itemsModel = new SpinnerNumberModel(0, -1,
+				Short.MAX_VALUE, 1);
+		itemsField = new JSpinner(itemsModel);
+		itemsField.setVisible(false);
+		itemsField.setValue(-1);
 
-		final JLabel companyLabel = new JLabel("Company:");
-		companyLabel.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 13));
+		final JLabel companyLabel = new JLabel("Company Name:");
+		companyLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		companyLabel.setVisible(false);
 
 		companyTextField = new JTextField();
@@ -188,7 +206,7 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		companyTextField.setColumns(10);
 
 		final JLabel countryLabel = new JLabel("Country:");
-		countryLabel.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 13));
+		countryLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		countryLabel.setVisible(false);
 
 		countryTextField = new JTextField();
@@ -196,31 +214,33 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		countryTextField.setColumns(10);
 
 		final JLabel cityLabel = new JLabel("City:");
-		cityLabel.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 13));
+		cityLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		cityLabel.setVisible(false);
 
 		cityTextField = new JTextField();
 		cityTextField.setVisible(false);
 		cityTextField.setColumns(10);
 
-		final JLabel streetLabel = new JLabel("Street:");
-		streetLabel.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 13));
+		final JLabel streetLabel = new JLabel("Street Name:");
+		streetLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		streetLabel.setVisible(false);
 
 		streetTextField = new JTextField();
 		streetTextField.setVisible(false);
 		streetTextField.setColumns(10);
 
-		final JLabel numberLabel = new JLabel("Number:");
-		numberLabel.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 13));
+		final JLabel numberLabel = new JLabel("Street Number:");
+		numberLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		numberLabel.setVisible(false);
 
-		numberTextField = new JTextField();
-		numberTextField.setVisible(false);
-		numberTextField.setColumns(10);
+		SpinnerNumberModel numberModel = new SpinnerNumberModel(0, -1,
+				Short.MAX_VALUE, 1);
+		numberField = new JSpinner(numberModel);
+		numberField.setVisible(false);
+		numberField.setValue(-1);
 
 		final JButton addReceiptButton = new JButton("Add");
-		addReceiptButton.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		addReceiptButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		addReceiptButton.setVisible(false);
 		addReceiptButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -231,11 +251,11 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		final List<JLabel> newReceiptLabels = Arrays.asList(receiptIDLabel, 
 				dateLabel, kindLabel, salesLabel, itemsLabel, companyLabel, 
 				countryLabel, cityLabel, streetLabel, numberLabel);
-		final List<JTextField> newReceiptFields = Arrays.asList(
-				receiptIDTextField, dateTextField, kindTextField, 
-				salesTextField, itemsTextField, companyTextField, 
+		final List<? extends JComponent> newReceiptFields = Arrays.asList(
+				receiptIDField, dateField, kindField, 
+				salesField, itemsField, companyTextField, 
 				countryTextField, cityTextField, streetTextField,
-				numberTextField);
+				numberField);
 		
 		final JToggleButton addReceiptToggleButton = new JToggleButton(
 				"Add New Receipt");
@@ -266,11 +286,11 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 
 		addedReceiptsTextField = new JTextField();
 		addedReceiptsTextField.setText("0");
-		addedReceiptsTextField.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		addedReceiptsTextField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		addedReceiptsTextField.setColumns(10);
 
 		JButton backButton = new JButton("Back");
-		backButton.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		backButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				onBackButtonPressed(evt);
@@ -278,7 +298,7 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		});
 
 		JButton nextButton = new JButton("Next");
-		nextButton.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		nextButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		nextButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				onNextButtonPressed(evt);
@@ -364,16 +384,16 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 				)
 				// 3rd column
 				.addGroup(layout.createParallelGroup(Alignment.LEADING)
-					.addComponent(receiptIDTextField)
-					.addComponent(dateTextField)
-					.addComponent(kindTextField)
-					.addComponent(salesTextField)
-					.addComponent(itemsTextField)
+					.addComponent(receiptIDField)
+					.addComponent(dateField)
+					.addComponent(kindField)
+					.addComponent(salesField)
+					.addComponent(itemsField)
 					.addComponent(companyTextField)
 					.addComponent(countryTextField)
 					.addComponent(cityTextField)
 					.addComponent(streetTextField)
-					.addComponent(numberTextField)
+					.addComponent(numberField)
 					.addGroup(layout.createSequentialGroup()
 						.addComponent(addedReceiptsLabel)
 						.addComponent(addedReceiptsTextField, 
@@ -397,23 +417,23 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 				.addGroup(layout.createParallelGroup(Alignment.LEADING)
 					.addComponent(totalSalesCheckBox)
 					.addComponent(receiptIDLabel)
-					.addComponent(receiptIDTextField))
+					.addComponent(receiptIDField))
 				.addGroup(layout.createParallelGroup(Alignment.LEADING)
 					.addComponent(totalItemsCheckBox)
 					.addComponent(dateLabel)
-					.addComponent(dateTextField))
+					.addComponent(dateField))
 				.addGroup(layout.createParallelGroup(Alignment.LEADING)
 					.addComponent(categoryCheckBox)
 					.addComponent(kindLabel)
-					.addComponent(kindTextField))
+					.addComponent(kindField))
 				.addGroup(layout.createParallelGroup(Alignment.LEADING)
 					.addComponent(shirtCheckBox)
 					.addComponent(salesLabel)
-					.addComponent(salesTextField))
+					.addComponent(salesField))
 				.addGroup(layout.createParallelGroup(Alignment.LEADING)
 					.addComponent(trousersCheckBox)
 					.addComponent(itemsLabel)
-					.addComponent(itemsTextField))
+					.addComponent(itemsField))
 				.addGroup(layout.createParallelGroup(Alignment.LEADING)
 					.addComponent(coatCheckBox)
 					.addComponent(companyLabel)
@@ -431,7 +451,7 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 					.addComponent(streetTextField))
 				.addGroup(layout.createParallelGroup(Alignment.LEADING)
 					.addComponent(numberLabel)
-					.addComponent(numberTextField))
+					.addComponent(numberField))
 				.addComponent(addReceiptButton)
 				.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED,
 	                     100, 100)
@@ -455,14 +475,14 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 	}
 	
 	private void onAddNewReceiptButtonPressed(ActionEvent evt) {
-		if (areAllReceiptFieldsEmpty()) {
-			JOptionPane.showMessageDialog(null,"Please fill in receipt fields");
-			return;
+		if (areAllReceiptFieldsFilledIn()) {
+			addReceipt();
+			appendFile();
+			resetReceiptFields();
+		} else {
+			JOptionPane.showMessageDialog(
+					null, "Please fill in all receipt fields");			
 		}
-			
-		addReceipt();
-		appendFile();
-		resetReceiptFields();
 	}
 	
 	private void onBackButtonPressed(ActionEvent evt) {
@@ -514,17 +534,16 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		this.setVisible(false);		
 	}
 	
-	private boolean areAllReceiptFieldsEmpty() {
-		return receiptIDTextField.getText().isEmpty() 
-				&& dateTextField.getText().isEmpty() 
-				&& kindTextField.getText().isEmpty() 
-				&& salesTextField.getText().isEmpty()
-				&& itemsTextField.getText().isEmpty()
-				&& companyTextField.getText().isEmpty()
-				&& countryTextField.getText().isEmpty()
-				&& cityTextField.getText().isEmpty()
-				&& streetTextField.getText().isEmpty()
-				&& numberTextField.getText().isEmpty();
+	private boolean areAllReceiptFieldsFilledIn() {
+		return (int) receiptIDField.getValue() >= 0
+				&& !dateField.getText().isEmpty()
+				&& (double) salesField.getValue() > 0.0
+				&& (int) itemsField.getValue() > 0
+				&& !companyTextField.getText().isEmpty()
+				&& !countryTextField.getText().isEmpty()
+				&& !cityTextField.getText().isEmpty()
+				&& !streetTextField.getText().isEmpty()
+				&& (int) numberField.getValue() >= 0;
 	}
 	
 	private void addReceipt() {
@@ -552,30 +571,30 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 	}
 
 	private void resetReceiptFields() {
-		receiptIDTextField.setText("");	
-		dateTextField.setText("");			
-		kindTextField.setText("");	
-		salesTextField.setText("");
-		itemsTextField.setText("");	
+		receiptIDField.setValue(-1);	
+		dateField.setValue(new Date());			
+		kindField.setSelectedIndex(0);
+		salesField.setValue(-1);
+		itemsField.setValue(-1);	
 		companyTextField.setText("");	
 		countryTextField.setText("");	
 		cityTextField.setText("");	
 		streetTextField.setText("");	
-		numberTextField.setText("");	
+		numberField.setValue(-1);	
 	}
 	
 	private Receipt getReceiptFromUserInput() {
 		try {
-			int id = Integer.parseInt(receiptIDTextField.getText());
-			String date = dateTextField.getText();
-			Double sales = Double.parseDouble(salesTextField.getText());
-			int items = Integer.parseInt(itemsTextField.getText());
-			String kind = kindTextField.getText();
+			int id = (int) receiptIDField.getValue();
+			String date = dateField.getText();
+			Double sales = (double) salesField.getValue();
+			int items = (int) itemsField.getValue();
+			String kind = (String) kindField.getSelectedItem();
 			String companyName = companyTextField.getText();
 			String country = countryTextField.getText();
 			String city = cityTextField.getText();
 			String street = streetTextField.getText();
-			int streetNumber = Integer.parseInt(numberTextField.getText());
+			int streetNumber = (int) numberField.getValue();
 			Address address = new Address(country, city, street, streetNumber);
 			Company company = new Company(companyName, address);
 			
