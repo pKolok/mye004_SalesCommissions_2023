@@ -71,7 +71,7 @@ public class ReceiptTest {
 	
 	// -------------------------------- Get Sales ------------------------------
 	@Test
-	public void testGetAndSetSalesHappyDay() {
+	public void testGetSalesHappyDay() {
 		Address address = new Address("", "", "", 0);
 		Company company = new Company("", address);
 		Receipt receipt = new Receipt(0, "", 500.54, SaleItem.OTHER, 0,
@@ -80,7 +80,7 @@ public class ReceiptTest {
 	}
 	
 	@Test
-	public void testGetAndSetSalesZero() {
+	public void testGetSalesZero() {
 		Address address = new Address("", "", "", 0);
 		Company company = new Company("", address);
 		Receipt receipt = new Receipt(0, "", 0.0, SaleItem.OTHER, 0, company);
@@ -88,7 +88,7 @@ public class ReceiptTest {
 	}
 	
 	@Test
-	public void testGetAndSetSalesNegative() {
+	public void testGetSalesNegative() {
 		Address address = new Address("", "", "", 0);
 		Company company = new Company("", address);
 		Receipt receipt = new Receipt(0, "", -25.980, SaleItem.OTHER, 0,
@@ -98,7 +98,7 @@ public class ReceiptTest {
 	
 	// -------------------------------- Get Items ------------------------------
 	@Test
-	public void testGetAndSetItemsHappyDay() {
+	public void testGetItemsHappyDay() {
 		Address address = new Address("", "", "", 0);
 		Company company = new Company("", address);
 		Receipt receipt = new Receipt(0, "", 0.0, SaleItem.OTHER, 200, company);
@@ -106,7 +106,7 @@ public class ReceiptTest {
 	}
 	
 	@Test
-	public void testGetAndSetItemsZero() {
+	public void testGetItemsZero() {
 		Address address = new Address("", "", "", 0);
 		Company company = new Company("", address);
 		Receipt receipt = new Receipt(0, "", 0.0, SaleItem.OTHER, 0, company);
@@ -114,7 +114,7 @@ public class ReceiptTest {
 	}
 	
 	@Test
-	public void testGetAndSetItemsNegative() {
+	public void testGetItemsNegative() {
 		Address address = new Address("", "", "", 0);
 		Company company = new Company("", address);
 		Receipt receipt = new Receipt(0, "", 0.0, SaleItem.OTHER, -35, company);
@@ -123,7 +123,7 @@ public class ReceiptTest {
 	
 	// ----------------------------- Get Receipt ID ----------------------------
 	@Test
-	public void testGetAndSetReceiptIDHappyDay() {
+	public void testGetReceiptIDHappyDay() {
 		Address address = new Address("", "", "", 0);
 		Company company = new Company("", address);
 		Receipt receipt = new Receipt(200, "", 0.0, SaleItem.OTHER, 0, company);
@@ -131,7 +131,7 @@ public class ReceiptTest {
 	}
 	
 	@Test
-	public void testGetAndSetReceiptIDZero() {
+	public void testGetReceiptIDZero() {
 		Address address = new Address("", "", "", 0);
 		Company company = new Company("", address);
 		Receipt receipt = new Receipt(0, "", 0.0, SaleItem.OTHER, 0, company);
@@ -139,7 +139,7 @@ public class ReceiptTest {
 	}
 	
 	@Test
-	public void testGetAndSetReceiptIDNegative() {
+	public void testGetReceiptIDNegative() {
 		Address address = new Address("", "", "", 0);
 		Company company = new Company("", address);
 		Receipt receipt = new Receipt(-35, "", 0.0, SaleItem.OTHER, 0, company);
@@ -148,7 +148,7 @@ public class ReceiptTest {
 	
 	// -------------------------------- Get Date -------------------------------
 	@Test
-	public void testGetAndSetDateHappyDay() {
+	public void testGetDateHappyDay() {
 		Address address = new Address("", "", "", 0);
 		Company company = new Company("", address);
 		Receipt receipt = new Receipt(0, "10-10-2010", 0.0, SaleItem.OTHER, 0,
@@ -157,7 +157,7 @@ public class ReceiptTest {
 	}
 	
 	@Test
-	public void testGetAndSetDateEmptyString() {
+	public void testGetDateEmptyString() {
 		Address address = new Address("", "", "", 0);
 		Company company = new Company("", address);
 		Receipt receipt = new Receipt(0, "", 0.0, SaleItem.OTHER, 0, company);
@@ -165,7 +165,7 @@ public class ReceiptTest {
 	}
 	
 	@Test
-	public void testGetAndSetDateNull() {
+	public void testGetDateNull() {
 		Address address = new Address("", "", "", 0);
 		Company company = new Company("", address);
 		Receipt receipt = new Receipt(0, null, 0.0, SaleItem.OTHER, 0, company);
