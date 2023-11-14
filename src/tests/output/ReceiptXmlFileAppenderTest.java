@@ -30,7 +30,7 @@ import output.ReceiptXmlFileAppender;
 
 public class ReceiptXmlFileAppenderTest {
 
-	private String fileName = "src/tests/data/txtFile.xml";
+	private String fileName = "src/tests/output/test_output_files/xmlFile.xml";
 		
 	@Before
 	public void setUp() throws Exception {
@@ -61,26 +61,26 @@ public class ReceiptXmlFileAppenderTest {
 	
 	@Test
 	public void testAppendFileHappyDay() {
-		String txtExpected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n";
-		txtExpected += "<Agent>\n";
-		txtExpected += "    <Receipt>\n";
-		txtExpected += "        <ReceiptID>1234</ReceiptID>\n";
-		txtExpected += "        <Date>10/10/2010</Date>\n";
-		txtExpected += "        <Kind>COAT</Kind>\n";
-		txtExpected += "        <Sales>2000.0</Sales>\n";
-		txtExpected += "        <Items>3</Items>\n";
-		txtExpected += "        <Company>Umbrella</Company>\n";
-		txtExpected += "        <Country>US</Country>\n";
-		txtExpected += "        <City>Racoon</City>\n";
-		txtExpected += "        <Street>Underground ave</Street>\n";
-		txtExpected += "        <Number>-10</Number>\n";
-		txtExpected += "    </Receipt>\n";
-		txtExpected += "</Agent>\n";
+		String fileExpected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n";
+		fileExpected += "<Agent>\n";
+		fileExpected += "    <Receipt>\n";
+		fileExpected += "        <ReceiptID>1234</ReceiptID>\n";
+		fileExpected += "        <Date>10/10/2010</Date>\n";
+		fileExpected += "        <Kind>Coats</Kind>\n";
+		fileExpected += "        <Sales>2000.0</Sales>\n";
+		fileExpected += "        <Items>3</Items>\n";
+		fileExpected += "        <Company>Umbrella</Company>\n";
+		fileExpected += "        <Country>US</Country>\n";
+		fileExpected += "        <City>Racoon</City>\n";
+		fileExpected += "        <Street>Underground ave</Street>\n";
+		fileExpected += "        <Number>-10</Number>\n";
+		fileExpected += "    </Receipt>\n";
+		fileExpected += "</Agent>\n";
 		
-		String txtFileRead = "";
+		String fileRead = "";
 
 		File file = new File(fileName);
-		ReceiptXmlFileAppender fileAppenderXML = new ReceiptXmlFileAppender(
+		ReceiptXmlFileAppender fileAppender = new ReceiptXmlFileAppender(
 				file);
 		
 		Address address = new Address("US", "Racoon", "Underground ave", -10);
@@ -88,17 +88,17 @@ public class ReceiptXmlFileAppenderTest {
 		Receipt receipt = new Receipt(1234, "10/10/2010", 2000.0, 
 				SaleItem.COAT, 3, company);
 		
-		fileAppenderXML.appendFile(receipt);
+		fileAppender.appendFile(receipt);
 		
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(fileName));
 			String line; 
 			while ((line = reader.readLine()) != null) {
-				txtFileRead += line + "\n";
+				fileRead += line + "\n";
 			}
 			reader.close();
 			
-			assertEquals(txtExpected, txtFileRead);
+			assertEquals(fileExpected, fileRead);
 			
 		} catch (FileNotFoundException e) {
 			fail();

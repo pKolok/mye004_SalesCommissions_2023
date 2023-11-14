@@ -20,6 +20,7 @@ import output.ReceiptTxtFileAppender;
 public class ReceiptTxtFileAppenderTest {
 
 	private File file;
+	private String fileName = "src/tests/output/test_output_files/txtFile.txt";
 		
 	@After
     public void clean() throws IOException {
@@ -29,21 +30,21 @@ public class ReceiptTxtFileAppenderTest {
 	
 	@Test
 	public void testAppendFileHappyDay() {
-		String txtExpected = "\nReceiptID: 1234\n";
-		txtExpected += "Date: 10/10/2010\n";
-		txtExpected += "Kind: COAT\n";
-		txtExpected += "Sales: 2000.0\n";
-		txtExpected += "Items: 3\n";
-		txtExpected += "Company: Umbrella\n";
-		txtExpected += "Country: US\n";
-		txtExpected += "City: Racoon\n";
-		txtExpected += "Street: Underground ave\n";
-		txtExpected += "Number: -10\n";
+		String fileExpected = "\nReceiptID: 1234\n";
+		fileExpected += "Date: 10/10/2010\n";
+		fileExpected += "Kind: Coats\n";
+		fileExpected += "Sales: 2000.0\n";
+		fileExpected += "Items: 3\n";
+		fileExpected += "Company: Umbrella\n";
+		fileExpected += "Country: US\n";
+		fileExpected += "City: Racoon\n";
+		fileExpected += "Street: Underground ave\n";
+		fileExpected += "Number: -10\n";
 
-		String txtFileRead = "";
+		String fileRead = "";
 
-		this.file = new File("src/tests/data/txtFile.txt");
-		ReceiptTxtFileAppender fileAppenderTXT = new ReceiptTxtFileAppender(
+		this.file = new File(fileName);
+		ReceiptTxtFileAppender fileAppender = new ReceiptTxtFileAppender(
 				this.file);
 		
 		Address address = new Address("US", "Racoon", "Underground ave", -10);
@@ -51,18 +52,18 @@ public class ReceiptTxtFileAppenderTest {
 		Receipt receipt = new Receipt(1234, "10/10/2010", 2000.0, 
 				SaleItem.COAT, 3, company);
 		
-		fileAppenderTXT.appendFile(receipt);
+		fileAppender.appendFile(receipt);
 		
 		try {
 			BufferedReader reader = new BufferedReader(
-				new FileReader("src/tests/data/txtFile.txt"));
+				new FileReader(fileName));
 			String line; 
 			while ((line = reader.readLine()) != null) {
-				txtFileRead += line + "\n";
+				fileRead += line + "\n";
 			}
 			reader.close();
 			
-			assertEquals(txtExpected, txtFileRead);
+			assertEquals(fileExpected, fileRead);
 			
 		} catch (FileNotFoundException e) {
 			fail();

@@ -12,7 +12,7 @@ public abstract class ReportWriter {
 	protected abstract void writeSalesSummary();
 	protected abstract void closeFile();
 	
-	public void writeReport(String fileName) {
+	public void writeReport() {
 		createFile();
 		writeRepresentativeDetails();
 		writeSalesSummary();

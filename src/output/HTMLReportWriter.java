@@ -36,7 +36,7 @@ public class HTMLReportWriter extends ReportWriter {
         		+ "</h1>"); 
             bufferedWriter.newLine();
 
-            bufferedWriter.write("<h2>AFM: " + representative.getAfm() 
+            bufferedWriter.write("    <h2>AFM: " + representative.getAfm() 
             	+ "</h2>");
             bufferedWriter.newLine();
         } catch (IOException ex){
@@ -49,7 +49,10 @@ public class HTMLReportWriter extends ReportWriter {
 	protected void writeSalesSummary() {
 		try{
 			bufferedWriter.write("    <br>");
+			bufferedWriter.newLine();
+			
 			bufferedWriter.write("    <h2>Report:</h2>");
+			bufferedWriter.newLine();
 			
             bufferedWriter.write("    <p>Total Sales: " 
             		+ representative.calculateTotalSales() + "</p>");
@@ -81,6 +84,7 @@ public class HTMLReportWriter extends ReportWriter {
 
             bufferedWriter.write("    <p>Commission: " 
             		+ representative.calculateCommission() + "</p>");
+            bufferedWriter.newLine();
         } catch (IOException ex){
         	ex.printStackTrace();
         }
@@ -90,6 +94,7 @@ public class HTMLReportWriter extends ReportWriter {
 	protected void closeFile() {
 		try {
 			bufferedWriter.write("  </body>");
+			bufferedWriter.newLine();
 			bufferedWriter.write("</html>");
         	bufferedWriter.close();
         } catch (IOException ex){
