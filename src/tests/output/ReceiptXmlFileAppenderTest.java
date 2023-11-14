@@ -25,7 +25,7 @@ import org.w3c.dom.Element;
 import data.Address;
 import data.Company;
 import data.Receipt;
-import data.SaleItem;
+import enums.SaleItem;
 import output.ReceiptXmlFileAppender;
 
 public class ReceiptXmlFileAppenderTest {

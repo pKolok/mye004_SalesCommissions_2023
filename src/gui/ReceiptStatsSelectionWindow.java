@@ -1,8 +1,8 @@
 package gui;
 
 import data.Representative;
+import enums.SaleItem;
 import data.Receipt;
-import data.SaleItem;
 import data.Address;
 import data.Company;
 import data.ReportStatistics;

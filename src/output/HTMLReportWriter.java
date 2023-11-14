@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import data.Representative;
-import data.SaleItem;
+import enums.SaleItem;
 
 public class HTMLReportWriter extends ReportWriter {
 

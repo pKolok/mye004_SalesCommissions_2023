@@ -7,7 +7,7 @@ import java.io.File;
 import org.junit.Test;
 
 import data.Representative;
-import data.SaleItem;
+import enums.SaleItem;
 import input.HTMLInput;
 
 public class HTMLInputTest {

@@ -2,6 +2,7 @@ package data;
 
 import java.util.ArrayList;
 
+import enums.SaleItem;
 import output.ReceiptFileAppender;
 
 public class Representative {

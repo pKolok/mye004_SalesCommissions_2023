@@ -1,5 +1,7 @@
 package data;
 
+import enums.SaleItem;
+
 public class Receipt {
 
 	protected int receiptId;

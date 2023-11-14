@@ -15,7 +15,7 @@ import data.Address;
 import data.Company;
 import data.Receipt;
 import data.Representative;
-import data.SaleItem;
+import enums.SaleItem;
 import output.ReceiptTxtFileAppender;
 import output.HTMLReportWriter;
 

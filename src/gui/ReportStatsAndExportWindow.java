@@ -284,7 +284,7 @@ public class ReportStatsAndExportWindow extends JDialog {
 
 	    TXTReportWriter reportWriter = new TXTReportWriter(
 	    		representative, filename);
-	    reportWriter.writeReport(filename);
+	    reportWriter.writeReport();
 	    JOptionPane.showMessageDialog(null, "Report Saved Successfully");
 	}
 	
@@ -294,7 +294,7 @@ public class ReportStatsAndExportWindow extends JDialog {
 		
 		XMLReportWriter reportWriter = new XMLReportWriter(
 				representative, filename);
-		reportWriter.writeReport(filename);
+		reportWriter.writeReport();
 		JOptionPane.showMessageDialog(null, "Report Saved Successfully");		
 	}
 	
@@ -304,7 +304,7 @@ public class ReportStatsAndExportWindow extends JDialog {
 		
 		HTMLReportWriter reportWriter = new HTMLReportWriter(
 				representative, filename);
-		reportWriter.writeReport(filename);
+		reportWriter.writeReport();
 		JOptionPane.showMessageDialog(null, "Report Saved Successfully");		
 	}
 	

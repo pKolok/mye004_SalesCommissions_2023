@@ -5,12 +5,11 @@ import static org.junit.Assert.*;
 import java.io.File;
 
 import data.Representative;
+import enums.SaleItem;
 import data.Address;
 import data.Company;
 import data.Receipt;
-import data.SaleItem;
 import output.ReceiptTxtFileAppender;
-import output.ReceiptXmlFileAppender;
 
 import org.junit.Before;
 import org.junit.Test;
