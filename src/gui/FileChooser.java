@@ -29,12 +29,7 @@ public class FileChooser {
 		fileChooser.setDialogTitle("Save Report As");
 		fileChooser.setDialogType(JFileChooser.SAVE_DIALOG);
 		fileChooser.setSelectedFile(new File("Report." + fileExtension));
-		
-		// TODO: to delete
-		fileChooser.setCurrentDirectory(new File(
-			"C:\\Users\\panousias\\Dropbox\\02_Edu\\01_Uni\\06_UoI\\04_Courses\\MYE004\\2023\\Project\\mye004_SalesCommissions_2023\\test_output_files"));
-		
-		
+			
 		int userSelection = fileChooser.showSaveDialog(null);
 		
 		if (userSelection == JFileChooser.APPROVE_OPTION) {
@@ -52,10 +47,6 @@ public class FileChooser {
 		fileChooser.setDialogTitle("Open Receipts File");
 		fileChooser.setDialogType(JFileChooser.OPEN_DIALOG);
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		
-		// TODO: to delete
-		fileChooser.setCurrentDirectory(new File(
-			"C:\\Users\\panousias\\Dropbox\\02_Edu\\01_Uni\\06_UoI\\04_Courses\\MYE004\\2023\\Project\\mye004_SalesCommissions_2023\\test_input_files"));
 		
 		fileChooser.showOpenDialog(null);
 		

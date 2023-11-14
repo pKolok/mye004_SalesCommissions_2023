@@ -17,7 +17,6 @@ import org.junit.Test;
 import data.Address;
 import data.Company;
 import data.Receipt;
-import data.enums.SaleItem;
 import output.ReceiptHtmlFileAppender;
 
 public class ReceiptHtmlFileAppenderTest {
@@ -95,7 +94,7 @@ public class ReceiptHtmlFileAppenderTest {
 		Address address = new Address("US", "Racoon", "Underground ave", -10);
 		Company company = new Company("Umbrella", address);
 		Receipt receipt = new Receipt(1234, "10/10/2010", 2000.0, 
-				SaleItem.COAT, 3, company);
+				"Coats", 3, company);
 		
 		fileAppenderTXT.appendFile(receipt);
 		

@@ -562,16 +562,16 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 	}
 
 	private void resetReceiptFields() {
-		receiptIDField.setValue(-1);	
-		dateField.setValue(new Date());			
+		receiptIDField.setValue(-1);
+		dateField.setValue(new Date());
 		kindField.setSelectedIndex(0);
 		salesField.setValue(-1);
-		itemsField.setValue(-1);	
-		companyTextField.setText("");	
-		countryTextField.setText("");	
-		cityTextField.setText("");	
-		streetTextField.setText("");	
-		numberField.setValue(-1);	
+		itemsField.setValue(-1);
+		companyTextField.setText("");
+		countryTextField.setText("");
+		cityTextField.setText("");
+		streetTextField.setText("");
+		numberField.setValue(-1);
 	}
 	
 	private Receipt getReceiptFromUserInput() {

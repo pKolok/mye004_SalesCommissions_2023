@@ -15,7 +15,6 @@ import data.Address;
 import data.Company;
 import data.Receipt;
 import data.Representative;
-import data.enums.SaleItem;
 import output.ReceiptTxtFileAppender;
 import output.HTMLReportWriter;
 
@@ -38,15 +37,15 @@ public class HTMLReportWriterTest {
 		Address address = new Address("", "", "", 0);
 		Company company = new Company("", address);
 		
-		Receipt receipt1 = new Receipt(0, "", 1000, SaleItem.OTHER, 10, company);
+		Receipt receipt1 = new Receipt(0, "", 1000, "Random", 10, company);
 		representative.addRepresentativeReceipt(receipt1);
-		Receipt receipt2 = new Receipt(0, "", 600, SaleItem.COAT, 30, company);
+		Receipt receipt2 = new Receipt(0, "", 600, "Coats", 30, company);
 		representative.addRepresentativeReceipt(receipt2);
-		Receipt receipt3 = new Receipt(0, "", 400, SaleItem.SHIRT, 20, company);
+		Receipt receipt3 = new Receipt(0, "", 400, "Shirts", 20, company);
 		representative.addRepresentativeReceipt(receipt3);
-		Receipt receipt4 = new Receipt(0, "", 700, SaleItem.SKIRT, 35, company);
+		Receipt receipt4 = new Receipt(0, "", 700, "Skirts", 35, company);
 		representative.addRepresentativeReceipt(receipt4);
-		Receipt receipt5 = new Receipt(0, "", 300, SaleItem.TROUSERS, 5,
+		Receipt receipt5 = new Receipt(0, "", 300, "Trousers", 5,
 				company);
 		representative.addRepresentativeReceipt(receipt5);
 		

@@ -11,17 +11,6 @@ public class Receipt {
 	protected Company company;
 	protected SaleItem kind;
 	
-	public Receipt(int id, String date, double sales, SaleItem saleItem, 
-			int items, Company company) {
-		this.receiptId = id;
-		this.date = date;
-		this.sales = sales;
-		this.kind = saleItem;
-		this.items = items;
-		this.company  = company;
-	}
-	
-	// TODO: violates open-closed principle
 	/**
 	 * Constructs a Receipt object.
 	 * Accepts a String _kind of "Shirts", "Skirts", "Trousers" or "Coats". If 

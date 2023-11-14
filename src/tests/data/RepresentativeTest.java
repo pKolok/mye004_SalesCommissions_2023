@@ -90,10 +90,10 @@ public class RepresentativeTest {
 	@Test
 	public void testCalculateTotalSalesHappyDay() {
 		Representative representative = new Representative("", "", fileAppender);
-		Receipt receipt1 = new Receipt(0, "", 20.05, SaleItem.OTHER, 0,
+		Receipt receipt1 = new Receipt(0, "", 20.05, "Random", 0,
 				company);
 		representative.addRepresentativeReceipt(receipt1);
-		Receipt receipt2 = new Receipt(0, "", 10.95, SaleItem.OTHER, 0,
+		Receipt receipt2 = new Receipt(0, "", 10.95, "Random", 0,
 				company);
 		representative.addRepresentativeReceipt(receipt2);
 		assertEquals(representative.calculateTotalSales(), 31.0, 0.01);
@@ -102,10 +102,10 @@ public class RepresentativeTest {
 	@Test
 	public void testCalculateTotalSalesPositiveAndNegativeSales() {
 		Representative representative = new Representative("", "", fileAppender);
-		Receipt receipt1 = new Receipt(0, "", 20.05, SaleItem.OTHER, 0,
+		Receipt receipt1 = new Receipt(0, "", 20.05, "Random", 0,
 				company);
 		representative.addRepresentativeReceipt(receipt1);
-		Receipt receipt2 = new Receipt(0, "", -10.95, SaleItem.OTHER, 0,
+		Receipt receipt2 = new Receipt(0, "", -10.95, "Random", 0,
 				company);
 		representative.addRepresentativeReceipt(receipt2);
 		assertEquals(representative.calculateTotalSales(), 9.1, 0.01);
@@ -114,10 +114,10 @@ public class RepresentativeTest {
 	@Test
 	public void testCalculateTotalSalesNegativeSales() {
 		Representative representative = new Representative("", "", fileAppender);
-		Receipt receipt1 = new Receipt(0, "", -5.95, SaleItem.OTHER, 0,
+		Receipt receipt1 = new Receipt(0, "", -5.95, "Random", 0,
 				company);
 		representative.addRepresentativeReceipt(receipt1);
-		Receipt receipt2 = new Receipt(0, "", -10.05, SaleItem.OTHER, 0,
+		Receipt receipt2 = new Receipt(0, "", -10.05, "Random", 0,
 				company);
 		representative.addRepresentativeReceipt(receipt2);
 		assertEquals(representative.calculateTotalSales(), -16.00, 0.01);
@@ -133,9 +133,9 @@ public class RepresentativeTest {
 	@Test
 	public void testCalculateTotalItemsHappyDay() {
 		Representative representative = new Representative("", "", fileAppender);
-		Receipt receipt1 = new Receipt(0, "", 0.0, SaleItem.OTHER, 2, company);
+		Receipt receipt1 = new Receipt(0, "", 0.0, "Random", 2, company);
 		representative.addRepresentativeReceipt(receipt1);
-		Receipt receipt2 = new Receipt(0, "", 0.0, SaleItem.OTHER, 3, company);
+		Receipt receipt2 = new Receipt(0, "", 0.0, "Random", 3, company);
 		representative.addRepresentativeReceipt(receipt2);
 		assertEquals(representative.calculateTotalItems(), 5);
 	}
@@ -143,9 +143,9 @@ public class RepresentativeTest {
 	@Test
 	public void testCalculateTotalItemsPositiveAndNegativeItemes() {
 		Representative representative = new Representative("", "", fileAppender);
-		Receipt receipt1 = new Receipt(0, "", 0.0, SaleItem.OTHER, -20, company);
+		Receipt receipt1 = new Receipt(0, "", 0.0, "Random", -20, company);
 		representative.addRepresentativeReceipt(receipt1);
-		Receipt receipt2 = new Receipt(0, "", 0.0, SaleItem.OTHER, 10, company);
+		Receipt receipt2 = new Receipt(0, "", 0.0, "Random", 10, company);
 		representative.addRepresentativeReceipt(receipt2);
 		assertEquals(representative.calculateTotalItems(), -10);
 	}
@@ -153,9 +153,9 @@ public class RepresentativeTest {
 	@Test
 	public void testCalculateTotalItemsNegativeItemes() {
 		Representative representative = new Representative("", "", fileAppender);
-		Receipt receipt1 = new Receipt(0, "", 0.0, SaleItem.OTHER, -5, company);
+		Receipt receipt1 = new Receipt(0, "", 0.0, "Random", -5, company);
 		representative.addRepresentativeReceipt(receipt1);
-		Receipt receipt2 = new Receipt(0, "", 0.0, SaleItem.OTHER, -10, company);
+		Receipt receipt2 = new Receipt(0, "", 0.0, "Random", -10, company);
 		representative.addRepresentativeReceipt(receipt2);
 		assertEquals(representative.calculateTotalItems(), -15);
 	}
@@ -170,11 +170,11 @@ public class RepresentativeTest {
 	@Test
 	public void testCalculateSkirtSalesHappyDay() {
 		Representative representative = new Representative("", "", fileAppender);
-		Receipt skirt1 = new Receipt(0, "", 20.05, SaleItem.SKIRT, -5, company);
+		Receipt skirt1 = new Receipt(0, "", 20.05, "Skirts", -5, company);
 		representative.addRepresentativeReceipt(skirt1);
-		Receipt skirt2 = new Receipt(0, "", 10.95, SaleItem.SKIRT, -5, company);
+		Receipt skirt2 = new Receipt(0, "", 10.95, "Skirts", -5, company);
 		representative.addRepresentativeReceipt(skirt2);
-		Receipt receipt = new Receipt(0, "", 10.95, SaleItem.OTHER, -5, company);
+		Receipt receipt = new Receipt(0, "", 10.95, "Random", -5, company);
 		representative.addRepresentativeReceipt(receipt);
 		assertEquals(representative.calculateItemSales(SaleItem.SKIRT), 31.0, 0.01);
 	}
@@ -182,11 +182,11 @@ public class RepresentativeTest {
 	@Test
 	public void testCalculateSkirtSalesPositiveAndNegativeSales() {
 		Representative representative = new Representative("", "", fileAppender);
-		Receipt skirt1 = new Receipt(0, "", 20.95, SaleItem.SKIRT, -5, company);
+		Receipt skirt1 = new Receipt(0, "", 20.95, "Skirts", -5, company);
 		representative.addRepresentativeReceipt(skirt1);
-		Receipt skirt2 = new Receipt(0, "", -10.05, SaleItem.SKIRT, -5, company);
+		Receipt skirt2 = new Receipt(0, "", -10.05, "Skirts", -5, company);
 		representative.addRepresentativeReceipt(skirt2);
-		Receipt receipt = new Receipt(0, "", 10.95, SaleItem.OTHER, -5, company);
+		Receipt receipt = new Receipt(0, "", 10.95, "Random", -5, company);
 		representative.addRepresentativeReceipt(receipt);
 		assertEquals(representative.calculateItemSales(SaleItem.SKIRT), 10.9, 0.01);
 	}
@@ -194,11 +194,11 @@ public class RepresentativeTest {
 	@Test
 	public void testCalculateSkirtSalesNegativeSales() {
 		Representative representative = new Representative("", "", fileAppender);
-		Receipt skirt1 = new Receipt(0, "", -5.95, SaleItem.SKIRT, -5, company);
+		Receipt skirt1 = new Receipt(0, "", -5.95, "Skirts", -5, company);
 		representative.addRepresentativeReceipt(skirt1);
-		Receipt skirt2 = new Receipt(0, "", -10.05, SaleItem.SKIRT, -5, company);
+		Receipt skirt2 = new Receipt(0, "", -10.05, "Skirts", -5, company);
 		representative.addRepresentativeReceipt(skirt2);
-		Receipt receipt = new Receipt(0, "", 10.95, SaleItem.OTHER, -5, company);
+		Receipt receipt = new Receipt(0, "", 10.95, "Random", -5, company);
 		representative.addRepresentativeReceipt(receipt);
 		assertEquals(representative.calculateItemSales(SaleItem.SKIRT), -16.00, 0.01);
 	}
@@ -213,11 +213,11 @@ public class RepresentativeTest {
 	@Test
 	public void testCalculateCoatSalesHappyDay() {
 		Representative representative = new Representative("", "", fileAppender);
-		Receipt coat1 = new Receipt(0, "", 20.05, SaleItem.COAT, -5, company);
+		Receipt coat1 = new Receipt(0, "", 20.05, "Coats", -5, company);
 		representative.addRepresentativeReceipt(coat1);
-		Receipt coat2 = new Receipt(0, "", 10.95, SaleItem.COAT, -5, company);
+		Receipt coat2 = new Receipt(0, "", 10.95, "Coats", -5, company);
 		representative.addRepresentativeReceipt(coat2);
-		Receipt receipt = new Receipt(0, "", 10.95, SaleItem.OTHER, -5, company);
+		Receipt receipt = new Receipt(0, "", 10.95, "Random", -5, company);
 		representative.addRepresentativeReceipt(receipt);
 		assertEquals(representative.calculateItemSales(SaleItem.COAT), 31.0, 0.01);
 	}
@@ -225,11 +225,11 @@ public class RepresentativeTest {
 	@Test
 	public void testCalculateCoatSalesPositiveAndNegativeSales() {
 		Representative representative = new Representative("", "", fileAppender);
-		Receipt coat1 = new Receipt(0, "", 20.95, SaleItem.COAT, -5, company);
+		Receipt coat1 = new Receipt(0, "", 20.95, "Coats", -5, company);
 		representative.addRepresentativeReceipt(coat1);
-		Receipt coat2 = new Receipt(0, "", -10.05, SaleItem.COAT, -5, company);
+		Receipt coat2 = new Receipt(0, "", -10.05, "Coats", -5, company);
 		representative.addRepresentativeReceipt(coat2);
-		Receipt receipt = new Receipt(0, "", 10.95, SaleItem.OTHER, -5, company);
+		Receipt receipt = new Receipt(0, "", 10.95, "Random", -5, company);
 		representative.addRepresentativeReceipt(receipt);
 		assertEquals(representative.calculateItemSales(SaleItem.COAT), 10.9, 0.01);
 	}
@@ -237,11 +237,11 @@ public class RepresentativeTest {
 	@Test
 	public void testCalculateCoatSalesNegativeSales() {
 		Representative representative = new Representative("", "", fileAppender);
-		Receipt coat1 = new Receipt(0, "", -5.95, SaleItem.COAT, -5, company);
+		Receipt coat1 = new Receipt(0, "", -5.95, "Coats", -5, company);
 		representative.addRepresentativeReceipt(coat1);
-		Receipt coat2 = new Receipt(0, "", -10.05, SaleItem.COAT, -5, company);
+		Receipt coat2 = new Receipt(0, "", -10.05, "Coats", -5, company);
 		representative.addRepresentativeReceipt(coat2);
-		Receipt receipt = new Receipt(0, "", 10.95, SaleItem.OTHER, -5, company);
+		Receipt receipt = new Receipt(0, "", 10.95, "Random", -5, company);
 		representative.addRepresentativeReceipt(receipt);
 		assertEquals(representative.calculateItemSales(SaleItem.COAT), -16.00, 0.01);
 	}
@@ -256,13 +256,13 @@ public class RepresentativeTest {
 	@Test
 	public void testCalculateTrouserSalesHappyDay() {
 		Representative representative = new Representative("", "", fileAppender);
-		Receipt trousers1 = new Receipt(0, "", 20.05, SaleItem.TROUSERS, -5,
+		Receipt trousers1 = new Receipt(0, "", 20.05, "Trousers", -5,
 				company);
 		representative.addRepresentativeReceipt(trousers1);
-		Receipt trousers2 = new Receipt(0, "", 10.95, SaleItem.TROUSERS, -5,
+		Receipt trousers2 = new Receipt(0, "", 10.95, "Trousers", -5,
 				company);
 		representative.addRepresentativeReceipt(trousers2);
-		Receipt receipt = new Receipt(0, "", 10.95, SaleItem.OTHER, -5, company);
+		Receipt receipt = new Receipt(0, "", 10.95, "Random", -5, company);
 		representative.addRepresentativeReceipt(receipt);
 		assertEquals(representative.calculateItemSales(SaleItem.TROUSERS), 31.0, 0.01);
 	}
@@ -270,13 +270,13 @@ public class RepresentativeTest {
 	@Test
 	public void testCalculateTrouserSalesPositiveAndNegativeSales() {
 		Representative representative = new Representative("", "", fileAppender);
-		Receipt trousers1 = new Receipt(0, "", 20.95, SaleItem.TROUSERS, -5,
+		Receipt trousers1 = new Receipt(0, "", 20.95, "Trousers", -5,
 				company);
 		representative.addRepresentativeReceipt(trousers1);
-		Receipt trousers2 = new Receipt(0, "", -10.05, SaleItem.TROUSERS, -5,
+		Receipt trousers2 = new Receipt(0, "", -10.05, "Trousers", -5,
 				company);
 		representative.addRepresentativeReceipt(trousers2);
-		Receipt receipt = new Receipt(0, "", 10.95, SaleItem.OTHER, -5, company);
+		Receipt receipt = new Receipt(0, "", 10.95, "Random", -5, company);
 		representative.addRepresentativeReceipt(receipt);
 		assertEquals(representative.calculateItemSales(SaleItem.TROUSERS), 10.9, 0.01);
 	}
@@ -284,13 +284,13 @@ public class RepresentativeTest {
 	@Test
 	public void testCalculateTrouserSalesNegativeSales() {
 		Representative representative = new Representative("", "", fileAppender);
-		Receipt trousers1 = new Receipt(0, "", -5.95, SaleItem.TROUSERS, -5,
+		Receipt trousers1 = new Receipt(0, "", -5.95, "Trousers", -5,
 				company);
 		representative.addRepresentativeReceipt(trousers1);
-		Receipt trousers2 = new Receipt(0, "", -10.05, SaleItem.TROUSERS, -5,
+		Receipt trousers2 = new Receipt(0, "", -10.05, "Trousers", -5,
 				company);
 		representative.addRepresentativeReceipt(trousers2);
-		Receipt receipt = new Receipt(0, "", 10.95, SaleItem.OTHER, -5, company);
+		Receipt receipt = new Receipt(0, "", 10.95, "Random", -5, company);
 		representative.addRepresentativeReceipt(receipt);
 		assertEquals(representative.calculateItemSales(SaleItem.TROUSERS), -16.00, 0.01);
 	}
@@ -305,11 +305,11 @@ public class RepresentativeTest {
 	@Test
 	public void testCalculateShirtSalesHappyDay() {
 		Representative representative = new Representative("", "", fileAppender);
-		Receipt shirt1 = new Receipt(0, "", 20.05, SaleItem.SHIRT, -5, company);
+		Receipt shirt1 = new Receipt(0, "", 20.05, "Shirts", -5, company);
 		representative.addRepresentativeReceipt(shirt1);
-		Receipt shirt2 = new Receipt(0, "", 10.95, SaleItem.SHIRT, -5, company);
+		Receipt shirt2 = new Receipt(0, "", 10.95, "Shirts", -5, company);
 		representative.addRepresentativeReceipt(shirt2);
-		Receipt receipt = new Receipt(0, "", 10.95, SaleItem.OTHER, -5, company);
+		Receipt receipt = new Receipt(0, "", 10.95, "Random", -5, company);
 		representative.addRepresentativeReceipt(receipt);
 		assertEquals(representative.calculateItemSales(SaleItem.SHIRT), 31.0, 0.01);
 	}
@@ -317,11 +317,11 @@ public class RepresentativeTest {
 	@Test
 	public void testCalculateShirtSalesPositiveAndNegativeSales() {
 		Representative representative = new Representative("", "", fileAppender);
-		Receipt shirt1 = new Receipt(0, "", 20.95, SaleItem.SHIRT, -5, company);
+		Receipt shirt1 = new Receipt(0, "", 20.95, "Shirts", -5, company);
 		representative.addRepresentativeReceipt(shirt1);
-		Receipt shirt2 = new Receipt(0, "", -10.05, SaleItem.SHIRT, -5, company);
+		Receipt shirt2 = new Receipt(0, "", -10.05, "Shirts", -5, company);
 		representative.addRepresentativeReceipt(shirt2);
-		Receipt receipt = new Receipt(0, "", 10.95, SaleItem.OTHER, -5, company);
+		Receipt receipt = new Receipt(0, "", 10.95, "Random", -5, company);
 		representative.addRepresentativeReceipt(receipt);
 		assertEquals(representative.calculateItemSales(SaleItem.SHIRT), 10.9, 0.01);
 	}
@@ -329,11 +329,11 @@ public class RepresentativeTest {
 	@Test
 	public void testCalculateShirtSalesNegativeSales() {
 		Representative representative = new Representative("", "", fileAppender);
-		Receipt shirt1 = new Receipt(0, "", -5.95, SaleItem.SHIRT, -5, company);
+		Receipt shirt1 = new Receipt(0, "", -5.95, "Shirts", -5, company);
 		representative.addRepresentativeReceipt(shirt1);
-		Receipt shirt2 = new Receipt(0, "", -10.05, SaleItem.SHIRT, -5, company);
+		Receipt shirt2 = new Receipt(0, "", -10.05, "Shirts", -5, company);
 		representative.addRepresentativeReceipt(shirt2);
-		Receipt receipt = new Receipt(0, "", 10.95, SaleItem.OTHER, -5, company);
+		Receipt receipt = new Receipt(0, "", 10.95, "Random", -5, company);
 		representative.addRepresentativeReceipt(receipt);
 		assertEquals(representative.calculateItemSales(SaleItem.SHIRT), -16.00, 0.01);
 	}
@@ -348,16 +348,16 @@ public class RepresentativeTest {
 	@Test
 	public void testCalculateCommissionLessThan6000() {
 		Representative representative = new Representative("", "", fileAppender);
-		Receipt skirt = new Receipt(0, "", 0.0, SaleItem.SKIRT, 1000, company);
+		Receipt skirt = new Receipt(0, "", 0.0, "Skirts", 1000, company);
 		representative.addRepresentativeReceipt(skirt);
-		Receipt coat = new Receipt(0, "", 0.0, SaleItem.COAT, 500, company);
+		Receipt coat = new Receipt(0, "", 0.0, "Coats", 500, company);
 		representative.addRepresentativeReceipt(coat);
-		Receipt trouser = new Receipt(0, "", 0.0, SaleItem.TROUSERS, 1000,
+		Receipt trouser = new Receipt(0, "", 0.0, "Trousers", 1000,
 				company);
 		representative.addRepresentativeReceipt(trouser);
-		Receipt shirt = new Receipt(0, "", 0.0, SaleItem.SHIRT, 500, company);
+		Receipt shirt = new Receipt(0, "", 0.0, "Shirts", 500, company);
 		representative.addRepresentativeReceipt(shirt);
-		Receipt receipt = new Receipt(0, "", 0.0, SaleItem.OTHER, 1000, company);
+		Receipt receipt = new Receipt(0, "", 0.0, "Random", 1000, company);
 		representative.addRepresentativeReceipt(receipt);
 		assertEquals(representative.calculateCommission(), 0.0, 0.01);
 	}
@@ -365,7 +365,7 @@ public class RepresentativeTest {
 	@Test
 	public void testCalculateCommission6000() {
 		Representative representative = new Representative("", "", fileAppender);
-		Receipt receipt = new Receipt(0, "", 0.0, SaleItem.OTHER, 6000, company);
+		Receipt receipt = new Receipt(0, "", 0.0, "Random", 6000, company);
 		representative.addRepresentativeReceipt(receipt);
 		assertEquals(representative.calculateCommission(), 0.0, 0.01);
 	}
@@ -373,7 +373,7 @@ public class RepresentativeTest {
 	@Test
 	public void testCalculateCommission6001() {
 		Representative representative = new Representative("", "", fileAppender);
-		Receipt receipt = new Receipt(0, "", 6001, SaleItem.OTHER, 0, company);
+		Receipt receipt = new Receipt(0, "", 6001, "Random", 0, company);
 		representative.addRepresentativeReceipt(receipt);
 		assertEquals(representative.calculateCommission(), 1*0.1, 0.01);
 	}
@@ -381,7 +381,7 @@ public class RepresentativeTest {
 	@Test
 	public void testCalculateCommission8000() {
 		Representative representative = new Representative("", "", fileAppender);
-		Receipt receipt = new Receipt(0, "", 8000, SaleItem.OTHER, 0, company);
+		Receipt receipt = new Receipt(0, "", 8000, "Random", 0, company);
 		representative.addRepresentativeReceipt(receipt);
 		assertEquals(representative.calculateCommission(), 2000*0.1, 0.01);
 	}
@@ -389,7 +389,7 @@ public class RepresentativeTest {
 	@Test
 	public void testCalculateCommission10000() {
 		Representative representative = new Representative("", "", fileAppender);
-		Receipt receipt = new Receipt(0, "", 10000, SaleItem.OTHER, 0,
+		Receipt receipt = new Receipt(0, "", 10000, "Random", 0,
 				company);
 		representative.addRepresentativeReceipt(receipt);
 		assertEquals(representative.calculateCommission(), 4000*0.1, 0.01);
@@ -398,7 +398,7 @@ public class RepresentativeTest {
 	@Test
 	public void testCalculateCommission10001() {
 		Representative representative = new Representative("", "", fileAppender);
-		Receipt receipt = new Receipt(0, "", 10001, SaleItem.OTHER, 0,
+		Receipt receipt = new Receipt(0, "", 10001, "Random", 0,
 				company);
 		representative.addRepresentativeReceipt(receipt);
 		assertEquals(representative.calculateCommission(), 1000+1*0.15, 0.01);
@@ -407,7 +407,7 @@ public class RepresentativeTest {
 	@Test
 	public void testCalculateCommission20000() {
 		Representative representative = new Representative("", "", fileAppender);
-		Receipt receipt = new Receipt(0, "", 20000, SaleItem.OTHER, 0,
+		Receipt receipt = new Receipt(0, "", 20000, "Random", 0,
 				company);
 		representative.addRepresentativeReceipt(receipt);
 		assertEquals(representative.calculateCommission(), 1000+10000*0.15, 0.01);
@@ -416,7 +416,7 @@ public class RepresentativeTest {
 	@Test
 	public void testCalculateCommission40000() {
 		Representative representative = new Representative("", "", fileAppender);
-		Receipt receipt = new Receipt(0, "", 40000, SaleItem.OTHER, 0,
+		Receipt receipt = new Receipt(0, "", 40000, "Random", 0,
 				company);
 		representative.addRepresentativeReceipt(receipt);
 		assertEquals(representative.calculateCommission(), 1000+30000*0.15, 0.01);
@@ -425,7 +425,7 @@ public class RepresentativeTest {
 	@Test
 	public void testCalculateCommission40001() {
 		Representative representative = new Representative("", "", fileAppender);
-		Receipt receipt = new Receipt(0, "", 40001, SaleItem.OTHER, 0,
+		Receipt receipt = new Receipt(0, "", 40001, "Random", 0,
 				company);
 		representative.addRepresentativeReceipt(receipt);
 		assertEquals(representative.calculateCommission(), 1000+4500+1*0.2, 0.01);
@@ -434,7 +434,7 @@ public class RepresentativeTest {
 	@Test
 	public void testCalculateCommission80000() {
 		Representative representative = new Representative("", "", fileAppender);
-		Receipt receipt = new Receipt(0, "", 80000, SaleItem.OTHER, 0,
+		Receipt receipt = new Receipt(0, "", 80000, "Random", 0,
 				company);
 		representative.addRepresentativeReceipt(receipt);
 		assertEquals(representative.calculateCommission(), 1000+4500+40000*0.2, 0.01);
@@ -449,7 +449,7 @@ public class RepresentativeTest {
 	@Test
 	public void testCalculateCommissionNegative() {
 		Representative representative = new Representative("", "", fileAppender);
-		Receipt receipt = new Receipt(0, "", -30000, SaleItem.OTHER, 0,
+		Receipt receipt = new Receipt(0, "", -30000, "Random", 0,
 				company);
 		representative.addRepresentativeReceipt(receipt);
 		assertEquals(representative.calculateCommission(), 0.0, 0.01);

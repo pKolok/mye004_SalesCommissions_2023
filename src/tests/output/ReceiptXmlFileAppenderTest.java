@@ -25,7 +25,6 @@ import org.w3c.dom.Element;
 import data.Address;
 import data.Company;
 import data.Receipt;
-import data.enums.SaleItem;
 import output.ReceiptXmlFileAppender;
 
 public class ReceiptXmlFileAppenderTest {
@@ -86,7 +85,7 @@ public class ReceiptXmlFileAppenderTest {
 		Address address = new Address("US", "Racoon", "Underground ave", -10);
 		Company company = new Company("Umbrella", address);
 		Receipt receipt = new Receipt(1234, "10/10/2010", 2000.0, 
-				SaleItem.COAT, 3, company);
+				"Coats", 3, company);
 		
 		fileAppender.appendFile(receipt);
 		

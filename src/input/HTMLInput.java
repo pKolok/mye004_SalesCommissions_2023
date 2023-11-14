@@ -155,7 +155,6 @@ public class HTMLInput extends Input {
 	    	for (int i = 0; i < 6; ++i) {
 	    		bufferedReader.readLine();
 	    	}
-	    	
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
