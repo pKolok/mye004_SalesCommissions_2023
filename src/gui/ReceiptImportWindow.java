@@ -1,7 +1,7 @@
 package gui;
 
 import data.Representative;
-import enums.FileExtension;
+import data.enums.FileExtension;
 import input.TXTInput;
 import input.XMLInput;
 import input.HTMLInput;

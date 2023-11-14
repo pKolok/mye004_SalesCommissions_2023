@@ -3,7 +3,7 @@ package tests.input;
 import static org.junit.Assert.*;
 
 import data.Representative;
-import enums.SaleItem;
+import data.enums.SaleItem;
 import input.TXTInput;
 
 import java.io.File;

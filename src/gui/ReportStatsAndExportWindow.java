@@ -1,8 +1,8 @@
 package gui;
 
 import data.Representative;
+import data.enums.FileExtension;
 import data.ReportStatistics;
-import enums.FileExtension;
 import output.TXTReportWriter;
 import output.XMLReportWriter;
 import output.HTMLReportWriter;

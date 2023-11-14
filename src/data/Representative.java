@@ -2,7 +2,7 @@ package data;
 
 import java.util.ArrayList;
 
-import enums.SaleItem;
+import data.enums.SaleItem;
 import output.ReceiptFileAppender;
 
 public class Representative {
@@ -10,7 +10,7 @@ public class Representative {
 	private String name;
 	private String afm;
 	private ArrayList<Receipt> allReceipts;
-	private ReceiptFileAppender fileAppender;
+	private ReceiptFileAppender fileAppender;	// TODO: dependency
 	
 	public Representative(String name, String afm, 
 			ReceiptFileAppender fileAppender){

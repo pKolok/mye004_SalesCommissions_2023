@@ -17,7 +17,7 @@ import org.junit.Test;
 import data.Address;
 import data.Company;
 import data.Receipt;
-import enums.SaleItem;
+import data.enums.SaleItem;
 import output.ReceiptHtmlFileAppender;
 
 public class ReceiptHtmlFileAppenderTest {

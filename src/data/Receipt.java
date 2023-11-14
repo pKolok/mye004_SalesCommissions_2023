@@ -1,6 +1,6 @@
 package data;
 
-import enums.SaleItem;
+import data.enums.SaleItem;
 
 public class Receipt {
 

@@ -9,7 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import data.Representative;
-import enums.SaleItem;
+import data.enums.SaleItem;
 import data.Address;
 import data.Company;
 import data.Receipt;

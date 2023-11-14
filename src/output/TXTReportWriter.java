@@ -1,7 +1,7 @@
 package output;
 
 import data.Representative;
-import enums.SaleItem;
+import data.enums.SaleItem;
 
 import java.io.BufferedWriter;
 import java.io.File;
