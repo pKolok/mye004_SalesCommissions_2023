@@ -1,20 +1,18 @@
 package input;
 
-import java.io.File;
-import java.util.ArrayList;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
 import data.Address;
 import data.Company;
 import data.Receipt;
 import data.Representative;
 import output.ReceiptXmlFileAppender;
+
+import java.io.File;
+import java.util.ArrayList;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 public class XMLInput extends Input {
  

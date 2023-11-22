@@ -5,7 +5,7 @@ import data.enums.SaleItem;
 import data.Receipt;
 import data.Address;
 import data.Company;
-import data.ReportStatistics;
+import data.StatisticsReport;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -523,7 +523,7 @@ public class ReceiptStatsSelectionWindow extends JDialog {
 		if(commissionCheckBox.isSelected())
 			commission = selectedRepresentative.calculateCommission();
 		
-		ReportStatistics reportStatistics = new ReportStatistics(totalSales, 
+		StatisticsReport reportStatistics = new StatisticsReport(totalSales, 
 				totalItems, shirtSales, skirtSales, trousersSales, coatsSales, 
 				commission);
 

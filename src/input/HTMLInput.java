@@ -1,17 +1,17 @@
 package input;
 
+import data.Address;
+import data.Company;
+import data.Receipt;
+import data.Representative;
+import output.ReceiptHtmlFileAppender;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import data.Address;
-import data.Company;
-import data.Receipt;
-import data.Representative;
-import output.ReceiptHtmlFileAppender;
 
 public class HTMLInput extends Input {
 	

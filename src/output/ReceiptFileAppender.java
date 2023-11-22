@@ -1,8 +1,8 @@
-package output;
-
-import java.io.File;
+	package output;
 
 import data.Receipt;
+
+import java.io.File;
 
 public abstract class ReceiptFileAppender {
 

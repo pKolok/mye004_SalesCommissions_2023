@@ -12,5 +12,6 @@ bin/**
 # Application specific
 test_input_files/*
 test_output_files/*
+diagrams/*.jpg
 *.docx
 Questions.txt

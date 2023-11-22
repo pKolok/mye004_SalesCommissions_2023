@@ -1,12 +1,12 @@
 package output;
 
+import data.Representative;
+import data.enums.SaleItem;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import data.Representative;
-import data.enums.SaleItem;
 
 public class HTMLReportWriter extends ReportWriter {
 

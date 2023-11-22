@@ -120,7 +120,7 @@ public class ReceiptImportWindow extends JDialog {
 		representativeList.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				selectAgent(e);
+				selectRepresentative(e);
 			}
 		});
 		
@@ -291,7 +291,7 @@ public class ReceiptImportWindow extends JDialog {
 		}
 	}
 	
-	private void selectAgent(MouseEvent e) {
+	private void selectRepresentative(MouseEvent e) {
 		String representativeName;
         if(representativeList.getSelectedIndex() >= 0){
             representativeName = representativeList.getSelectedValue().toString();

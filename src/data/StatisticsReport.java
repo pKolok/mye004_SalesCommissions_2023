@@ -1,6 +1,6 @@
 package data;
 
-public class ReportStatistics {
+public class StatisticsReport {
 	private double totalSales;
 	private int totalItems;
 	private float shirtSales;
@@ -9,7 +9,7 @@ public class ReportStatistics {
 	private float coatsSales;
 	private double commission;
 
-	public ReportStatistics(double totalSales, int totalItems, float shirtSales,
+	public StatisticsReport(double totalSales, int totalItems, float shirtSales,
 			float skirtSales, float trousersSales, float coatsSales, 
 			double commission) {
 		this.totalSales = totalSales;

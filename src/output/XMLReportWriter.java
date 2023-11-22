@@ -17,7 +17,7 @@ import org.w3c.dom.Element;
 public class XMLReportWriter extends ReportWriter{
 	
 	private Document document;
-	Element agentElem;
+	Element representativeElem;
 
 	public XMLReportWriter(Representative representative, String fileName){
 		this.representative = representative;
@@ -39,16 +39,16 @@ public class XMLReportWriter extends ReportWriter{
 	protected void writeRepresentativeDetails() {
         try {
         	 // root element
-        	 agentElem = document.createElement("Agent");
-        	 document.appendChild(agentElem);
+        	 representativeElem = document.createElement("Agent");
+        	 document.appendChild(representativeElem);
         	 
         	 Element name = document.createElement("Name");
         	 name.appendChild(document.createTextNode(representative.getName()));
-        	 agentElem.appendChild(name);
+        	 representativeElem.appendChild(name);
         	 
         	 Element afm = document.createElement("AFM");
         	 afm.appendChild(document.createTextNode(representative.getAfm()));	
-        	 agentElem.appendChild(afm);
+        	 representativeElem.appendChild(afm);
         	 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -61,37 +61,37 @@ public class XMLReportWriter extends ReportWriter{
         	 Element totalSales = document.createElement("TotalSales");
         	 totalSales.appendChild(document.createTextNode(Double.toString(
         			 representative.calculateTotalSales())));
-        	 agentElem.appendChild(totalSales);
+        	 representativeElem.appendChild(totalSales);
         	 
         	 Element totalItems = document.createElement("TotalItems");
         	 totalItems.appendChild(document.createTextNode(Double.toString(
         			 representative.calculateTotalItems())));
-        	 agentElem.appendChild(totalItems);
+        	 representativeElem.appendChild(totalItems);
         	 
         	 Element trouserSales = document.createElement("TrouserSales");
         	 trouserSales.appendChild(document.createTextNode(Float.toString(
         			 representative.calculateItemSales(SaleItem.TROUSERS))));
-        	 agentElem.appendChild(trouserSales);
+        	 representativeElem.appendChild(trouserSales);
         	 
         	 Element shirtsSales = document.createElement("ShirtsSales");
         	 shirtsSales.appendChild(document.createTextNode(Float.toString(
         			 representative.calculateItemSales(SaleItem.SHIRT))));
-        	 agentElem.appendChild(shirtsSales);
+        	 representativeElem.appendChild(shirtsSales);
         	 
         	 Element coatsSales = document.createElement("CoatsSales");
         	 coatsSales.appendChild(document.createTextNode(Float.toString(
         			 representative.calculateItemSales(SaleItem.COAT))));
-        	 agentElem.appendChild(coatsSales);
+        	 representativeElem.appendChild(coatsSales);
         	 
         	 Element skirtsSales = document.createElement("SkirtsSales");
         	 skirtsSales.appendChild(document.createTextNode(Float.toString(
         			 representative.calculateItemSales(SaleItem.SKIRT))));
-        	 agentElem.appendChild(skirtsSales);
+        	 representativeElem.appendChild(skirtsSales);
         	 
         	 Element commission = document.createElement("Commission");
         	 commission.appendChild(document.createTextNode(Double.toString(
         			 representative.calculateCommission())));
-        	 agentElem.appendChild(commission);
+        	 representativeElem.appendChild(commission);
         	 
         } catch (Exception ex) {
             ex.printStackTrace();
